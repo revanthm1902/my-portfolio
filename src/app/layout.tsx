@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
 
-// This pulls in the Inter font with Latin characters
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Revanth Modalavalasa | Portfolio",
-  description: "Full-Stack Developer & AI Enthusiast",
+  title: "Revanth",
+  description: "My Portfolio built with Next.js 13, Tailwind CSS, and Framer Motion. Showcasing my projects, skills, and experience in a sleek and modern design.",
 };
 
 export default function RootLayout({
@@ -16,9 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // We inject the Inter font class into the HTML tag
     <html lang="en" className={inter.className}>
       <body className="antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+        <CustomCursor />
         {children}
       </body>
     </html>

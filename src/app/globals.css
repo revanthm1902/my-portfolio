@@ -127,3 +127,15 @@
     @apply font-sans;
   }
 }
+
+/* Only apply custom cursor logic on devices with a real mouse pointer */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  
+  /* Ensure we hide the cursor on links and buttons too */
+  a, button, [role="button"], input, select, textarea {
+    cursor: none;
+  }
+}

@@ -81,9 +81,36 @@ export default function Home() {
             <div className="absolute -bottom-[1px] -left-[1px] w-6 h-6 border-b-2 border-l-2 border-red-600 dark:border-red-500" />
             <div className="absolute -bottom-[1px] -right-[1px] w-6 h-6 border-b-2 border-r-2 border-red-600 dark:border-red-500" />
 
-            {/* Top Left Initials */}
-            <div className="absolute top-6 left-6 font-mono text-2xl font-bold text-red-600 dark:text-red-500 tracking-tighter">
-              MR
+            {/* Top Left Initials & Glass Socials */}
+            <div className="absolute top-6 left-6 flex items-center gap-4 z-30 pointer-events-auto">
+              <div className="font-mono text-2xl font-bold text-red-600 dark:text-red-500 tracking-tighter mr-2">
+                MR
+              </div>
+              <div className="flex items-center gap-2">
+                {[
+                  { icon: <Github size={18} />, href: "https://github.com/revanthm1902" },
+                  { icon: <Linkedin size={18} />, href: "https://www.linkedin.com/in/modalavalasa-revanth/" },
+                  { icon: <Mail size={18} />, href: "mailto:revanthm051@gmail.com" }
+                ].map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    whileHover={{ 
+                      scale: 1.1, 
+                      backgroundColor: "rgba(255, 255, 255, 0.2)",
+                      borderColor: "rgba(220, 38, 38, 0.5)" // Red glow on hover
+                    }}
+                    className="p-2.5 flex items-center justify-center rounded-xl bg-white/5 dark:bg-zinc-900/40 backdrop-blur-md border border-white/10 dark:border-zinc-800/50 text-zinc-500 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-500 transition-all duration-300 shadow-xl shadow-black/5"
+                  >
+                    {social.icon}
+                  </motion.a>
+                ))}
+              </div>
             </div>
 
             {/* Top Right Location */}

@@ -3,8 +3,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import MusicPlayer from "@/components/MusicPlayer";
+import localFont from 'next/font/local';
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const ndotFont = localFont({
+  src: '../../public/fonts/NDot-55.ttf',
+  variable: '--font-ndot',
+});
 
 export const metadata: Metadata = {
   title: "Revanth",
@@ -17,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={`${inter.className} ${ndotFont.variable}`}>
       <body className="antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
         <CustomCursor />
         {children}

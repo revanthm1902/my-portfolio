@@ -10,6 +10,12 @@ import NavWindow from "@/components/NavWindow";
 export default function AppFrame({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("portfolio-preloader-shown")) {
+      setIsLoading(false);
+    }
+  }, []);
   const router = useRouter();
 
   // Mouse tracking for background dot eraser
@@ -31,7 +37,14 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative h-dvh w-full bg-zinc-50 dark:bg-zinc-950 overflow-hidden">
       <AnimatePresence mode="wait">
-        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+        {isLoading && (
+          <Preloader
+            onComplete={() => {
+              sessionStorage.setItem("portfolio-preloader-shown", "1");
+              setIsLoading(false);
+            }}
+          />
+        )}
       </AnimatePresence>
 
       {!isLoading && (
@@ -91,9 +104,15 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
           </AnimatePresence>
 
           {/* 4. THE ACTUAL PAGE CONTENT (Injected here via routing) */}
-          <div className="absolute inset-0 z-10 w-full h-full">
+          <motion.div
+            key="page-content"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="absolute inset-0 z-10 w-full h-full"
+          >
             {children}
-          </div>
+          </motion.div>
         </>
       )}
     </div>

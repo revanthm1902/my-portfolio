@@ -138,7 +138,7 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
             <div className="w-3.5 h-3.5 rounded-full bg-[#27C93F]" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-medium text-zinc-300 uppercase tracking-widest">SITE.MAP</span>
+            <span className="text-xs font-medium text-zinc-300 uppercase tracking-widest">SYSTEM.MAP</span>
             <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider mt-0.5">PORTFOLIO.EXPLORER • {progress}% DISCOVERED</span>
           </div>
         </div>

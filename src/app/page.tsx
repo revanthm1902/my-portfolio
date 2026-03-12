@@ -35,13 +35,17 @@ const firstName = "REVANTH".split("");
 const lastName = "MODALAVALASA".split("");
 
 export default function Home() {
-  // Manually track scroll of the inner overflow div — avoids framer-motion
-  // "container ref not hydrated" error that occurs inside AppFrame's conditional render.
   const scrollY = useMotionValue(0);
 
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
   const heroY = useTransform(scrollY, [0, 700], ["0%", "-15%"]);
   const heroScale = useTransform(scrollY, [0, 700], [1, 0.92]);
+
+  // Grid portal transition transforms
+  const gridOpacity = useTransform(scrollY, [300, 600, 900, 1100], [0, 1, 1, 0]);
+  const gridScale = useTransform(scrollY, [300, 700, 1100], [0.5, 1.2, 3]);
+  const gridRotateX = useTransform(scrollY, [300, 700, 1100], [60, 20, -10]);
+  const gridZ = useTransform(scrollY, [300, 700, 1100], [-400, 0, 600]);
 
   return (
     <AppFrame>
@@ -53,25 +57,27 @@ export default function Home() {
         <section className="relative min-h-dvh flex items-center">
           <motion.div
             style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}
-            className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-10 md:px-16 pt-24 md:pt-0"
+            className="relative z-10 w-full px-6 sm:px-10 md:px-16 pt-24 md:pt-0"
           >
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-4 md:mb-6 font-mono text-[10px] md:text-xs tracking-[0.2em] text-zinc-500 uppercase"
-            >
-              Full-Stack Developer // Product Designer
-            </motion.div>
+            <div className="max-w-5xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="mb-4 md:mb-6 font-mono text-[10px] md:text-xs tracking-[0.2em] text-zinc-500 uppercase"
+              >
+                Full-Stack Developer // Product Designer
+              </motion.div>
+            </div>
 
             <motion.h1
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className={`${displayFont.className} text-5xl min-[400px]:text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold leading-[0.85] tracking-tight text-zinc-900 dark:text-zinc-50 flex flex-col`}
+              className={`${displayFont.className} max-w-[95vw] mx-auto text-5xl min-[400px]:text-6xl sm:text-7xl md:text-8xl lg:text-[min(10rem,10vw)] font-bold leading-[0.85] tracking-tight text-zinc-900 dark:text-zinc-50 flex flex-col`}
               style={{ perspective: "1000px" }}
             >
-              <span className="flex overflow-hidden">
+              <span className="flex">
                 {firstName.map((letter, index) => (
                   <motion.span
                     key={index}
@@ -82,7 +88,7 @@ export default function Home() {
                   </motion.span>
                 ))}
               </span>
-              <span className="flex overflow-hidden text-red-600 dark:text-red-500 mt-1 md:mt-0">
+              <span className="flex text-red-600 dark:text-red-500 mt-1 md:mt-0">
                 {lastName.map((letter, index) => (
                   <motion.span
                     key={index}
@@ -95,12 +101,13 @@ export default function Home() {
               </span>
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
-              className="mt-6 md:mt-8 text-sm sm:text-base md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl font-light leading-relaxed"
-            >
+            <div className="max-w-5xl mx-auto">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.2 }}
+                className="mt-6 md:mt-8 text-sm sm:text-base md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl font-light leading-relaxed"
+              >
               Crafting{" "}
               <span className="font-medium text-red-600 dark:text-red-500">
                 digital experiences
@@ -132,6 +139,7 @@ export default function Home() {
                 Resume
               </Link>
             </motion.div>
+            </div>
           </motion.div>
 
           {/* Scroll-down indicator */}
@@ -157,16 +165,38 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* ─── Decorative divider ─── */}
-        <div className="relative py-6 md:py-10 flex items-center justify-center">
+        {/* ─── GRID PORTAL TRANSITION ─── */}
+        <section className="relative h-[80vh] flex items-center justify-center overflow-hidden" style={{ perspective: "1000px" }}>
           <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="w-20 md:w-28 h-px bg-red-600 origin-center"
-          />
-        </div>
+            style={{
+              opacity: gridOpacity,
+              scale: gridScale,
+              rotateX: gridRotateX,
+              z: gridZ,
+            }}
+            className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 grid-rows-6 md:grid-rows-8 gap-px"
+          >
+            {Array.from({ length: 48 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="border border-red-600/20 dark:border-red-500/15 bg-red-600/2 dark:bg-red-500/2"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i % 8) * 0.03 + Math.floor(i / 8) * 0.05 }}
+              />
+            ))}
+          </motion.div>
+          {/* Center portal accent */}
+          <motion.div
+            style={{ opacity: gridOpacity }}
+            className="relative z-10 text-center pointer-events-none"
+          >
+            <p className="font-(family-name:--font-ndot) text-4xl md:text-6xl text-red-600/30 dark:text-red-500/20 tracking-wider">
+              /
+            </p>
+          </motion.div>
+        </section>
 
         {/* ─── CONTACT SECTION ─── */}
         <section className="relative py-16 md:py-24">

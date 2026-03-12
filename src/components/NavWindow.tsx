@@ -2,23 +2,25 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useDragControls } from "framer-motion";
-import { Home, User, Wrench, PenTool, FileText, FolderGit2, Award } from "lucide-react";
+import { Home, User, Wrench, PenTool, FileText, FolderGit2, Award, MessageCircle } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 // --- EXACT BRACKET COORDINATES ---
 const nodes = [
   { id: "home", label: "Portfolio", icon: Home, x: 200, y: 350 },
-  { id: "about", label: "About", icon: User, x: 500, y: 200 },
-  { id: "skills", label: "Skills", icon: Wrench, x: 500, y: 500 },
+  { id: "about", label: "About", icon: User, x: 500, y: 180 },
+  { id: "contact", label: "Contact", icon: MessageCircle, x: 500, y: 350 },
+  { id: "skills", label: "Skills", icon: Wrench, x: 500, y: 520 },
   { id: "blog", label: "Blog", icon: PenTool, x: 800, y: 100 },
-  { id: "resume", label: "Resume", icon: FileText, x: 800, y: 300 },
+  { id: "resume", label: "Resume", icon: FileText, x: 800, y: 280 },
   { id: "projects", label: "Projects", icon: FolderGit2, x: 800, y: 400 },
   { id: "certifications", label: "Certifications", icon: Award, x: 800, y: 600 },
 ];
 
 const edges = [
   { source: "home", target: "about" },
+  { source: "home", target: "contact" },
   { source: "home", target: "skills" },
   { source: "about", target: "blog" },
   { source: "about", target: "resume" },
@@ -205,6 +207,7 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
                <MobileNode id="blog" label="Blog" icon={PenTool} isVisited={visitedNodes.includes("blog")} isActive={activeNode === "blog"} onNodeClick={handleNodeClick} />
                <MobileNode id="resume" label="Resume" icon={FileText} isVisited={visitedNodes.includes("resume")} isActive={activeNode === "resume"} onNodeClick={handleNodeClick} />
             </div>
+            <MobileNode id="contact" label="Contact" icon={MessageCircle} isVisited={visitedNodes.includes("contact")} isActive={activeNode === "contact"} onNodeClick={handleNodeClick} />
             <MobileNode id="skills" label="Skills" icon={Wrench} isVisited={visitedNodes.includes("skills")} isActive={activeNode === "skills"} onNodeClick={handleNodeClick} />
             <div className="flex flex-col gap-6 pl-6 ml-5 border-l-[1.5px] border-zinc-800 border-dashed">
                <MobileNode id="projects" label="Projects" icon={FolderGit2} isVisited={visitedNodes.includes("projects")} isActive={activeNode === "projects"} onNodeClick={handleNodeClick} />

@@ -65,7 +65,7 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
 
             {/* Bottom Left Location */}
             <div className="absolute bottom-6 md:bottom-10 left-6 md:left-8">
-              <div className="font-mono text-[8px] md:text-[10px] text-zinc-500 tracking-[0.3em] uppercase">
+              <div className="font-mono text-[8px] md:text-[10px] text-zinc-700 dark:text-zinc-400 tracking-[0.3em] uppercase">
                 {">"} Hyderabad, India
               </div>
             </div>

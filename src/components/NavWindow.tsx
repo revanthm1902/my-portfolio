@@ -77,7 +77,7 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
     const currentPage =
       window.location.pathname === "/" ? "home" : window.location.pathname.replace(/^\//, "");
     try {
-      const stored = localStorage.getItem("portfolio-visited-nodes");
+      const stored = sessionStorage.getItem("portfolio-visited-nodes");
       const storedNodes: string[] = stored ? JSON.parse(stored) : ["home"];
       return Array.from(new Set([...storedNodes, currentPage]));
     } catch {
@@ -94,7 +94,7 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
   const activeNode = pathname === "/" ? "home" : pathname.replace(/^\//, "");
 
   useEffect(() => {
-    localStorage.setItem("portfolio-visited-nodes", JSON.stringify(visitedNodes));
+    sessionStorage.setItem("portfolio-visited-nodes", JSON.stringify(visitedNodes));
   }, [visitedNodes]);
 
   useEffect(() => {

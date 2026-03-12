@@ -71,7 +71,7 @@ export default function CertificationsPage() {
                 <div className="flex flex-col gap-5">
                   {block.items.map((item, i) => (
                     <div key={i} className="relative pl-4 border-l-2 border-zinc-200 dark:border-zinc-800">
-                      <div className="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700"></div>
+                      <div className="absolute -left-1.25 top-1.5 w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700"></div>
                       <h4 className="text-base font-semibold text-zinc-800 dark:text-zinc-200">
                         {item.title}
                       </h4>

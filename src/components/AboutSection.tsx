@@ -9,26 +9,11 @@ import {
   Code,
   Globe,
   Zap,
-  Terminal,
-  Cloud,
-  Smartphone,
-  PenTool,
 } from "lucide-react";
 
 // ──────────────────────────────────
 // DATA
 // ──────────────────────────────────
-
-const techStack = [
-  { category: "Languages", icon: Code, items: "Java · Python · R · JavaScript (ES6+) · TypeScript" },
-  { category: "Frontend", icon: Smartphone, items: "React.js · Next.js · React Native · Tailwind CSS" },
-  { category: "Backend", icon: Terminal, items: "Node.js · Express.js · Django · REST APIs" },
-  { category: "Databases", icon: Database, items: "MongoDB · MySQL · PostgreSQL · Supabase" },
-  { category: "Cloud & DevOps", icon: Cloud, items: "AWS (EC2, S3, Lambda) · OCI · Vercel · CI/CD" },
-  { category: "Data Science", icon: Cpu, items: "Pandas · NumPy · Matplotlib · Scikit-learn · Power BI" },
-  { category: "IoT & Hardware", icon: Zap, items: "Arduino · Raspberry Pi · ESP32 · PCB Design (EasyEDA)" },
-  { category: "Design & Tools", icon: PenTool, items: "Figma · Git · GitHub · 3D CAD · Fusion 360" },
-];
 
 const timeline = [
   {
@@ -91,8 +76,8 @@ export default function AboutSection() {
               <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] text-red-600 uppercase mb-3">
                 {"// sys.About_User"}
               </p>
-              <h2 className="font-(family-name:--font-ndot) text-3xl sm:text-4xl md:text-6xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
-                MY STORY
+              <h2 className="font-(family-name:--font-ndot) text-4xl sm:text-5xl md:text-7xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
+                EXPERIENCE
               </h2>
             </motion.div>
 
@@ -103,89 +88,46 @@ export default function AboutSection() {
               className="space-y-5 text-sm sm:text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed"
             >
               <p>
-                I am a Computer Science undergraduate at VIT-AP, deeply
-                passionate about bridging the gap between physical hardware and
-                scalable cloud infrastructure. My journey didn&apos;t start with
-                just writing code—it started with{" "}
+                I am a Computer Science undergraduate at VIT-AP with a deep
+                passion for building end-to-end products — from the circuits on
+                a PCB to the pixels on a screen. My approach to engineering is
+                rooted in{" "}
                 <span className="text-zinc-900 dark:text-zinc-200 font-medium">
-                  building systems
+                  systems thinking
                 </span>
-                .
+                : understanding how every layer of technology connects and
+                influences the final user experience.
               </p>
               <p>
-                Whether it is designing an Intelligent Safety Helmet that
-                processes real-time telemetry, mapping out custom PCBs for
-                health wearables, or engineering robust MERN stack platforms like
-                my &ldquo;Second Brain&rdquo; knowledge system, I thrive on
-                solving complex operational challenges.
+                With hands-on internship experience across full-stack
+                development and R&amp;D engineering, I&apos;ve shipped MERN
+                stack applications with predictive analytics at Purple Techno
+                Solutions and built IoT-driven safety systems at TechtoGreen
+                Drone &amp; Robotics that cut incident response latency by 90%.
               </p>
               <p>
-                I don&apos;t just build software; I build{" "}
+                I work across the entire stack —{" "}
+                <span className="text-zinc-900 dark:text-zinc-200 font-medium">
+                  Java, Python, TypeScript, React, Next.js, Node.js, Django,
+                  AWS, and embedded C++
+                </span>
+                . Whether it&apos;s deploying serverless functions, designing
+                custom PCBs for health wearables, or fine-tuning ML models, I
+                focus on owning the complete pipeline from idea to production.
+              </p>
+              <p>
+                Beyond engineering, I&apos;m an active competitive programmer
+                with 300+ problems solved, a NASA Space Apps Challenge global
+                nominee, and a multi-time hackathon winner (HackAP 2024,
+                AppFusion 2024, IEEE Hackasagon runner-up). I thrive under
+                pressure, believe the best solutions come from understanding
+                problems from{" "}
                 <span className="text-zinc-900 dark:text-zinc-200 font-medium border-b border-red-600/50">
-                  ecosystems
-                </span>
-                . From writing low-level C++ for Raspberry Pi to deploying
-                predictive analytics modules using Python and AWS, I love
-                controlling the entire pipeline of a product.
-              </p>
-              <p>
-                Outside of engineering, I&apos;m a competitive programmer (300+
-                problems solved), a NASA Space Apps Challenge global nominee, and
-                a hackathon enthusiast who thrives under pressure. I believe the
-                best solutions come from understanding the problem from{" "}
-                <span className="text-zinc-900 dark:text-zinc-200 font-medium">
                   every angle
                 </span>
-                —hardware, software, data, and design.
+                , and am always looking for my next challenge.
               </p>
             </motion.div>
-          </section>
-
-          {/* ── SECTION 2: TECH STACK ── */}
-          <section className="mb-16 md:mb-20">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            >
-              <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] text-red-600 uppercase mb-3">
-                {"// sys.Tech_Stack"}
-              </p>
-              <h2 className="font-(family-name:--font-ndot) text-3xl sm:text-4xl md:text-6xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
-                ARSENAL
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-              {techStack.map((tech, index) => {
-                const Icon = tech.icon;
-                return (
-                  <motion.div
-                    key={tech.category}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    className="group p-4 md:p-5 border border-zinc-200 dark:border-zinc-800 hover:border-red-600/40 transition-colors"
-                  >
-                    <div className="flex items-center gap-3 mb-2.5">
-                      <div className="w-8 h-8 flex items-center justify-center border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 group-hover:border-red-600/40 transition-colors">
-                        <Icon
-                          size={14}
-                          className="text-zinc-500 group-hover:text-red-600 transition-colors"
-                        />
-                      </div>
-                      <h4 className="text-xs md:text-sm font-bold font-mono text-zinc-900 dark:text-white uppercase tracking-wider">
-                        {tech.category}
-                      </h4>
-                    </div>
-                    <p className="text-xs md:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed pl-11">
-                      {tech.items}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
           </section>
 
           {/* ── SECTION 3: TIMELINE ── */}
@@ -198,7 +140,7 @@ export default function AboutSection() {
               <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] text-red-600 uppercase mb-3">
                 {"// sys.Execution_Log"}
               </p>
-              <h2 className="font-(family-name:--font-ndot) text-3xl sm:text-4xl md:text-6xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
+              <h2 className="font-(family-name:--font-ndot) text-4xl sm:text-5xl md:text-7xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
                 EXPERIENCE
               </h2>
             </motion.div>
@@ -266,7 +208,7 @@ export default function AboutSection() {
               <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] text-red-600 uppercase mb-3">
                 {"// sys.Hidden_Variables"}
               </p>
-              <h2 className="font-(family-name:--font-ndot) text-3xl sm:text-4xl md:text-6xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
+              <h2 className="font-(family-name:--font-ndot) text-4xl sm:text-5xl md:text-7xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
                 ACHIEVEMENTS
               </h2>
             </motion.div>

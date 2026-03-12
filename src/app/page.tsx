@@ -3,10 +3,10 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Teko } from "next/font/google";
 import Link from "next/link";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ChevronDown } from "lucide-react";
+import { useRef, useCallback } from "react";
 import AppFrame from "@/components/AppFrame";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
 
 const displayFont = Teko({
   subsets: ["latin"],
@@ -36,21 +36,26 @@ const lastName = "MODALAVALASA".split("");
 
 export default function Home() {
   const scrollY = useMotionValue(0);
+  const router = useRouter();
+  const hasNavigated = useRef(false);
 
-  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
-  const heroY = useTransform(scrollY, [0, 700], ["0%", "-15%"]);
-  const heroScale = useTransform(scrollY, [0, 700], [1, 0.92]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const heroY = useTransform(scrollY, [0, 400], ["0%", "-10%"]);
+  const heroScale = useTransform(scrollY, [0, 400], [1, 0.95]);
 
-  // Grid portal transition transforms
-  const gridOpacity = useTransform(scrollY, [300, 600, 900, 1100], [0, 1, 1, 0]);
-  const gridScale = useTransform(scrollY, [300, 700, 1100], [0.5, 1.2, 3]);
-  const gridRotateX = useTransform(scrollY, [300, 700, 1100], [60, 20, -10]);
-  const gridZ = useTransform(scrollY, [300, 700, 1100], [-400, 0, 600]);
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const top = e.currentTarget.scrollTop;
+    scrollY.set(top);
+    if (top > 80 && !hasNavigated.current) {
+      hasNavigated.current = true;
+      router.push("/contact");
+    }
+  }, [scrollY, router]);
 
   return (
     <AppFrame>
       <div
-        onScroll={(e) => scrollY.set(e.currentTarget.scrollTop)}
+        onScroll={handleScroll}
         className="absolute inset-0 overflow-y-auto overflow-x-hidden scroll-smooth no-scrollbar pb-4"
       >
         {/* ─── HERO SECTION ─── */}
@@ -117,23 +122,14 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1.3 }}
-              className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6"
+              className="mt-8 md:mt-10 flex items-center justify-center"
             >
               <Link
-                href="/projects"
-                className="group flex justify-center items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-red-600 text-white font-medium rounded-none hover:bg-red-700 transition-all shadow-lg shadow-red-500/20 w-full sm:w-auto"
-              >
-                View Work
-                <ArrowRight
-                  size={16}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </Link>
-              <Link
                 href="/resume"
-                className="flex justify-center px-6 py-3 md:px-8 md:py-4 border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-white font-medium rounded-none hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-all w-full sm:w-auto"
+                className="group relative inline-flex justify-center items-center px-10 py-4 md:px-12 md:py-4.5 overflow-hidden rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-2xl border border-red-500/50 md:border-white/25 dark:md:border-zinc-700/40 text-white md:text-zinc-900 dark:text-white font-semibold text-sm md:text-base tracking-wide shadow-[0_8px_40px_rgba(220,38,38,0.15)] md:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:md:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-500 hover:border-red-500/50 hover:shadow-[0_8px_40px_rgba(220,38,38,0.15)]"
               >
-                Resume
+                <span className="absolute inset-0 bg-linear-to-r from-red-600 to-red-500 translate-x-0 md:-translate-x-full group-hover:translate-x-0 transition-transform duration-600 ease-out" />
+                <span className="relative z-10 md:group-hover:text-white transition-colors duration-300">Resume</span>
               </Link>
             </motion.div>
           </motion.div>
@@ -161,46 +157,8 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* ─── GRID PORTAL TRANSITION ─── */}
-        <section className="relative h-[80vh] flex items-center justify-center overflow-hidden" style={{ perspective: "1000px" }}>
-          <motion.div
-            style={{
-              opacity: gridOpacity,
-              scale: gridScale,
-              rotateX: gridRotateX,
-              z: gridZ,
-            }}
-            className="absolute inset-0 grid grid-cols-6 md:grid-cols-8 grid-rows-6 md:grid-rows-8 gap-px"
-          >
-            {Array.from({ length: 48 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="border border-red-600/20 dark:border-red-500/15 bg-red-600/2 dark:bg-red-500/2"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: (i % 8) * 0.03 + Math.floor(i / 8) * 0.05 }}
-              />
-            ))}
-          </motion.div>
-          {/* Center portal accent */}
-          <motion.div
-            style={{ opacity: gridOpacity }}
-            className="relative z-10 text-center pointer-events-none"
-          >
-            <p className="font-(family-name:--font-ndot) text-4xl md:text-6xl text-red-600/30 dark:text-red-500/20 tracking-wider">
-              /
-            </p>
-          </motion.div>
-        </section>
-
-        {/* ─── CONTACT SECTION ─── */}
-        <section className="relative py-16 md:py-24">
-          <ContactSection />
-        </section>
-
-        {/* ─── FOOTER ─── */}
-        <Footer />
+        {/* Extra scroll space to trigger navigation */}
+        <div className="h-[50vh]" />
       </div>
     </AppFrame>
   );

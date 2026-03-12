@@ -9,7 +9,7 @@ export default function BlogPage() {
           <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-zinc-500 uppercase mb-4">
             Blog // Writings
           </div>
-          <h1 className="font-(family-name:--font-ndot) text-4xl md:text-6xl text-zinc-900 dark:text-zinc-50 tracking-tight">
+          <h1 className="font-(family-name:--font-ndot) text-5xl md:text-7xl lg:text-8xl text-zinc-900 dark:text-zinc-50 tracking-tight">
             BLOG
           </h1>
           <p className="mt-4 text-zinc-500 dark:text-zinc-400 text-sm md:text-base max-w-xl">

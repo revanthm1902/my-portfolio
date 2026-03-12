@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 md:gap-8">
           {/* Brand */}
           <div>
-            <span className="font-(family-name:--font-ndot) text-2xl text-red-600 tracking-tight">
+            <span className="font-(family-name:--font-ndot) text-3xl text-red-600 tracking-tight">
               MR
             </span>
             <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400 font-mono leading-relaxed max-w-55">

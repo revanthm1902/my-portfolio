@@ -91,12 +91,12 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
 
-              <button onClick={() => setIsNavOpen(true)} className="group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/10 dark:bg-zinc-900/40 backdrop-blur-md border border-white/20 dark:border-zinc-800/50 shadow-xl hover:border-red-600/50 transition-all">
+              <button onClick={() => setIsNavOpen(true)} className="group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/10 dark:bg-zinc-900/40 backdrop-blur-md border border-red-600/50 md:border-white/20 dark:md:border-zinc-800/50 shadow-xl md:hover:border-red-600/50 transition-all">
                 <div className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600" />
                 </div>
-                <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-300 group-hover:text-red-500">System.Map</span>
+                <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-red-500 md:text-zinc-600 dark:md:text-zinc-300 md:group-hover:text-red-500">System.Map</span>
                 <Network size={14} className="hidden md:block text-zinc-400 group-hover:text-red-500" />
               </button>
             </div>

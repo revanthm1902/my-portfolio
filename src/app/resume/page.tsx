@@ -55,7 +55,7 @@ export default function ResumePage() {
                 href={DRIVE_VIEW_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="hidden sm:flex items-center gap-2 px-3 py-1.5 font-mono text-[9px] uppercase tracking-widest border border-zinc-700 text-zinc-400 hover:text-white transition-all rounded"
+                className="group/drive relative hidden sm:flex items-center gap-2 px-3 py-1.5 overflow-hidden font-mono text-[9px] uppercase tracking-widest bg-white/5 backdrop-blur-xl border border-zinc-700/50 text-zinc-400 rounded-lg shadow-lg transition-all duration-300 hover:border-zinc-500/50"
               >
                 <ExternalLink size={12} />
                 Drive
@@ -64,11 +64,15 @@ export default function ResumePage() {
                 href={DRIVE_DOWNLOAD_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-widest bg-red-600 text-white hover:bg-red-700 transition-all rounded shadow-lg shadow-red-600/20"
+                className="group/dl relative flex items-center gap-1.5 md:gap-2 px-3 py-1.5 overflow-hidden font-mono text-[9px] uppercase tracking-widest bg-red-600 border border-red-500 text-white rounded-lg shadow-[0_4px_20px_rgba(220,38,38,0.2)] transition-all duration-300 hover:bg-red-700 hover:shadow-[0_4px_25px_rgba(220,38,38,0.4)] hover:scale-[1.02] active:scale-[0.98]"
               >
-                <Download size={12} />
-                <span className="xs:inline">Download</span>
-              </a>
+              {/* The icon and text now stand out against the solid red */}
+              <Download size={12} className="shrink-0" />
+              <span className="xs:inline font-bold">Download</span>
+              
+              {/* Subtle shine effect to maintain the high-tech terminal feel */}
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/dl:animate-[shimmer_1.5s_infinite] pointer-events-none" />
+            </a>
             </div>
           </div>
 

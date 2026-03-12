@@ -61,7 +61,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-4 md:mb-6 font-mono text-[10px] md:text-xs tracking-[0.2em] text-zinc-500 uppercase"
             >
-              Full-Stack Developer // AI Solutions
+              Full-Stack Developer // Product Designer
             </motion.div>
 
             <motion.h1

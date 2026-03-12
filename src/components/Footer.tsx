@@ -29,7 +29,7 @@ export default function Footer() {
               MR
             </span>
             <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400 font-mono leading-relaxed max-w-55">
-              Full-Stack Developer &amp; AI Solutions Engineer based in
+              Product Developer &amp; Full-Stack Engineer based in
               Hyderabad, India.
             </p>
           </div>

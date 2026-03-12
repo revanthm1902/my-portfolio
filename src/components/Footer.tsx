@@ -58,7 +58,7 @@ export default function Footer() {
             <h4 className="font-mono text-[10px] tracking-[0.3em] text-zinc-400 uppercase mb-4">
               Connect
             </h4>
-            <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3">
               {socials.map((s) => {
                 const Icon = s.icon;
                 return (
@@ -67,10 +67,10 @@ export default function Footer() {
                     href={s.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-500 transition-colors font-mono"
+                    aria-label={s.label}
+                    className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 hover:text-red-600 hover:border-red-600/50 dark:hover:text-red-500 transition-all"
                   >
-                    <Icon size={14} />
-                    {s.label}
+                    <Icon size={16} />
                   </a>
                 );
               })}

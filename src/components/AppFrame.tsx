@@ -62,18 +62,20 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
             <div className="absolute -top-px -right-px w-4 h-4 md:w-6 md:h-6 border-t-2 border-r-2 border-red-600" />
             <div className="absolute -bottom-px -left-px w-4 h-4 md:w-6 md:h-6 border-b-2 border-l-2 border-red-600" />
             <div className="absolute -bottom-px -right-px w-4 h-4 md:w-6 md:h-6 border-b-2 border-r-2 border-red-600" />
+          </div>
 
-            {/* Bottom Left Location */}
-            <div className="absolute bottom-6 md:bottom-10 left-6 md:left-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-zinc-700/50 rounded-md shadow-lg">
-                <span className="font-mono text-[8px] md:text-[10px] text-zinc-700 dark:text-zinc-400 tracking-[0.3em] uppercase">
-                  {">"} Hyderabad, India
-                </span>
-              </div>
+          {/* Bottom Left Location — attached to bottom border */}
+          <div className="absolute bottom-4 md:bottom-8 left-8 md:left-16 z-30 pointer-events-none -translate-y-1/2">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md border border-white/30 dark:border-zinc-700/50 rounded-md shadow-lg">
+              <span className="font-mono text-[8px] md:text-[10px] text-zinc-700 dark:text-zinc-400 tracking-[0.3em] uppercase">
+                {"> "} Hyderabad, India
+              </span>
             </div>
+          </div>
 
-            {/* Top Bar (Logo + Map Trigger) */}
-            <div className="absolute top-4 md:top-6 left-4 right-4 md:left-6 md:right-6 flex items-center justify-between pointer-events-auto z-40">
+          {/* Top Bar (Logo + Map Trigger) */}
+          <div className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-40">
+            <div className="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-6">
               <div className="flex items-center gap-3 md:gap-4">
                 <div onClick={() => router.push("/")} className="font-mono text-xl md:text-2xl font-bold text-red-600 tracking-tighter cursor-pointer">MR</div>
                 <div className="hidden sm:flex items-center gap-2">
@@ -105,13 +107,13 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
             {isNavOpen && <NavWindow isOpen={isNavOpen} onClose={() => setIsNavOpen(false)} />}
           </AnimatePresence>
 
-          {/* 4. THE ACTUAL PAGE CONTENT (Injected here via routing) */}
+          {/* 4. THE ACTUAL PAGE CONTENT — clipped inside frame */}
           <motion.div
             key="page-content"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="absolute inset-0 z-10 w-full h-full"
+            className="absolute inset-4 md:inset-8 z-10 overflow-hidden"
           >
             {children}
           </motion.div>

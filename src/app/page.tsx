@@ -51,30 +51,28 @@ export default function Home() {
     <AppFrame>
       <div
         onScroll={(e) => scrollY.set(e.currentTarget.scrollTop)}
-        className="absolute inset-0 overflow-y-auto overflow-x-hidden scroll-smooth no-scrollbar"
+        className="absolute inset-0 overflow-y-auto overflow-x-hidden scroll-smooth no-scrollbar pb-4"
       >
         {/* ─── HERO SECTION ─── */}
-        <section className="relative min-h-dvh flex items-center">
+        <section className="relative min-h-dvh flex items-center justify-center">
           <motion.div
             style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}
-            className="relative z-10 w-full px-6 sm:px-10 md:px-16 pt-24 md:pt-0"
+            className="relative z-10 w-full px-4 sm:px-8 md:px-12 pt-20 md:pt-0 text-center"
           >
-            <div className="max-w-5xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-4 md:mb-6 font-mono text-[10px] md:text-xs tracking-[0.2em] text-zinc-500 uppercase"
-              >
-                Full-Stack Developer // Product Designer
-              </motion.div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mb-4 md:mb-6 font-mono text-[10px] md:text-xs tracking-[0.2em] text-zinc-500 uppercase"
+            >
+              Full-Stack Developer // Product Designer
+            </motion.div>
 
             <motion.h1
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className={`${displayFont.className} max-w-[95vw] mx-auto text-5xl min-[400px]:text-6xl sm:text-7xl md:text-8xl lg:text-[min(10rem,10vw)] font-bold leading-[0.85] tracking-tight text-zinc-900 dark:text-zinc-50 flex flex-col`}
+              className={`${displayFont.className} text-5xl min-[400px]:text-6xl sm:text-7xl md:text-8xl lg:text-[min(10rem,9.5vw)] font-bold leading-[0.85] tracking-tight text-zinc-900 dark:text-zinc-50 flex flex-col items-center`}
               style={{ perspective: "1000px" }}
             >
               <span className="flex">
@@ -101,13 +99,12 @@ export default function Home() {
               </span>
             </motion.h1>
 
-            <div className="max-w-5xl mx-auto">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                className="mt-6 md:mt-8 text-sm sm:text-base md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl font-light leading-relaxed"
-              >
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+              className="mt-6 md:mt-8 text-sm sm:text-base md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto font-light leading-relaxed"
+            >
               Crafting{" "}
               <span className="font-medium text-red-600 dark:text-red-500">
                 digital experiences
@@ -120,7 +117,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1.3 }}
-              className="mt-8 md:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 md:gap-6 w-full sm:w-auto"
+              className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6"
             >
               <Link
                 href="/projects"
@@ -139,7 +136,6 @@ export default function Home() {
                 Resume
               </Link>
             </motion.div>
-            </div>
           </motion.div>
 
           {/* Scroll-down indicator */}

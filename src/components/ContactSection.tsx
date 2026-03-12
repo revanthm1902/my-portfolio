@@ -24,12 +24,6 @@ const contactLinks = [
     value: "Modalavalasa Revanth",
     href: "https://www.linkedin.com/in/modalavalasa-revanth/",
   },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Hyderabad, India",
-    href: null,
-  },
 ];
 
 export default function ContactSection() {
@@ -60,7 +54,7 @@ export default function ContactSection() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto w-full px-6 md:px-12">
+    <div className="max-w-5xl mx-auto w-full px-4 md:px-8">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +75,7 @@ export default function ContactSection() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">
         {/* ─── Contact Cards ─── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 self-start">
+        <div className="flex flex-col gap-3 md:gap-4 self-start">
           {contactLinks.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -97,9 +91,9 @@ export default function ContactSection() {
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex items-center gap-4 p-5 md:p-6 border border-zinc-200 dark:border-zinc-800 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm hover:border-red-600/50 transition-all"
+                    className="group flex items-center gap-4 p-5 md:p-6 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-xl border border-white/30 dark:border-zinc-700/50 rounded-lg shadow-lg hover:border-red-600/50 transition-all"
                   >
-                    <div className="shrink-0 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 group-hover:border-red-600/50 transition-colors">
+                    <div className="shrink-0 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-md bg-white/60 dark:bg-zinc-800/60 border border-white/40 dark:border-zinc-700/50 group-hover:border-red-600/50 transition-colors">
                       <Icon size={18} className="text-zinc-500 group-hover:text-red-600 transition-colors" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -116,8 +110,8 @@ export default function ContactSection() {
                     />
                   </a>
                 ) : (
-                  <div className="flex items-center gap-4 p-5 md:p-6 border border-zinc-200 dark:border-zinc-800 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm">
-                    <div className="shrink-0 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+                  <div className="flex items-center gap-4 p-5 md:p-6 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-xl border border-white/30 dark:border-zinc-700/50 rounded-lg shadow-lg">
+                    <div className="shrink-0 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-md bg-white/60 dark:bg-zinc-800/60 border border-white/40 dark:border-zinc-700/50">
                       <Icon size={18} className="text-zinc-500" />
                     </div>
                     <div className="min-w-0 flex-1">

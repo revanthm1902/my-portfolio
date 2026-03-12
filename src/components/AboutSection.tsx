@@ -76,7 +76,7 @@ const achievements = [
 
 export default function AboutSection() {
   return (
-    <div className="relative z-10 min-h-dvh pt-24 md:pt-28 pb-20 px-6 sm:px-8 md:px-16">
+    <div className="relative z-10 min-h-dvh pt-20 md:pt-24 pb-16 px-4 sm:px-6 md:px-12">
       <div className="max-w-4xl mx-auto">
         {/* Glass wrapper */}
         <div className="relative p-5 sm:p-8 md:p-12 bg-white/95 dark:bg-[#09090b]/95 backdrop-blur-2xl rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl">

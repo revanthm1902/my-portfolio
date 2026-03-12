@@ -13,7 +13,7 @@ const DRIVE_DOWNLOAD_URL = `https://drive.google.com/uc?export=download&id=${FIL
 export default function ResumePage() {
   return (
     <AppFrame>
-      <div className="absolute inset-0 z-10 flex flex-col items-center">
+      <div className="absolute inset-0 flex flex-col items-center">
         
         {/* 1. DYNAMIC TOP SPACER: Prevents collision with MR Logo and SYSTEM.MAP button */}
         <div className="shrink-0 h-28 md:h-32" />
@@ -24,7 +24,7 @@ export default function ResumePage() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.5, type: "spring", damping: 20 }}
           // MOBILE FIX: Restricted width to calc(100vw - 4rem) to stay inside sniper borders
-          className="flex-1 w-[calc(100vw-4rem)] md:w-[75vw] max-w-5xl mb-20 md:mb-12 flex flex-col bg-[#0a0a0a] rounded-xl shadow-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800"
+          className="flex-1 w-[calc(100%-2rem)] md:w-[85%] max-w-5xl mb-20 md:mb-12 flex flex-col bg-[#0a0a0a] rounded-xl shadow-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800"
         >
           {/* MACBOOK TITLE BAR */}
           <div className="flex items-center justify-between px-3 md:px-5 py-3 bg-[#121212] border-b border-zinc-800 shrink-0">

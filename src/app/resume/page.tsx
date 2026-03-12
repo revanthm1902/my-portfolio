@@ -71,7 +71,7 @@ export default function ResumePage() {
               <span className="xs:inline font-bold">Download</span>
               
               {/* Subtle shine effect to maintain the high-tech terminal feel */}
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/dl:animate-[shimmer_1.5s_infinite] pointer-events-none" />
+              <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/dl:animate-[shimmer_1.5s_infinite] pointer-events-none" />
             </a>
             </div>
           </div>

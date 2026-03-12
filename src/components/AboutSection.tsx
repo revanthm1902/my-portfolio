@@ -88,15 +88,11 @@ export default function AboutSection() {
               className="space-y-5 text-sm sm:text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed"
             >
               <p>
-                I am a Computer Science undergraduate at VIT-AP with a deep
-                passion for building end-to-end products — from the circuits on
-                a PCB to the pixels on a screen. My approach to engineering is
-                rooted in{" "}
+                I am a Computer Science undergraduate at VIT-AP with hands-on experience in full-stack development, industrial IoT systems, and AI-powered applications. My approach to engineering is rooted in{" "}
                 <span className="text-zinc-900 dark:text-zinc-200 font-medium">
                   systems thinking
                 </span>
-                : understanding how every layer of technology connects and
-                influences the final user experience.
+                : building scalable products that integrate real-time data pipelines, cloud infrastructure, and intelligent automation to solve real-world operational challenges.
               </p>
               <p>
                 With hands-on internship experience across full-stack
@@ -119,7 +115,7 @@ export default function AboutSection() {
                 Beyond engineering, I&apos;m an active competitive programmer
                 with 300+ problems solved, a NASA Space Apps Challenge global
                 nominee, and a multi-time hackathon winner (HackAP 2024,
-                AppFusion 2024, IEEE Hackasagon runner-up). I thrive under
+                AppFusion 2024, IEEE Hacksagon 2025). I thrive under
                 pressure, believe the best solutions come from understanding
                 problems from{" "}
                 <span className="text-zinc-900 dark:text-zinc-200 font-medium border-b border-red-600/50">

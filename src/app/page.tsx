@@ -108,14 +108,18 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1.2 }}
-              className="mt-6 md:mt-8 text-sm sm:text-base md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto font-light leading-relaxed"
+              className="mt-6 md:mt-8 text-sm sm:text-base md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed"
             >
-              Crafting{" "}
+              CS Undergrad with hands-on experience in{" "}
               <span className="font-medium text-red-600 dark:text-red-500">
-                digital experiences
-              </span>{" "}
-              that bridge the gap between complex backend logic and seamless user
-              interfaces.
+                full-stack development
+              </span>{", "}
+              <span className="font-medium text-red-600 dark:text-red-500">
+                industrial IoT systems
+              </span>{", and "}
+              <span className="font-medium text-red-600 dark:text-red-500">
+                AI-powered applications
+              </span>.
             </motion.p>
 
             <motion.div

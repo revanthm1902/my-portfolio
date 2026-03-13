@@ -116,15 +116,21 @@ export default function SkillsPage() {
                     {group.category}
                   </h3>
                 </div>
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-4 md:gap-6">
                   {group.skills.map((skill, index) => (
-                    <span 
+                    <div 
                       key={index}
-                      className="px-4 py-2 flex items-center gap-2.5 bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm md:text-base font-medium text-zinc-600 dark:text-zinc-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-colors hover:border-red-500/50 hover:text-red-500"
+                      className="group relative flex flex-col items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800 rounded-2xl md:rounded-3xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-all duration-300 hover:scale-110 hover:border-red-500/50 hover:shadow-xl hover:shadow-red-500/10 cursor-pointer"
                     >
-                      <skill.icon className="w-5 h-5 md:w-6 md:h-6" />
-                      {skill.name}
-                    </span>
+                      <skill.icon className="w-8 h-8 md:w-10 md:h-10 text-zinc-600 dark:text-zinc-400 group-hover:text-red-500 transition-colors duration-300" />
+                      
+                      {/* Tooltip on hover */}
+                      <span className="absolute -top-10 scale-0 group-hover:scale-100 transition-all duration-200 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-semibold px-2.5 py-1.5 rounded-lg whitespace-nowrap shadow-lg select-none pointer-events-none z-10 flex items-center justify-center">
+                        {skill.name}
+                        {/* Little triangle arrow pointing down */}
+                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zinc-900 dark:bg-white rotate-45"></span>
+                      </span>
+                    </div>
                   ))}
                 </div>
               </div>

@@ -2,17 +2,23 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, Wifi, BatteryFull, Search, ExternalLink, Github, Maximize2 } from "lucide-react";
+import { Terminal, Wifi, BatteryFull, Search, ExternalLink, Github, Maximize2, CheckCircle2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-// --- PROJECT DATA ---
+// --- PROJECT DATA (Now includes Key Features) ---
 const projectsData = [
   {
     id: 1,
     iconName: "Proj 1",
     name: "Second Brain",
     shortDesc: "AI Knowledge Management",
-    fullDesc: "A full-stack knowledge management platform engineered with real-time synchronization and secure authentication. It integrates the Gemini API for Al-driven summarization and semantic tagging to enhance knowledge discovery, wrapped in a highly responsive dashboard for dynamic categorization.",
+    fullDesc: "A full-stack knowledge management platform engineered with real-time synchronization and secure authentication. It integrates the Gemini API for Al-driven summarization and semantic tagging to enhance knowledge discovery.",
+    features: [
+      "Gemini API integration for auto-summarization",
+      "Real-time data synchronization via Supabase",
+      "Dynamic categorization and semantic tagging",
+      "Secure user authentication and role management"
+    ],
     tech: ["React.js", "Next.js", "Supabase", "Tailwind CSS", "Gemini API"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
@@ -22,7 +28,13 @@ const projectsData = [
     iconName: "Proj 2",
     name: "SafeFit Wearable",
     shortDesc: "IoT Health Monitor",
-    fullDesc: "A screenless health wearable featuring SpO2, heart rate monitoring, fitness tracking, and fall detection. Integrated GSM+GPS auto-calling and SMS alerting using NodeMCU and custom PCB architecture, achieving <5s emergency alert latency.",
+    fullDesc: "A screenless health wearable featuring SpO2, heart rate monitoring, fitness tracking, and fall detection. Integrated GSM+GPS auto-calling and SMS alerting using NodeMCU and custom PCB architecture.",
+    features: [
+      "Real-time SpO2 and heart rate monitoring",
+      "Integrated fall detection algorithms",
+      "<5s emergency alert latency (SMS/Call)",
+      "Custom PCB architecture with NodeMCU"
+    ],
     tech: ["IoT", "React Native", "NodeMCU", "C++", "Custom PCB"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
@@ -32,7 +44,13 @@ const projectsData = [
     iconName: "Proj 3",
     name: "ERP System",
     shortDesc: "School Management",
-    fullDesc: "Designed the official digital platform for St. G.D. Convent School, deploying a secure MERN stack solution to digitize records for 1,000+ users. Implemented an admin portal with Role-Based Access Control (RBAC), reducing administrative data entry workload by 50%.",
+    fullDesc: "Designed the official digital platform for St. G.D. Convent School, deploying a secure MERN stack solution to digitize records for 1,000+ users. Implemented an admin portal with Role-Based Access Control (RBAC).",
+    features: [
+      "Role-Based Access Control (RBAC) architecture",
+      "Digitized records for 1,000+ students & staff",
+      "Automated attendance and fee tracking modules",
+      "Reduced administrative data entry by 50%"
+    ],
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "RBAC"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
@@ -42,7 +60,13 @@ const projectsData = [
     iconName: "Proj 4",
     name: "Safety Helmet",
     shortDesc: "Industrial IoT",
-    fullDesc: "Intelligent Safety Helmet (CS1) using Raspberry Pi-based IoT architecture. Integrates 360° cameras and multi-sensor data fusion with a real-time telemetry pipeline, successfully reducing incident response latency by 90%.",
+    fullDesc: "Intelligent Safety Helmet (CS1) using Raspberry Pi-based IoT architecture. Integrates 360° cameras and multi-sensor data fusion with a real-time telemetry pipeline.",
+    features: [
+      "360° camera integration for spatial awareness",
+      "Multi-sensor data fusion (temp, gas, impact)",
+      "Real-time telemetry data pipeline",
+      "Reduced incident response latency by 90%"
+    ],
     tech: ["Raspberry Pi", "Python", "Sensor Fusion", "Telemetry"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
@@ -53,6 +77,12 @@ const projectsData = [
     name: "Leap Pulse",
     shortDesc: "Brand Perception Tool",
     fullDesc: "An AI-powered brand perception monitoring tool built during a hackathon to analyze real-time sentiment and market positioning.",
+    features: [
+      "Real-time sentiment analysis engine",
+      "Competitor positioning matrix",
+      "Live data visualization dashboard",
+      "Automated reporting generation"
+    ],
     tech: ["Next.js", "AI/ML", "Data Analytics"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
@@ -71,7 +101,7 @@ const exitFullScreen = () => {
   }
 };
 
-// --- APP ICON COMPONENT (Clean Folders Only) ---
+// --- APP ICON COMPONENT ---
 const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
   return (
     <motion.div
@@ -80,14 +110,12 @@ const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
       onClick={onClick}
       className="flex flex-col items-center justify-start w-20 md:w-24 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-colors group"
     >
-      {/* Unified Pure Mac Folder (No Emojis/Icons) */}
       <div className="relative w-16 h-12 md:w-20 md:h-14 items-end justify-center drop-shadow-xl mb-2 flex mx-auto">
         <div className="absolute top-0 left-0 w-1/3 h-3 md:h-4 bg-[#7abcf5] rounded-t-md" />
         <div className="absolute bottom-0 w-full h-10 md:h-12 bg-[#57a6eb] rounded-b-md rounded-tr-md" />
         <div className="absolute bottom-2 left-[10%] w-[80%] h-8 md:h-10 bg-white/90 rounded-sm" />
         <div className="absolute bottom-0 w-full h-9 md:h-11 bg-[#479ee8]/90 backdrop-blur-md rounded-md border-t border-white/30 shadow-inner" />
       </div>
-
       <span className="text-white text-[10px] md:text-[11px] font-medium text-center shadow-black drop-shadow-md bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded leading-tight line-clamp-2 w-full">
         {proj.iconName}
       </span>
@@ -98,7 +126,7 @@ const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
 // --- IN-OS TERMINAL COMPONENT ---
 const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, onFocus: () => void, openProject: (id: number) => void }) => {
   const [history, setHistory] = useState<{ type: string, text: string }[]>([
-    { type: "info", text: "Portfolio OS v1.0.0 (Darwin Kernel)" },
+    { type: "info", text: "Portfolio OS v1.0.0 (Reanth Modalavalasa)" },
     { type: "info", text: "Type 'help' to see available commands." }
   ]);
   const [input, setInput] = useState("");
@@ -224,7 +252,7 @@ const MacOSDesktop = () => {
       {/* TOP MENU BAR */}
       <div className="h-7 w-full bg-black/40 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-3 md:px-4 text-white text-[10px] md:text-[11px] font-medium tracking-wide z-[60]">
         <div className="flex items-center gap-2 md:gap-4">
-          <span className="font-bold cursor-pointer hover:opacity-80">Revanth's Mac</span>
+          <span className="font-bold cursor-pointer hover:opacity-80">Revanth's OS</span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">File</span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">Edit</span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">View</span>
@@ -286,7 +314,7 @@ const MacOSDesktop = () => {
               className={`absolute w-[94vw] md:w-[900px] ${isTerminal ? 'h-[60vh] md:h-[500px]' : 'h-[85vh] md:min-h-[550px] max-h-[88vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
             >
               {/* Window Title Bar */}
-              <div className="h-12 md:h-14 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
+              <div className="h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
                 <div className="flex gap-2.5">
                   <button onClick={(e) => { e.stopPropagation(); closeWindow(win.id); }} className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FF5F56] flex items-center justify-center group !cursor-pointer">
                     <span className="opacity-0 group-hover:opacity-100 text-[#8b1a10] text-[10px] md:text-xs font-bold leading-none mb-[1px] md:mb-[2px]">×</span>
@@ -310,34 +338,56 @@ const MacOSDesktop = () => {
                 <OSTerminal onClose={() => closeWindow("terminal")} onFocus={() => bringToFront("terminal")} openProject={(id) => openWindow(id, "project")} />
               ) : (
                 <div className="flex-1 flex flex-col md:flex-row cursor-auto overflow-y-auto no-scrollbar">
-                  <div className="w-full md:w-[40%] p-6 md:p-10 bg-black/20 md:border-r border-white/5 flex flex-col gap-5 md:gap-8 shrink-0">
+
+                  {/* LEFT COLUMN: Title, Stack, Buttons */}
+                  <div className="w-full md:w-[35%] p-6 md:p-8 bg-black/20 md:border-r border-white/5 flex flex-col gap-6 shrink-0">
                     <div>
-                      <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">{projData?.name}</h2>
+                      <h2 className="text-3xl font-bold tracking-tight text-white mb-2">{projData?.name}</h2>
                       <p className="text-zinc-400 text-sm font-mono">{projData?.shortDesc}</p>
                     </div>
+
                     <div className="flex flex-col gap-3">
-                      <span className="text-[10px] md:text-xs text-zinc-500 font-mono uppercase tracking-widest">Stack</span>
+                      <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">Stack</span>
                       <div className="flex flex-wrap gap-2">
                         {projData?.tech.map((t, i) => (
-                          <span key={i} className="px-3 py-1.5 bg-white/10 border border-white/10 rounded-md text-xs font-mono text-zinc-300">
+                          <span key={i} className="px-2.5 py-1 bg-white/10 border border-white/10 rounded-md text-[11px] font-mono text-zinc-300">
                             {t}
                           </span>
                         ))}
                       </div>
                     </div>
-                  </div>
 
-                  <div className="w-full md:w-[60%] p-6 md:p-10 flex flex-col gap-6 md:justify-between">
-                    <p className="text-sm md:text-base text-zinc-300 leading-relaxed">{projData?.fullDesc}</p>
-
-                    <div className="flex flex-col xs:flex-row gap-3 mt-auto pb-4 md:pb-0">
-                      <a href={projData?.liveUrl} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-3 md:py-4 rounded-xl text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
+                    {/* MOVED BUTTONS TO LEFT COLUMN */}
+                    <div className="flex flex-col gap-3 mt-auto pt-6">
+                      <a href={projData?.liveUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
                         <ExternalLink size={16} /> VIEW LIVE
                       </a>
-                      <a href={projData?.githubUrl} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-3 md:py-4 rounded-xl text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
+                      <a href={projData?.githubUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
                         <Github size={16} /> SOURCE CODE
                       </a>
                     </div>
+                  </div>
+
+                  {/* RIGHT COLUMN: Desc & Key Features */}
+                  <div className="w-full md:w-[65%] p-6 md:p-8 flex flex-col gap-8 bg-[#1c1c1e]/50">
+
+                    <div>
+                      <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest block mb-3">Overview</span>
+                      <p className="text-sm text-zinc-300 leading-relaxed">{projData?.fullDesc}</p>
+                    </div>
+
+                    <div>
+                      <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest block mb-4">Key Features</span>
+                      <ul className="flex flex-col gap-3">
+                        {projData?.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-sm text-zinc-300">
+                            <CheckCircle2 size={16} className="text-[#57a6eb] shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
                   </div>
                 </div>
               )}
@@ -345,16 +395,18 @@ const MacOSDesktop = () => {
           );
         })}
 
-        {/* < EXIT OS > BUTTON (Dynamic Hover) */}
+        {/* FLAWLESS EXIT OS BUTTON (<>) */}
         <motion.button
           onClick={handleExit}
           className="absolute bottom-6 left-1/2 -translate-x-1/2 h-12 bg-[#1E1E1E]/90 backdrop-blur-2xl border border-white/20 rounded-full flex items-center justify-center px-4 shadow-2xl z-[200] group hover:bg-red-600 hover:border-red-500 !cursor-pointer transition-colors duration-300"
         >
           <div className="flex items-center text-white font-mono font-bold text-lg">
             <span className="text-zinc-400 group-hover:text-white transition-colors">&lt;</span>
-            <span className="w-4 group-hover:w-[85px] overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap text-sm flex items-center justify-center">
-              <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100 tracking-widest">EXIT OS</span>
-            </span>
+            <div className="w-0 overflow-hidden group-hover:w-[76px] transition-all duration-300 ease-out flex items-center justify-center">
+              <span className="text-sm tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap px-2 transition-opacity duration-300 delay-100">
+                EXIT OS
+              </span>
+            </div>
             <span className="text-zinc-400 group-hover:text-white transition-colors">&gt;</span>
           </div>
         </motion.button>
@@ -446,12 +498,10 @@ export default function ProjectsPage() {
           >
             <div className="flex flex-col overflow-y-auto no-scrollbar pb-10">
 
-              {/* CLAUDE CLI HEADER */}
               <div className="border border-[#e67e5a] text-[#e67e5a] px-4 py-2 w-fit rounded-md mb-6 shadow-[0_0_15px_rgba(230,126,90,0.15)] bg-[#e67e5a]/5 text-xs md:text-sm">
                 * Welcome to the Revanth OS research preview!
               </div>
 
-              {/* REVANTH BLOCK ASCII */}
               <pre className="text-[#e67e5a] font-bold text-[8px] sm:text-[10px] md:text-xs leading-tight mb-8 drop-shadow-md">
                 {`██████╗ ███████╗██╗   ██╗ █████╗ ███╗   ██╗████████╗██╗  ██╗
 ██╔══██╗██╔════╝██║   ██║██╔══██╗████╗  ██║╚══██╔══╝██║  ██║

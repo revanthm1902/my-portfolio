@@ -120,9 +120,9 @@ export default function SkillsPage() {
                   {group.skills.map((skill, index) => (
                     <span 
                       key={index}
-                      className="px-3 py-1.5 flex items-center gap-2 bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800 rounded-lg text-xs md:text-sm font-medium text-zinc-600 dark:text-zinc-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-colors hover:border-red-500/50 hover:text-red-500"
+                      className="px-4 py-2 flex items-center gap-2.5 bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm md:text-base font-medium text-zinc-600 dark:text-zinc-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-colors hover:border-red-500/50 hover:text-red-500"
                     >
-                      <skill.icon className="w-4 h-4" />
+                      <skill.icon className="w-5 h-5 md:w-6 md:h-6" />
                       {skill.name}
                     </span>
                   ))}

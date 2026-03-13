@@ -128,8 +128,9 @@ export default function BlogPage() {
   };
 
   return (
-    <AppFrame>
-      <div className="absolute inset-0 overflow-y-auto no-scrollbar pb-4">
+    <>
+      <AppFrame>
+        <div className="absolute inset-0 overflow-y-auto no-scrollbar pb-4">
         <div className="min-h-dvh flex flex-col items-start justify-start max-w-5xl mx-auto px-4 sm:px-8 md:px-12 pt-24 md:pt-32 pb-24">
           <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-zinc-500 uppercase mb-4 flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-500" /> Writings // Updates // Thoughts
@@ -174,6 +175,8 @@ export default function BlogPage() {
           </div>
         </div>
         <Footer />
+      </div>
+    </AppFrame>
         
         {/* Full Post Modal Popup */}
         <AnimatePresence>
@@ -183,18 +186,18 @@ export default function BlogPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedPost(null)}
-              className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 backdrop-blur-xl bg-zinc-900/40 dark:bg-black/80"
+              className="fixed inset-0 z-[99999] flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
             >
               <motion.div
                 initial={{ scale: 0.95, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col relative"
+                className="bg-white dark:bg-zinc-900 sm:border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-2xl h-[100dvh] sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
               >
                 <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white via-white dark:from-zinc-900 dark:via-zinc-900 to-transparent z-10 pointer-events-none" />
                 
-                <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+                <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
                   <a
                     href={selectedPost.link}
                     target="_blank"
@@ -216,7 +219,7 @@ export default function BlogPage() {
                   </button>
                 </div>
                 
-                <div className="overflow-y-auto no-scrollbar p-6 sm:p-10 pt-20 h-full font-sans">
+                <div className="overflow-y-auto no-scrollbar p-5 sm:p-10 pt-24 sm:pt-20 h-full font-sans">
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0">
                       {getSourceIcon(selectedPost.source)}
@@ -261,7 +264,6 @@ export default function BlogPage() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-    </AppFrame>
+    </>
   );
 }

@@ -45,7 +45,7 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full mix-blend-difference"
+      className="fixed top-0 left-0 pointer-events-none z-[999999] rounded-full mix-blend-difference"
         // 1. Remove the useSpring imports and variables.
         // 2. Change your style prop in the motion.div to use the raw motion values directly:
         style={{

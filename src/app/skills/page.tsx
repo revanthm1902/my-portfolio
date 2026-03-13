@@ -1,38 +1,89 @@
 import AppFrame from "@/components/AppFrame";
 import Footer from "@/components/Footer";
+import { FaJava, FaPython, FaJs, FaReact, FaNodeJs, FaAws, FaGitAlt, FaGithub, FaFigma, FaCubes, FaMicrochip, FaNetworkWired, FaDatabase, FaChartBar, FaLaptopCode, FaProjectDiagram, FaFileExcel } from "react-icons/fa";
+import { SiR, SiTypescript, SiNextdotjs, SiExpress, SiDjango, SiVercel, SiMongodb, SiMysql, SiPostgresql, SiSupabase, SiPandas, SiNumpy, SiArduino, SiRaspberrypi, SiEspressif, SiAutodesk } from "react-icons/si";
+import { TbApi, TbBinaryTree } from "react-icons/tb";
+import { BsInfinity } from "react-icons/bs";
 
 const skillCategories = [
   {
     category: "Languages",
-    skills: ["Java", "Python", "R", "JavaScript (ES6+)", "TypeScript"]
+    skills: [
+      { name: "Java", icon: FaJava },
+      { name: "Python", icon: FaPython },
+      { name: "R", icon: SiR },
+      { name: "JavaScript (ES6+)", icon: FaJs },
+      { name: "TypeScript", icon: SiTypescript }
+    ]
   },
   {
     category: "Web & App Development",
-    skills: ["React.js", "Next.js", "Node.js", "Express.js", "Django", "React Native", "REST APIs"]
+    skills: [
+      { name: "React.js", icon: FaReact },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "Express.js", icon: SiExpress },
+      { name: "Django", icon: SiDjango },
+      { name: "React Native", icon: FaReact },
+      { name: "REST APIs", icon: TbApi }
+    ]
   },
   {
     category: "Cloud & DevOps",
-    skills: ["AWS (EC2, S3, Lambda)", "OCI", "Git", "GitHub", "CI/CD", "Vercel"]
+    skills: [
+      { name: "AWS (EC2, S3, Lambda)", icon: FaAws },
+      { name: "OCI", icon: FaDatabase },
+      { name: "Git", icon: FaGitAlt },
+      { name: "GitHub", icon: FaGithub },
+      { name: "CI/CD", icon: BsInfinity },
+      { name: "Vercel", icon: SiVercel }
+    ]
   },
   {
     category: "Databases",
-    skills: ["MongoDB", "MySQL", "PostgreSQL", "Supabase"]
+    skills: [
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "MySQL", icon: SiMysql },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "Supabase", icon: SiSupabase }
+    ]
   },
   {
     category: "Data Science",
-    skills: ["Power BI", "Pandas", "NumPy", "Matplotlib", "Excel"]
+    skills: [
+      { name: "Power BI", icon: FaChartBar },
+      { name: "Pandas", icon: SiPandas },
+      { name: "NumPy", icon: SiNumpy },
+      { name: "Matplotlib", icon: FaChartBar },
+      { name: "Excel", icon: FaFileExcel }
+    ]
   },
   {
     category: "IoT & Hardware",
-    skills: ["Arduino", "Raspberry Pi", "ESP32", "PCB Design (EasyEDA)", "IoT Architecture"]
+    skills: [
+      { name: "Arduino", icon: SiArduino },
+      { name: "Raspberry Pi", icon: SiRaspberrypi },
+      { name: "ESP32", icon: SiEspressif },
+      { name: "PCB Design (EasyEDA)", icon: FaMicrochip },
+      { name: "IoT Architecture", icon: FaNetworkWired }
+    ]
   },
   {
     category: "Core Fundamentals",
-    skills: ["Data Structures & Algorithms", "OOPs", "DBMS", "Operating Systems"]
+    skills: [
+      { name: "Data Structures & Algorithms", icon: TbBinaryTree },
+      { name: "OOPs", icon: FaProjectDiagram },
+      { name: "DBMS", icon: FaDatabase },
+      { name: "Operating Systems", icon: FaLaptopCode }
+    ]
   },
   {
     category: "Design & Tools",
-    skills: ["Figma", "Autodesk Fusion 360", "3D CAD"]
+    skills: [
+      { name: "Figma", icon: FaFigma },
+      { name: "Autodesk Fusion 360", icon: SiAutodesk },
+      { name: "3D CAD", icon: FaCubes }
+    ]
   }
 ];
 
@@ -69,9 +120,10 @@ export default function SkillsPage() {
                   {group.skills.map((skill, index) => (
                     <span 
                       key={index}
-                      className="px-3 py-1.5 bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800 rounded-lg text-xs md:text-sm font-medium text-zinc-600 dark:text-zinc-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-colors hover:border-red-500/50 hover:text-red-500"
+                      className="px-3 py-1.5 flex items-center gap-2 bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800 rounded-lg text-xs md:text-sm font-medium text-zinc-600 dark:text-zinc-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-colors hover:border-red-500/50 hover:text-red-500"
                     >
-                      {skill}
+                      <skill.icon className="w-4 h-4" />
+                      {skill.name}
                     </span>
                   ))}
                 </div>

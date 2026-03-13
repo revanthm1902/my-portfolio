@@ -19,7 +19,7 @@ export default function Preloader({ onComplete, isSecondary = false }: { onCompl
       if (typedText.length < targetText.length) {
         const timeout = setTimeout(() => {
           setTypedText(targetText.slice(0, typedText.length + 1));
-        }, 150); // Typing speed
+        }, 100); // Typing speed
         return () => clearTimeout(timeout);
       } else {
         const timeout = setTimeout(() => {

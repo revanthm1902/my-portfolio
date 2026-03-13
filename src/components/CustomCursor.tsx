@@ -13,13 +13,13 @@ export default function CustomCursor() {
 
   // Spring physics for smooth trailing effect
   const springConfig = { damping: 20, stiffness: 700, mass: 0.1 };
-  const cursorX = useSpring(mouseX, springConfig);
-  const cursorY = useSpring(mouseY, springConfig);
+  // const cursorX = useSpring(mouseX, springConfig);
+  // const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
     // Only show custom cursor on non-touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
-    setIsVisible(true);
+    setTimeout(() => setIsVisible(true), 0);
 
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX);

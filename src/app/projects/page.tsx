@@ -124,13 +124,13 @@ const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
 };
 
 // --- IN-OS TERMINAL COMPONENT ---
-const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, onFocus: () => void, openProject: (id: number) => void }) => {
-  const [history, setHistory] = useState<{ type: string, text: string }[]>([
+const OSTerminal = ({  onFocus, openProject }: { onClose: () => void, onFocus: () => void, openProject: (id: number) => void }) => {
+  const [history, setHistory] = useState<{ type: string, text: string }[]> ([
     { type: "info", text: "Portfolio OS v1.0.0 (Reanth Modalavalasa)" },
     { type: "info", text: "Type 'help' to see available commands." }
   ]);
   const [input, setInput] = useState("");
-  const endRef = useRef<HTMLDivElement>(null);
+  const endRef = useRef <HTMLDivElement>(null);
 
   useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [history]);
 
@@ -144,7 +144,7 @@ const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, on
     if (cmd === "help") {
       newHistory.push({ type: "text", text: "Available commands:" });
       newHistory.push({ type: "text", text: "  ls         - List all available projects" });
-      newHistory.push({ type: "text", text: "  open <id>  - Open a project (e.g., 'open 1')" });
+      newHistory.push({ type: "text", text: "  open <id> - Open a project (e.g., 'open 1')" });
       newHistory.push({ type: "text", text: "  clear      - Clear terminal output" });
       newHistory.push({ type: "text", text: "  date       - Show current system date" });
     } else if (cmd === "ls") {
@@ -173,8 +173,7 @@ const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, on
     setInput("");
   };
 
-  return (
-    <div onPointerDown={onFocus} className="w-full h-full flex flex-col bg-[#141414] text-zinc-300 font-mono text-xs md:text-sm p-4 cursor-text overflow-hidden rounded-b-xl">
+  return ( <div onPointerDown={onFocus} className="w-full h-full flex flex-col bg-[#141414] text-zinc-300 font-mono text-xs md:text-sm p-4 cursor-text overflow-hidden rounded-b-xl">
       <div className="flex-1 overflow-y-auto no-scrollbar pb-4 space-y-1">
         {history.map((line, i) => (
           <div key={i} className={
@@ -244,15 +243,15 @@ const MacOSDesktop = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
-      className="absolute inset-0 z-[9999] flex flex-col overflow-hidden cursor-auto select-none bg-black"
+      className="absolute inset-0 z-50 flex flex-col overflow-hidden cursor-auto select-none bg-black"
     >
       <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/wallpaper.jpg')" }} />
       <div className="absolute inset-0 z-0 bg-black/20" />
 
       {/* TOP MENU BAR */}
-      <div className="h-7 w-full bg-black/40 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-3 md:px-4 text-white text-[10px] md:text-[11px] font-medium tracking-wide z-[60]">
+      <div className="h-7 w-full bg-black/40 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-3 md:px-4 text-white text-[10px] md:text-[11px] font-medium tracking-wide z-50">
         <div className="flex items-center gap-2 md:gap-4">
-          <span className="font-bold cursor-pointer hover:opacity-80">Revanth's OS</span>
+          <span className="font-bold cursor-pointer hover:opacity-80"> Revanth's OS </span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">File</span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">Edit</span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">View</span>
@@ -311,18 +310,17 @@ const MacOSDesktop = () => {
                 left: `max(2%, ${15 + (index * 3)}%)`,
                 zIndex: 100 + index
               }}
-              className={`absolute w-[94vw] md:w-[900px] ${isTerminal ? 'h-[60vh] md:h-[500px]' : 'h-[85vh] md:min-h-[550px] max-h-[88vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
+              className={`absolute w-[94vw] md:w-[225rem] ${isTerminal ? 'h-[60vh] md:h-[125rem]' : 'h-[85vh] md:min-h-[137.5rem] max-h-[88vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
             >
-              {/* Window Title Bar */}
-              <div className="h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
+              {/* Window Title Bar */} <div className="h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
                 <div className="flex gap-2.5">
-                  <button onClick={(e) => { e.stopPropagation(); closeWindow(win.id); }} className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FF5F56] flex items-center justify-center group !cursor-pointer">
+                  <button onClick={(e) => { e.stopPropagation(); closeWindow(win.id); }} className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FF5F56] flex items-center justify-center group cursor-pointer">
                     <span className="opacity-0 group-hover:opacity-100 text-[#8b1a10] text-[10px] md:text-xs font-bold leading-none mb-[1px] md:mb-[2px]">×</span>
                   </button>
-                  <button className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FFBD2E] flex items-center justify-center group !cursor-pointer">
+                  <button className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FFBD2E] flex items-center justify-center group cursor-pointer">
                     <span className="opacity-0 group-hover:opacity-100 text-[#9d7215] text-[10px] md:text-xs font-bold leading-none mb-[1px] md:mb-[2px]">-</span>
                   </button>
-                  <button className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#27C93F] flex items-center justify-center group !cursor-pointer">
+                  <button className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#27C93F] flex items-center justify-center group cursor-pointer">
                     <Maximize2 size={8} className="opacity-0 group-hover:opacity-100 text-[#115b1a]" />
                   </button>
                 </div>
@@ -359,10 +357,10 @@ const MacOSDesktop = () => {
 
                     {/* MOVED BUTTONS TO LEFT COLUMN */}
                     <div className="flex flex-col gap-3 mt-auto pt-6">
-                      <a href={projData?.liveUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
+                      <a href={projData?.liveUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]">
                         <ExternalLink size={16} /> VIEW LIVE
                       </a>
-                      <a href={projData?.githubUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
+                      <a href={projData?.githubUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]">
                         <Github size={16} /> SOURCE CODE
                       </a>
                     </div>
@@ -398,7 +396,7 @@ const MacOSDesktop = () => {
         {/* FLAWLESS EXIT OS BUTTON (<>) */}
         <motion.button
           onClick={handleExit}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 h-12 bg-[#1E1E1E]/90 backdrop-blur-2xl border border-white/20 rounded-full flex items-center justify-center px-4 shadow-2xl z-[200] group hover:bg-red-600 hover:border-red-500 !cursor-pointer transition-colors duration-300"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 h-12 bg-[#1E1E1E]/90 backdrop-blur-2xl border border-white/20 rounded-full flex items-center justify-center px-4 shadow-2xl z-50 group hover:bg-red-600 hover:border-red-500 cursor-pointer transition-colors duration-300"
         >
           <div className="flex items-center text-white font-mono font-bold text-lg">
             <span className="text-zinc-400 group-hover:text-white transition-colors">&lt;</span>
@@ -485,7 +483,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <main className="fixed inset-0 z-[9999] w-full h-[100dvh] bg-[#141414] overflow-hidden cursor-default">
+    <main className="fixed inset-0 z-50 w-full h-dvh bg-[#141414] overflow-hidden cursor-default">
       <AnimatePresence mode="wait">
 
         {phase === "terminal" && (

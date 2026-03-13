@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { useRef, useCallback } from "react";
 import AppFrame from "@/components/AppFrame";
+import SkillsCarousel from "@/components/SkillsCarousel";
 
 const displayFont = Teko({
   subsets: ["latin"],
@@ -103,6 +104,8 @@ export default function Home() {
                 ))}
               </span>
             </motion.h1>
+
+            <SkillsCarousel />
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

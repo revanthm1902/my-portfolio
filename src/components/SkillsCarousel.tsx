@@ -54,7 +54,7 @@ export default function SkillsCarousel() {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-      className="w-full max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto overflow-hidden py-4 md:py-6 mt-4 md:mt-8 relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+      className="w-full max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto overflow-hidden py-4 md:py-6 mt-4 md:mt-8 relative mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
     >
       <motion.div
         className="flex w-max"

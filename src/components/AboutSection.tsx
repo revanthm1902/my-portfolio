@@ -77,7 +77,7 @@ export default function AboutSection() {
                 {"// sys.About_User"}
               </p>
               <h2 className="font-(family-name:--font-ndot) text-4xl sm:text-5xl md:text-7xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
-                EXPERIENCE
+                My Story
               </h2>
             </motion.div>
 
@@ -137,7 +137,7 @@ export default function AboutSection() {
                 {"// sys.Execution_Log"}
               </p>
               <h2 className="font-(family-name:--font-ndot) text-4xl sm:text-5xl md:text-7xl text-zinc-900 dark:text-zinc-50 leading-tight mb-8">
-                EXPERIENCE
+                My Journey
               </h2>
             </motion.div>
 

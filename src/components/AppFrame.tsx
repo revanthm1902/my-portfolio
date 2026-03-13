@@ -8,12 +8,17 @@ import Preloader from "@/components/Preloader";
 import NavWindow from "@/components/NavWindow";
 
 export default function AppFrame({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [loaderState, setLoaderState] = useState<{ isLoading: boolean; type: "initial" | "secondary" | "checking" }>({
+    isLoading: true,
+    type: "checking",
+  });
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     if (sessionStorage.getItem("portfolio-preloader-shown")) {
-      setIsLoading(false);
+      setLoaderState({ isLoading: true, type: "secondary" });
+    } else {
+      setLoaderState({ isLoading: true, type: "initial" });
     }
   }, []);
   const router = useRouter();
@@ -37,17 +42,24 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative h-dvh w-full bg-zinc-50 dark:bg-zinc-950 overflow-hidden">
       <AnimatePresence mode="wait">
-        {isLoading && (
+        {loaderState.isLoading && loaderState.type !== "checking" && (
           <Preloader
+            key="preloader"
+            isSecondary={loaderState.type === "secondary"}
             onComplete={() => {
-              sessionStorage.setItem("portfolio-preloader-shown", "1");
-              setIsLoading(false);
+              if (loaderState.type === "initial") {
+                sessionStorage.setItem("portfolio-preloader-shown", "1");
+              }
+              setLoaderState((prev) => ({ ...prev, isLoading: false }));
             }}
           />
         )}
+        {loaderState.type === "checking" && (
+          <motion.div key="checking" className="fixed inset-0 z-999 bg-black" />
+        )}
       </AnimatePresence>
 
-      {!isLoading && (
+      {!loaderState.isLoading && (
         <>
           {/* 1. Background Grid */}
           <motion.div 

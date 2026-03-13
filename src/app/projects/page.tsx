@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, Folder, Wifi, BatteryFull, Search, ExternalLink, Github, Maximize2, Code } from "lucide-react";
+import { Terminal, Wifi, BatteryFull, Search, ExternalLink, Github, Maximize2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 // --- PROJECT DATA ---
@@ -16,7 +16,6 @@ const projectsData = [
     tech: ["React.js", "Next.js", "Supabase", "Tailwind CSS", "Gemini API"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
-    color: "from-blue-400 to-indigo-600"
   },
   {
     id: 2,
@@ -27,7 +26,6 @@ const projectsData = [
     tech: ["IoT", "React Native", "NodeMCU", "C++", "Custom PCB"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
-    color: "from-emerald-400 to-teal-600"
   },
   {
     id: 3,
@@ -38,7 +36,6 @@ const projectsData = [
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "RBAC"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
-    color: "from-orange-400 to-red-600"
   },
   {
     id: 4,
@@ -49,7 +46,6 @@ const projectsData = [
     tech: ["Raspberry Pi", "Python", "Sensor Fusion", "Telemetry"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
-    color: "from-purple-400 to-fuchsia-600"
   },
   {
     id: 5,
@@ -60,7 +56,6 @@ const projectsData = [
     tech: ["Next.js", "AI/ML", "Data Analytics"],
     liveUrl: "#",
     githubUrl: "https://github.com/revanthm1902",
-    color: "from-cyan-400 to-blue-500"
   },
 ];
 
@@ -76,32 +71,29 @@ const exitFullScreen = () => {
   }
 };
 
-// --- APP ICON COMPONENT ---
-const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => (
-  <motion.div
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={onClick}
-    className="flex flex-col items-center justify-start w-20 md:w-24 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-colors group"
-  >
-    {/* DESKTOP: Mac Folder */}
-    <div className="hidden md:flex relative w-16 h-14 items-end justify-center drop-shadow-xl mb-2">
-      <div className="absolute top-0 left-0 w-1/3 h-3 bg-blue-300 rounded-t-md" />
-      <div className="absolute bottom-0 w-full h-12 bg-blue-400 rounded-b-md rounded-tr-md" />
-      <div className="absolute bottom-2 left-[10%] w-[80%] h-10 bg-white/90 rounded-sm" />
-      <div className="absolute bottom-0 w-full h-10 bg-blue-500/80 backdrop-blur-md rounded-md border-t border-white/30 shadow-inner" />
-    </div>
+// --- APP ICON COMPONENT (Clean Folders Only) ---
+const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onClick}
+      className="flex flex-col items-center justify-start w-20 md:w-24 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-colors group"
+    >
+      {/* Unified Pure Mac Folder (No Emojis/Icons) */}
+      <div className="relative w-16 h-12 md:w-20 md:h-14 items-end justify-center drop-shadow-xl mb-2 flex mx-auto">
+        <div className="absolute top-0 left-0 w-1/3 h-3 md:h-4 bg-[#7abcf5] rounded-t-md" />
+        <div className="absolute bottom-0 w-full h-10 md:h-12 bg-[#57a6eb] rounded-b-md rounded-tr-md" />
+        <div className="absolute bottom-2 left-[10%] w-[80%] h-8 md:h-10 bg-white/90 rounded-sm" />
+        <div className="absolute bottom-0 w-full h-9 md:h-11 bg-[#479ee8]/90 backdrop-blur-md rounded-md border-t border-white/30 shadow-inner" />
+      </div>
 
-    {/* MOBILE: iOS App Squircle */}
-    <div className={`md:hidden flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${proj.color} shadow-lg mb-1.5 border border-white/20`}>
-      <Code size={24} className="text-white drop-shadow-md" />
-    </div>
-
-    <span className="text-white text-[10px] md:text-[11px] font-medium text-center shadow-black drop-shadow-md bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded leading-tight line-clamp-2 w-full">
-      {proj.iconName}
-    </span>
-  </motion.div>
-);
+      <span className="text-white text-[10px] md:text-[11px] font-medium text-center shadow-black drop-shadow-md bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded leading-tight line-clamp-2 w-full">
+        {proj.iconName}
+      </span>
+    </motion.div>
+  );
+};
 
 // --- IN-OS TERMINAL COMPONENT ---
 const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, onFocus: () => void, openProject: (id: number) => void }) => {
@@ -154,13 +146,13 @@ const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, on
   };
 
   return (
-    <div onPointerDown={onFocus} className="w-full h-full flex flex-col bg-[#1E1E1E] text-zinc-300 font-mono text-xs md:text-sm p-4 cursor-text overflow-hidden">
+    <div onPointerDown={onFocus} className="w-full h-full flex flex-col bg-[#141414] text-zinc-300 font-mono text-xs md:text-sm p-4 cursor-text overflow-hidden rounded-b-xl">
       <div className="flex-1 overflow-y-auto no-scrollbar pb-4 space-y-1">
         {history.map((line, i) => (
           <div key={i} className={
             line.type === "error" ? "text-red-400" :
-              line.type === "success" ? "text-green-400" :
-                line.type === "cmd" ? "text-white font-bold" : "text-zinc-300"
+              line.type === "success" ? "text-[#e67e5a]" :
+                line.type === "cmd" ? "text-white font-bold" : "text-zinc-400"
           }>
             {line.text}
           </div>
@@ -168,8 +160,8 @@ const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, on
         <div ref={endRef} />
       </div>
       <form onSubmit={handleCommand} className="flex items-center gap-2 mt-2 shrink-0">
-        <span className="text-green-400 font-bold hidden xs:inline">revanth@mac ~$</span>
-        <span className="text-green-400 font-bold xs:hidden">~$</span>
+        <span className="text-[#e67e5a] font-bold hidden xs:inline">revanth@mac ~$</span>
+        <span className="text-[#e67e5a] font-bold xs:hidden">~$</span>
         <input
           autoFocus
           type="text"
@@ -248,10 +240,8 @@ const MacOSDesktop = () => {
       {/* DESKTOP WORKSPACE */}
       <div className="flex-1 p-4 md:p-6 relative w-full h-full z-10 overflow-hidden">
 
-        {/* RESPONSIVE ICON GRID 
-            Mobile: Flex Row wrap (iOS App Grid style)
-            Desktop: Flex Col wrap (macOS Folder style) */}
-        <div className="flex flex-row md:flex-col flex-wrap gap-4 md:gap-6 items-start content-start h-[calc(100vh-120px)] overflow-hidden w-full">
+        {/* RESPONSIVE ICON GRID */}
+        <div className="grid grid-cols-4 sm:grid-cols-6 md:flex md:flex-col md:flex-wrap gap-2 md:gap-6 items-start content-start h-[calc(100vh-120px)] overflow-hidden w-full">
 
           {projectsData.map((proj) => (
             <AppIcon key={proj.id} proj={proj} onClick={() => openWindow(proj.id, "project")} />
@@ -263,8 +253,8 @@ const MacOSDesktop = () => {
             onClick={() => openWindow("terminal", "terminal")}
             className="flex flex-col items-center justify-start w-20 md:w-24 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-colors group"
           >
-            <div className="flex items-center justify-center w-14 h-14 md:w-16 md:h-14 rounded-2xl bg-[#1E1E1E] border-2 border-zinc-700 shadow-xl mb-1.5 md:mb-2">
-              <Terminal size={24} className="text-green-400" />
+            <div className="flex items-center justify-center w-14 h-12 md:w-16 md:h-14 rounded-xl bg-[#141414] border border-zinc-700 shadow-xl mb-2 mx-auto">
+              <Terminal size={24} className="text-[#e67e5a]" />
             </div>
             <span className="text-white text-[10px] md:text-[11px] font-medium text-center shadow-black drop-shadow-md bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded w-full">
               Terminal
@@ -288,29 +278,28 @@ const MacOSDesktop = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, filter: "blur(5px)" }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              // Ensure window stays within bounds on mobile
               style={{
                 top: `max(5%, ${10 + (index * 2)}%)`,
                 left: `max(2%, ${15 + (index * 3)}%)`,
                 zIndex: 100 + index
               }}
-              className={`absolute w-[96vw] md:w-[750px] ${isTerminal ? 'h-[60vh] md:h-[400px]' : 'h-[80vh] md:h-[450px] max-h-[80vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-xl md:rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/20 overflow-hidden`}
+              className={`absolute w-[94vw] md:w-[900px] ${isTerminal ? 'h-[60vh] md:h-[500px]' : 'h-[85vh] md:min-h-[550px] max-h-[88vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
             >
               {/* Window Title Bar */}
-              <div className="h-10 md:h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-3 md:px-4 cursor-grab active:cursor-grabbing shrink-0">
+              <div className="h-12 md:h-14 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
                 <div className="flex gap-2.5">
-                  <button onClick={(e) => { e.stopPropagation(); closeWindow(win.id); }} className="w-3.5 h-3.5 rounded-full bg-[#FF5F56] flex items-center justify-center group !cursor-pointer">
-                    <span className="opacity-0 group-hover:opacity-100 text-[#8b1a10] text-[9px] font-bold leading-none mb-[1px]">×</span>
+                  <button onClick={(e) => { e.stopPropagation(); closeWindow(win.id); }} className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FF5F56] flex items-center justify-center group !cursor-pointer">
+                    <span className="opacity-0 group-hover:opacity-100 text-[#8b1a10] text-[10px] md:text-xs font-bold leading-none mb-[1px] md:mb-[2px]">×</span>
                   </button>
-                  <button className="w-3.5 h-3.5 rounded-full bg-[#FFBD2E] flex items-center justify-center group !cursor-pointer">
-                    <span className="opacity-0 group-hover:opacity-100 text-[#9d7215] text-[10px] leading-none mb-[1px]">-</span>
+                  <button className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FFBD2E] flex items-center justify-center group !cursor-pointer">
+                    <span className="opacity-0 group-hover:opacity-100 text-[#9d7215] text-[10px] md:text-xs font-bold leading-none mb-[1px] md:mb-[2px]">-</span>
                   </button>
-                  <button className="w-3.5 h-3.5 rounded-full bg-[#27C93F] flex items-center justify-center group !cursor-pointer">
+                  <button className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#27C93F] flex items-center justify-center group !cursor-pointer">
                     <Maximize2 size={8} className="opacity-0 group-hover:opacity-100 text-[#115b1a]" />
                   </button>
                 </div>
-                <span className="text-zinc-300 text-[10px] md:text-xs font-semibold font-mono tracking-wide flex items-center gap-2 truncate px-2">
-                  {isTerminal && <Terminal size={12} />}
+                <span className="text-zinc-300 text-xs md:text-sm font-semibold font-mono tracking-wide flex items-center gap-2 truncate px-2">
+                  {isTerminal && <Terminal size={14} className="text-[#e67e5a]" />}
                   {windowTitle}
                 </span>
                 <div className="w-12 hidden md:block" />
@@ -321,17 +310,16 @@ const MacOSDesktop = () => {
                 <OSTerminal onClose={() => closeWindow("terminal")} onFocus={() => bringToFront("terminal")} openProject={(id) => openWindow(id, "project")} />
               ) : (
                 <div className="flex-1 flex flex-col md:flex-row cursor-auto overflow-y-auto no-scrollbar">
-                  {/* Left Column */}
-                  <div className="w-full md:w-2/5 p-5 md:p-8 bg-black/20 md:border-r border-white/5 flex flex-col gap-4 md:gap-6 shrink-0">
+                  <div className="w-full md:w-[40%] p-6 md:p-10 bg-black/20 md:border-r border-white/5 flex flex-col gap-5 md:gap-8 shrink-0">
                     <div>
-                      <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-1 md:mb-2">{projData?.name}</h2>
-                      <p className="text-zinc-400 text-xs md:text-sm font-mono">{projData?.shortDesc}</p>
+                      <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">{projData?.name}</h2>
+                      <p className="text-zinc-400 text-sm font-mono">{projData?.shortDesc}</p>
                     </div>
-                    <div className="flex flex-col gap-2 md:gap-3">
-                      <span className="text-[9px] md:text-[10px] text-zinc-500 font-mono uppercase tracking-widest">Stack</span>
-                      <div className="flex flex-wrap gap-1.5 md:gap-2">
+                    <div className="flex flex-col gap-3">
+                      <span className="text-[10px] md:text-xs text-zinc-500 font-mono uppercase tracking-widest">Stack</span>
+                      <div className="flex flex-wrap gap-2">
                         {projData?.tech.map((t, i) => (
-                          <span key={i} className="px-2 py-1 bg-white/10 border border-white/10 rounded text-[10px] md:text-[11px] font-mono text-zinc-300">
+                          <span key={i} className="px-3 py-1.5 bg-white/10 border border-white/10 rounded-md text-xs font-mono text-zinc-300">
                             {t}
                           </span>
                         ))}
@@ -339,15 +327,15 @@ const MacOSDesktop = () => {
                     </div>
                   </div>
 
-                  {/* Right Column */}
-                  <div className="w-full md:w-3/5 p-5 md:p-8 flex flex-col gap-6 md:justify-between">
-                    <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">{projData?.fullDesc}</p>
-                    <div className="flex flex-row gap-2 md:gap-3 mt-auto pb-4 md:pb-0">
-                      <a href={projData?.liveUrl} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-1.5 md:gap-2 bg-white text-black hover:bg-zinc-200 px-2 md:px-4 py-2.5 md:py-3 rounded-lg text-[10px] md:text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
-                        <ExternalLink size={14} /> <span className="hidden xs:inline">VIEW</span> LIVE
+                  <div className="w-full md:w-[60%] p-6 md:p-10 flex flex-col gap-6 md:justify-between">
+                    <p className="text-sm md:text-base text-zinc-300 leading-relaxed">{projData?.fullDesc}</p>
+
+                    <div className="flex flex-col xs:flex-row gap-3 mt-auto pb-4 md:pb-0">
+                      <a href={projData?.liveUrl} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-3 md:py-4 rounded-xl text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
+                        <ExternalLink size={16} /> VIEW LIVE
                       </a>
-                      <a href={projData?.githubUrl} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-1.5 md:gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-2 md:px-4 py-2.5 md:py-3 rounded-lg text-[10px] md:text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
-                        <Github size={14} /> <span className="hidden xs:inline">SOURCE</span> CODE
+                      <a href={projData?.githubUrl} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-3 md:py-4 rounded-xl text-xs font-bold tracking-widest transition-all !cursor-pointer hover:scale-[1.02]">
+                        <Github size={16} /> SOURCE CODE
                       </a>
                     </div>
                   </div>
@@ -357,17 +345,17 @@ const MacOSDesktop = () => {
           );
         })}
 
-        {/* EXIT BUTTON */}
+        {/* < EXIT OS > BUTTON (Dynamic Hover) */}
         <motion.button
           onClick={handleExit}
-          initial={{ width: 56 }}
-          whileHover={{ width: 120 }}
-          transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 h-14 bg-[#1E1E1E]/90 backdrop-blur-2xl border border-white/20 rounded-full flex items-center justify-start px-4 shadow-2xl z-[200] overflow-hidden group hover:bg-red-600 hover:border-red-500 !cursor-pointer"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 h-12 bg-[#1E1E1E]/90 backdrop-blur-2xl border border-white/20 rounded-full flex items-center justify-center px-4 shadow-2xl z-[200] group hover:bg-red-600 hover:border-red-500 !cursor-pointer transition-colors duration-300"
         >
-          <div className="flex items-center gap-3 whitespace-nowrap text-white font-mono font-bold">
-            <Code size={20} className="shrink-0 text-zinc-400 group-hover:text-white transition-colors" />
-            <span className="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 tracking-widest">EXIT OS</span>
+          <div className="flex items-center text-white font-mono font-bold text-lg">
+            <span className="text-zinc-400 group-hover:text-white transition-colors">&lt;</span>
+            <span className="w-4 group-hover:w-[85px] overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap text-sm flex items-center justify-center">
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-100 tracking-widest">EXIT OS</span>
+            </span>
+            <span className="text-zinc-400 group-hover:text-white transition-colors">&gt;</span>
           </div>
         </motion.button>
 
@@ -377,15 +365,11 @@ const MacOSDesktop = () => {
 };
 
 
-// --- INITIAL UBUNTU BOOT SEQUENCE ---
+// --- INITIAL CLAUDE-STYLE BOOT SEQUENCE ---
 export default function ProjectsPage() {
   const [phase, setPhase] = useState<"terminal" | "desktop">("terminal");
-  const [bootLines, setBootLines] = useState<{ type: string, text: string }[]>([
-    { type: "sys", text: "Ubuntu 24.04 LTS (GNU/Linux 5.15.0-101-generic x86_64)" },
-    { type: "sys", text: "Welcome to Revanth_OS. System booting..." }
-  ]);
+  const [bootLines, setBootLines] = useState<{ type: string, text: string }[]>([]);
   const [authStep, setAuthStep] = useState<"checking" | "prompt" | "verifying" | "loading">("checking");
-
   const [mathA, setMathA] = useState(0);
   const [mathB, setMathB] = useState(0);
   const [userInput, setUserInput] = useState("");
@@ -403,10 +387,9 @@ export default function ProjectsPage() {
         res(true);
       }, delay));
 
-      await addLine("info", "[ OK ] Started Secure Protocol Initialization.", 600);
-      await addLine("info", "[ OK ] Mounting root filesystem /dev/nvme0n1p2...", 400);
-      await addLine("warn", "[WARN] Unrecognized user signature detected.", 800);
-      await addLine("auth", "[AUTH] Human verification protocol required.", 600);
+      await addLine("info", "[ OK ] Mounting root filesystem /dev/nvme0n1p2...", 600);
+      await addLine("warn", "[WARN] Unrecognized user signature detected.", 500);
+      await addLine("info", "[AUTH] Human verification protocol required.", 400);
 
       setMathA(Math.floor(Math.random() * 50) + 10);
       setMathB(Math.floor(Math.random() * 50) + 10);
@@ -424,34 +407,33 @@ export default function ProjectsPage() {
     if (!userInput) return;
 
     const answer = parseInt(userInput);
-    setBootLines(prev => [...prev, { type: "input", text: `revanth@portfolio:~$ authorize --sum ${userInput}` }]);
+    setBootLines(prev => [...prev, { type: "input", text: `revanth@os:~$ authorize --sum ${userInput}` }]);
     setUserInput("");
     setAuthStep("verifying");
 
     if (answer === mathA + mathB) {
-      setBootLines(prev => [...prev, { type: "success", text: "[ OK ] Verification successful. Access granted." }]);
+      setBootLines(prev => [...prev, { type: "success", text: "Login successful. Access granted." }]);
       setAuthStep("loading");
 
-      // TRIGGER FULLSCREEN MODE UPON SUCCESS
       requestFullScreen();
 
       for (let i = 1; i <= 5; i++) {
         await new Promise(res => setTimeout(res, 150));
-        setBootLines(prev => [...prev, { type: "info", text: `[ OK ] Unpacking project_module_0${i}.pkg...` }]);
+        setBootLines(prev => [...prev, { type: "info", text: `Unpacking project_module_0${i}.pkg... OK` }]);
       }
 
       await new Promise(res => setTimeout(res, 400));
-      setBootLines(prev => [...prev, { type: "sys", text: "Starting GUI Interface. Switching tty..." }]);
+      setBootLines(prev => [...prev, { type: "info", text: "Starting GUI Interface..." }]);
       await new Promise(res => setTimeout(res, 600));
       setPhase("desktop");
     } else {
-      setBootLines(prev => [...prev, { type: "error", text: "[FAIL] Incorrect checksum. Access denied." }]);
+      setBootLines(prev => [...prev, { type: "error", text: "Incorrect checksum. Access denied." }]);
       setAuthStep("prompt");
     }
   };
 
   return (
-    <main className="fixed inset-0 z-[9999] w-full h-[100dvh] bg-[#300A24] overflow-hidden cursor-default">
+    <main className="fixed inset-0 z-[9999] w-full h-[100dvh] bg-[#141414] overflow-hidden cursor-default">
       <AnimatePresence mode="wait">
 
         {phase === "terminal" && (
@@ -459,40 +441,57 @@ export default function ProjectsPage() {
             key="terminal"
             exit={{ opacity: 0, scale: 1.05, filter: "blur(5px)" }}
             transition={{ duration: 0.5 }}
-            className="w-full h-full flex flex-col p-4 md:p-8 pt-10 font-mono text-sm overflow-hidden cursor-text"
+            className="w-full h-full flex flex-col p-4 md:p-8 pt-8 font-mono text-xs md:text-sm overflow-hidden cursor-text"
             onClick={() => inputRef.current?.focus()}
           >
-            <div className="flex flex-col gap-1 overflow-y-auto no-scrollbar pb-10">
-              {bootLines.map((line, idx) => (
-                <div key={idx} className={
-                  line.type === "sys" ? "text-zinc-300" :
-                    line.type === "info" ? "text-white" :
-                      line.type === "warn" ? "text-yellow-400 font-bold" :
-                        line.type === "auth" ? "text-cyan-400 font-bold" :
-                          line.type === "success" ? "text-green-400 font-bold" :
-                            line.type === "error" ? "text-red-500 font-bold" :
-                              line.type === "input" ? "text-white font-bold mt-2" : "text-white"
-                }>
-                  {line.text}
-                </div>
-              ))}
+            <div className="flex flex-col overflow-y-auto no-scrollbar pb-10">
 
-              {authStep === "prompt" && (
-                <form onSubmit={handleAuthSubmit} className="flex items-center gap-2 mt-2">
-                  <span className="text-green-400 font-bold">revanth@portfolio:~$</span>
-                  <span className="text-white">solve {mathA} + {mathB} = </span>
-                  <input
-                    ref={inputRef}
-                    type="number"
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                    className="bg-transparent outline-none border-none text-white w-20 shadow-none focus:ring-0 p-0 m-0"
-                    autoComplete="off"
-                  />
-                  <span className="animate-pulse bg-white w-2 h-4 inline-block -ml-2" />
-                </form>
-              )}
-              <div ref={endRef} />
+              {/* CLAUDE CLI HEADER */}
+              <div className="border border-[#e67e5a] text-[#e67e5a] px-4 py-2 w-fit rounded-md mb-6 shadow-[0_0_15px_rgba(230,126,90,0.15)] bg-[#e67e5a]/5 text-xs md:text-sm">
+                * Welcome to the Revanth OS research preview!
+              </div>
+
+              {/* REVANTH BLOCK ASCII */}
+              <pre className="text-[#e67e5a] font-bold text-[8px] sm:text-[10px] md:text-xs leading-tight mb-8 drop-shadow-md">
+                {`██████╗ ███████╗██╗   ██╗ █████╗ ███╗   ██╗████████╗██╗  ██╗
+██╔══██╗██╔════╝██║   ██║██╔══██╗████╗  ██║╚══██╔══╝██║  ██║
+██████╔╝█████╗  ██║   ██║███████║██╔██╗ ██║   ██║   ███████║
+██╔══██╗██╔══╝  ╚██╗ ██╔╝██╔══██║██║╚██╗██║   ██║   ██╔══██║
+██║  ██║███████╗ ╚████╔╝ ██║  ██║██║ ╚████║   ██║   ██║  ██║
+╚═╝  ╚═╝╚══════╝  ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝`}
+              </pre>
+
+              <div className="space-y-1.5">
+                {bootLines.map((line, idx) => (
+                  <div key={idx} className={
+                    line.type === "info" ? "text-zinc-400" :
+                      line.type === "warn" ? "text-yellow-500 font-bold" :
+                        line.type === "success" ? "text-[#e67e5a] font-bold" :
+                          line.type === "error" ? "text-red-500 font-bold" :
+                            line.type === "input" ? "text-white font-bold mt-3" : "text-white"
+                  }>
+                    {line.text}
+                  </div>
+                ))}
+
+                {authStep === "prompt" && (
+                  <form onSubmit={handleAuthSubmit} className="flex items-center gap-2 mt-3">
+                    <span className="text-[#e67e5a] font-bold">revanth@os:~$</span>
+                    <span className="text-zinc-300 hidden xs:inline">solve {mathA} + {mathB} = </span>
+                    <span className="text-zinc-300 xs:hidden">{mathA} + {mathB} = </span>
+                    <input
+                      ref={inputRef}
+                      type="number"
+                      value={userInput}
+                      onChange={(e) => setUserInput(e.target.value)}
+                      className="bg-transparent outline-none border-none text-white w-20 shadow-none focus:ring-0 p-0 m-0"
+                      autoComplete="off"
+                    />
+                    <span className="animate-pulse bg-[#e67e5a] w-2 h-4 inline-block -ml-2" />
+                  </form>
+                )}
+                <div ref={endRef} />
+              </div>
             </div>
           </motion.div>
         )}

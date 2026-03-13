@@ -1,11 +1,8 @@
 "use client";
 
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Teko } from "next/font/google";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { ChevronDown } from "lucide-react";
-import { useRef, useCallback } from "react";
 import AppFrame from "@/components/AppFrame";
 import SkillsCarousel from "@/components/SkillsCarousel";
 
@@ -36,34 +33,13 @@ const firstName = "REVANTH".split("");
 const lastName = "MODALAVALASA".split("");
 
 export default function Home() {
-  const scrollY = useMotionValue(0);
-  const router = useRouter();
-  const hasNavigated = useRef(false);
-
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const heroY = useTransform(scrollY, [0, 400], ["0%", "-10%"]);
-  const heroScale = useTransform(scrollY, [0, 400], [1, 0.95]);
-
-  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
-    const top = e.currentTarget.scrollTop;
-    scrollY.set(top);
-    if (top > 80 && !hasNavigated.current) {
-      hasNavigated.current = true;
-      router.push("/contact");
-    }
-  }, [scrollY, router]);
-
   return (
     <AppFrame>
-      <div
-        onScroll={handleScroll}
-        className="absolute inset-0 overflow-y-auto overflow-x-hidden scroll-smooth no-scrollbar pb-4"
-      >
+      <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scroll-smooth no-scrollbar pb-4 flex items-center justify-center">
         {/* ─── HERO SECTION ─── */}
-        <section className="relative min-h-dvh flex items-center justify-center">
+        <section className="relative w-full">
           <motion.div
-            style={{ opacity: heroOpacity, y: heroY, scale: heroScale }}
-            className="relative z-10 w-full px-4 sm:px-8 md:px-12 pt-20 md:pt-0 text-center"
+            className="relative z-10 w-full px-4 sm:px-8 md:px-12 text-center"
           >
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -140,32 +116,7 @@ export default function Home() {
               </Link>
             </motion.div>
           </motion.div>
-
-          {/* Scroll-down indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 0.6 }}
-            className="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
-          >
-            <span className="font-mono text-[8px] tracking-[0.3em] text-zinc-400 uppercase">
-              Scroll
-            </span>
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <ChevronDown size={16} className="text-zinc-400" />
-            </motion.div>
-          </motion.div>
         </section>
-
-        {/* Extra scroll space to trigger navigation */}
-        <div className="h-[50vh]" />
       </div>
     </AppFrame>
   );

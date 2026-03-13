@@ -67,12 +67,6 @@ export default function SkillsCarousel() {
             className="group relative flex flex-col items-center justify-center mx-2.5 md:mx-4 w-12 h-12 md:w-16 md:h-16 bg-white dark:bg-[#0a0a0a] shadow-[0_2px_15px_rgba(0,0,0,0.04)] border border-zinc-200/80 dark:border-zinc-800/80 rounded-2xl transition-all duration-300 hover:scale-110 hover:border-red-500/50 hover:shadow-red-500/10 hover:z-50 cursor-pointer"
           >
             <skill.icon className="w-6 h-6 md:w-8 md:h-8 text-zinc-600 dark:text-zinc-400 group-hover:text-red-500 transition-colors duration-300" />
-            
-            {/* Tooltip on hover */}
-            <span className="absolute -top-10 md:-top-11 scale-0 group-hover:scale-100 transition-all duration-200 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-[10px] md:text-xs font-semibold px-2 md:px-2.5 py-1 md:py-1.5 rounded-lg whitespace-nowrap shadow-xl select-none pointer-events-none flex items-center justify-center origin-bottom">
-              {skill.name}
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 md:w-2 md:h-2 bg-zinc-900 dark:bg-white rotate-45"></span>
-            </span>
           </div>
         ))}
       </motion.div>

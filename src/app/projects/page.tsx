@@ -6,88 +6,185 @@ import { Terminal, Wifi, BatteryFull, Search, ExternalLink, Github, Maximize2, C
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-// --- PROJECT DATA (Now includes Key Features) ---
+// --- EXPANDED PROJECT DATA ---
 const projectsData = [
   {
     id: 1,
-    iconName: "Proj 1",
+    iconName: "Second Brain",
     name: "Second Brain",
     shortDesc: "AI Knowledge Management",
-    fullDesc: "A full-stack knowledge management platform engineered with real-time synchronization and secure authentication. It integrates the Gemini API for Al-driven summarization and semantic tagging to enhance knowledge discovery.",
+    fullDesc: "A full-stack knowledge management platform engineered with real-time synchronization. It acts as a digital neural network, integrating the Gemini API for Al-driven summarization, vector-based semantic tagging, and instantaneous knowledge discovery.",
     features: [
-      "Gemini API integration for auto-summarization",
-      "Real-time data synchronization via Supabase",
-      "Dynamic categorization and semantic tagging",
-      "Secure user authentication and role management"
+      "Gemini API integration for auto-summarization & tagging",
+      "Real-time data synchronization and persistence via Supabase",
+      "Markdown support with rich-text rendering",
+      "Secure JWT-based user authentication and role management"
     ],
-    tech: ["React.js", "Next.js", "Supabase", "Tailwind CSS", "Gemini API"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/revanthm1902",
+    tech: ["Next.js", "React", "Supabase", "Tailwind CSS", "Gemini API"],
+    liveUrl: "http://second-brain-notes-ai.vercel.app/",
+    githubUrl: "https://github.com/revanthm1902/second-brain",
   },
   {
     id: 2,
-    iconName: "Proj 2",
+    iconName: "SafeFit",
     name: "SafeFit Wearable",
     shortDesc: "IoT Health Monitor",
-    fullDesc: "A screenless health wearable featuring SpO2, heart rate monitoring, fitness tracking, and fall detection. Integrated GSM+GPS auto-calling and SMS alerting using NodeMCU and custom PCB architecture.",
+    fullDesc: "A screenless health wearable designed for elderly and patient care. It continuously monitors SpO2 and heart rate, utilizing an onboard accelerometer for fall detection. The system bypasses smartphones, connecting directly to GSM networks for emergency alerts.",
     features: [
-      "Real-time SpO2 and heart rate monitoring",
-      "Integrated fall detection algorithms",
-      "<5s emergency alert latency (SMS/Call)",
-      "Custom PCB architecture with NodeMCU"
+      "Real-time SpO2 and continuous heart rate monitoring",
+      "Algorithmic fall detection using MPU6050 sensor data",
+      "<5s emergency alert latency (Direct SMS/Call via GSM)",
+      "Custom PCB architecture interfacing with NodeMCU"
     ],
     tech: ["IoT", "React Native", "NodeMCU", "C++", "Custom PCB"],
     liveUrl: "#",
-    githubUrl: "https://github.com/revanthm1902",
+    githubUrl: "https://github.com/revanthm1902/safe-fit",
   },
   {
     id: 3,
-    iconName: "Proj 3",
-    name: "ERP System",
-    shortDesc: "School Management",
-    fullDesc: "Designed the official digital platform for St. G.D. Convent School, deploying a secure MERN stack solution to digitize records for 1,000+ users. Implemented an admin portal with Role-Based Access Control (RBAC).",
+    iconName: "ERP System",
+    name: "School ERP System",
+    shortDesc: "St. G.D. School Portal",
+    fullDesc: "The official digital infrastructure for St. G.D. Convent School. This secure MERN stack solution digitized decades of paper records, providing distinct portals for students, teachers, and administrators to streamline daily operations.",
     features: [
-      "Role-Based Access Control (RBAC) architecture",
-      "Digitized records for 1,000+ students & staff",
-      "Automated attendance and fee tracking modules",
-      "Reduced administrative data entry by 50%"
+      "Strict Role-Based Access Control (RBAC) architecture",
+      "Digitized and encrypted records for 1,000+ students & staff",
+      "Automated attendance logging and fee tracking modules",
+      "Dynamic report card generation and analytics dashboard"
     ],
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "RBAC"],
+    tech: ["React.js", "Node.js", "Express", "MongoDB"],
     liveUrl: "#",
-    githubUrl: "https://github.com/revanthm1902",
+    githubUrl: "https://github.com/revanthm1902/StgdSchool",
   },
   {
     id: 4,
-    iconName: "Proj 4",
-    name: "Safety Helmet",
-    shortDesc: "Industrial IoT",
-    fullDesc: "Intelligent Safety Helmet (CS1) using Raspberry Pi-based IoT architecture. Integrates 360° cameras and multi-sensor data fusion with a real-time telemetry pipeline.",
+    iconName: "Leap Pulse",
+    name: "Leap Pulse",
+    shortDesc: "Brand Perception Tool",
+    fullDesc: "An AI-powered analytics dashboard built to monitor brand health. It ingests unstructured social sentiment data and processes it through machine learning models to generate real-time market positioning insights.",
     features: [
-      "360° camera integration for spatial awareness",
-      "Multi-sensor data fusion (temp, gas, impact)",
-      "Real-time telemetry data pipeline",
-      "Reduced incident response latency by 90%"
+      "Real-time social sentiment analysis engine",
+      "Automated competitor positioning matrix generation",
+      "Interactive data visualization dashboard (Charts/Graphs)",
+      "Automated PDF reporting generation for stakeholders"
     ],
-    tech: ["Raspberry Pi", "Python", "Sensor Fusion", "Telemetry"],
+    tech: ["Next.js", "AI/ML", "Data Analytics", "Tailwind CSS"],
     liveUrl: "#",
-    githubUrl: "https://github.com/revanthm1902",
+    githubUrl: "https://github.com/revanthm1902/leap-pulse",
   },
   {
     id: 5,
-    iconName: "Proj 5",
-    name: "Leap Pulse",
-    shortDesc: "Brand Perception Tool",
-    fullDesc: "An AI-powered brand perception monitoring tool built during a hackathon to analyze real-time sentiment and market positioning.",
+    iconName: "PlayNow",
+    name: "PlayNow Web App",
+    shortDesc: "Party Game Platform",
+    fullDesc: "A responsive multiplayer party game web application. Designed for sub-second latency, it utilizes real-time state management to synchronize gameplay events across multiple client devices in active game lobbies.",
     features: [
-      "Real-time sentiment analysis engine",
-      "Competitor positioning matrix",
-      "Live data visualization dashboard",
-      "Automated reporting generation"
+      "Real-time multiplayer game state synchronization",
+      "Interactive, mobile-first responsive UI/UX",
+      "Dynamic lobby creation and session management",
+      "Seamless deployment and edge-caching via Vercel"
     ],
-    tech: ["Next.js", "AI/ML", "Data Analytics"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/revanthm1902",
+    tech: ["Next.js", "React", "Vercel", "WebSockets"],
+    liveUrl: "https://play-now-or-never.vercel.app/",
+    githubUrl: "https://github.com/revanthm1902/PlayNow",
   },
+  {
+    id: 6,
+    iconName: "Spreadsheet",
+    name: "Spreadsheet Lite",
+    shortDesc: "Web-based Data Grid",
+    fullDesc: "A lightweight, highly optimized browser-based spreadsheet. It mimics core Excel functionalities by implementing a custom formula parser and a dependency graph to efficiently update cell values based on dynamic references.",
+    features: [
+      "Custom DAG (Directed Acyclic Graph) for formula evaluation",
+      "Responsive CSS Grid architecture for massive tables",
+      "Client-side data state persistence and local storage",
+      "Dynamic cell formatting and reference highlighting"
+    ],
+    tech: ["React.js", "TypeScript", "Tailwind CSS", "Data Structures"],
+    liveUrl: "https://spread-sheet-lite.vercel.app/",
+    githubUrl: "https://github.com/revanthm1902/spreadsheet-lite",
+  },
+  {
+    id: 7,
+    iconName: "PushUp",
+    name: "Streak Tracker",
+    shortDesc: "A Chrome extension",
+    fullDesc: "A gamified fitness application focused entirely on tracking push-up repetitions. It utilizes local storage and interactive charts to help users maintain daily streaks and visualize their physical progression over time.",
+    features: [
+      "Leetcode, Codeforces, HackerRank, CodeChef Problem tracker",
+      "Gamified streak system with daily/weekly goals",
+      "Interactive progress visualization with charts and stats",
+      "Browser notifications for streak reminders and milestones"
+    ],
+    tech: ["React Native", "JavaScript", "Firebase"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/revanthm1902/PushUp",
+  },
+  {
+    id: 8,
+    iconName: "Real-Estate",
+    name: "Real Estate CMS",
+    shortDesc: "Property Management",
+    fullDesc: "A comprehensive Content Management System tailored for real estate agencies. It streamlines operations by providing robust property listing management, advanced search filtering, and a secure tenant database.",
+    features: [
+      "Dynamic property listing with advanced search & filter",
+      "Cloud-based image gallery hosting for properties",
+      "Secure admin dashboard for portfolio and agent oversight",
+      "RESTful API architecture for rapid data retrieval"
+    ],
+    tech: ["MERN Stack", "Tailwind CSS", "JWT Auth", "Cloudinary"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/revanthm1902/Real-Estate-Management-System",
+  },
+  {
+    id: 9,
+    iconName: "Laundry MS",
+    name: "Laundry Management",
+    shortDesc: "Service Operations",
+    fullDesc: "An end-to-end operational software solution for laundromat businesses. It tracks the complete lifecycle of a service order from intake to delivery, whilst managing customer billing and histories.",
+    features: [
+      "Live order status tracking pipeline (Intake to Delivery)",
+      "Customer history tracking and database management",
+      "Role-specific UI routing for staff vs. administrators"
+    ],
+    tech: ["React.js", "Node.js", "Express", "MongoDB"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/revanthm1902/laundry-management-system",
+  },
+  {
+    id: 10,
+    iconName: "Ethereum Validator",
+    name: "Ethereum Validator",
+    shortDesc: "Blockchain Infrastructure",
+    fullDesc: "A robust technical implementation focused on Ethereum network consensus. Involved configuring and maintaining a secure validator node to participate in block validation and smart contract interactions on the testnet.",
+    features: [
+      "Validator node deployment and synchronization",
+      "Consensus layer participation and uptime monitoring",
+      "validator performance analytics and reporting dashboard",
+      "Beaconcha.in integration for real-time validator status tracking",
+      "Alchemy API integration for smart contract interaction and on-chain data retrieval"
+
+    ],
+    tech: ["Alchemy", "Beaconcha.in", "Web3.js", "Ethereum", "Node.js", "Express.js"],
+    liveUrl: "https://ethereum-validator-dashboard.vercel.app/",
+    githubUrl: "https://github.com/revanthm1902/ethereum-validator",
+  },
+  {
+    id: 11,
+    iconName: "Ydhya",
+    name: "Ydhya App",
+    shortDesc: "Custom Web Platform",
+    fullDesc: "Mecication reminder and health tracking web application built with React.js. It features a custom responsive UI, server-side rendering for optimized performance, and a modular component architecture for maintainability.",
+    features: [
+      "Custom responsive UI design with mobile-first approach",
+      "Server-side rendering (SSR) for improved performance and SEO",
+      "Modular React component architecture for scalability",
+      "Integration with third-party APIs for health data tracking"
+    ],
+    tech: ["Next.js", "React", "CSS Modules", "Vercel"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/revanthm1902/Ydhya",
+  }
 ];
 
 // --- FULLSCREEN UTILS ---
@@ -109,7 +206,7 @@ const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
-      className="flex flex-col items-center justify-start w-20 md:w-24 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-colors group"
+      className="flex flex-col items-center justify-start w-20 md:w-24 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-colors group shrink-0"
     >
       <div className="relative w-16 h-12 md:w-20 md:h-14 items-end justify-center drop-shadow-xl mb-2 flex mx-auto">
         <div className="absolute top-0 left-0 w-1/3 h-3 md:h-4 bg-[#7abcf5] rounded-t-md" />
@@ -125,13 +222,13 @@ const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
 };
 
 // --- IN-OS TERMINAL COMPONENT ---
-const OSTerminal = ({  onFocus, openProject }: { onClose: () => void, onFocus: () => void, openProject: (id: number) => void }) => {
-  const [history, setHistory] = useState<{ type: string, text: string }[]> ([
-    { type: "info", text: "Portfolio OS v1.0.0 (Reanth Modalavalasa)" },
+const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, onFocus: () => void, openProject: (id: number) => void }) => {
+  const [history, setHistory] = useState<{ type: string, text: string }[]>([
+    { type: "info", text: "Portfolio OS v1.0.0 (Revanth Modalavalasa)" },
     { type: "info", text: "Type 'help' to see available commands." }
   ]);
   const [input, setInput] = useState("");
-  const endRef = useRef <HTMLDivElement>(null);
+  const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [history]);
 
@@ -145,11 +242,11 @@ const OSTerminal = ({  onFocus, openProject }: { onClose: () => void, onFocus: (
     if (cmd === "help") {
       newHistory.push({ type: "text", text: "Available commands:" });
       newHistory.push({ type: "text", text: "  ls         - List all available projects" });
-      newHistory.push({ type: "text", text: "  open <id> - Open a project (e.g., 'open 1')" });
+      newHistory.push({ type: "text", text: "  open <id>  - Open a project (e.g., 'open 1')" });
       newHistory.push({ type: "text", text: "  clear      - Clear terminal output" });
       newHistory.push({ type: "text", text: "  date       - Show current system date" });
     } else if (cmd === "ls") {
-      projectsData.forEach(p => newHistory.push({ type: "text", text: `  [${p.id}] ${p.name}` }));
+      projectsData.forEach(p => newHistory.push({ type: "text", text: `  [${p.id.toString().padStart(2, '0')}] ${p.name}` }));
     } else if (cmd === "clear") {
       setHistory([]);
       setInput("");
@@ -174,7 +271,8 @@ const OSTerminal = ({  onFocus, openProject }: { onClose: () => void, onFocus: (
     setInput("");
   };
 
-  return ( <div onPointerDown={onFocus} className="w-full h-full flex flex-col bg-[#141414] text-zinc-300 font-mono text-xs md:text-sm p-4 cursor-text overflow-hidden rounded-b-xl">
+  return (
+    <div onPointerDown={onFocus} className="w-full h-full flex flex-col bg-[#141414] text-zinc-300 font-mono text-xs md:text-sm p-4 cursor-text overflow-hidden rounded-b-xl">
       <div className="flex-1 overflow-y-auto no-scrollbar pb-4 space-y-1">
         {history.map((line, i) => (
           <div key={i} className={
@@ -269,7 +367,7 @@ const MacOSDesktop = () => {
       <div className="flex-1 p-4 md:p-6 relative w-full h-full z-10 overflow-hidden">
 
         {/* RESPONSIVE ICON GRID */}
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:flex md:flex-col md:flex-wrap gap-2 md:gap-6 items-start content-start h-[calc(100vh-120px)] overflow-hidden w-full">
+        <div className="grid grid-cols-4 sm:grid-cols-6 md:flex md:flex-col md:flex-wrap gap-2 md:gap-6 items-start content-start h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden md:overflow-hidden md:overflow-x-auto no-scrollbar w-full pb-20">
 
           {projectsData.map((proj) => (
             <AppIcon key={proj.id} proj={proj} onClick={() => openWindow(proj.id, "project")} />
@@ -310,9 +408,11 @@ const MacOSDesktop = () => {
                 top: `max(6%, ${8 + (index * 1.5)}%)`,
                 zIndex: 100 + index
               }}
-              className={`absolute left-1/2 -translate-x-1/2 w-[94vw] md:w-[88vw] md:max-w-6xl ${isTerminal ? 'h-[60vh] md:h-[72vh]' : 'h-[82vh] md:h-[84vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
+              // DECREASED WINDOW SIZE (md:w-[820px] and md:h-[500px])
+              className={`absolute left-1/2 -translate-x-1/2 w-[94vw] md:w-[820px] ${isTerminal ? 'h-[60vh] md:h-[450px]' : 'h-[82vh] md:h-[520px] max-h-[85vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
             >
-              {/* Window Title Bar */} <div className="h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
+              {/* Window Title Bar */} 
+              <div className="h-10 md:h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
                 <div className="flex gap-2.5">
                   <button onClick={(e) => { e.stopPropagation(); closeWindow(win.id); }} className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FF5F56] flex items-center justify-center group cursor-pointer">
                     <span className="opacity-0 group-hover:opacity-100 text-[#8b1a10] text-[10px] md:text-xs font-bold leading-none mb-px md:mb-0.5">×</span>
@@ -324,7 +424,7 @@ const MacOSDesktop = () => {
                     <Maximize2 size={8} className="opacity-0 group-hover:opacity-100 text-[#115b1a]" />
                   </button>
                 </div>
-                <span className="text-zinc-300 text-xs md:text-sm font-semibold font-mono tracking-wide flex items-center gap-2 truncate px-2">
+                <span className="text-zinc-300 text-[11px] md:text-xs font-semibold font-mono tracking-wide flex items-center gap-2 truncate px-2">
                   {isTerminal && <Terminal size={14} className="text-[#e67e5a]" />}
                   {windowTitle}
                 </span>
@@ -338,34 +438,33 @@ const MacOSDesktop = () => {
                 <div className="flex-1 flex flex-col md:flex-row cursor-auto overflow-y-auto no-scrollbar">
 
                   {/* LEFT COLUMN: Title, Stack, Buttons */}
-                  <div className="w-full md:w-[35%] p-6 md:p-8 bg-black/20 md:border-r border-white/5 flex flex-col gap-6 shrink-0">
+                  <div className="w-full md:w-[38%] p-6 md:p-8 bg-black/20 md:border-r border-white/5 flex flex-col gap-5 shrink-0">
                     <div>
-                      <h2 className="text-3xl font-bold tracking-tight text-white mb-2">{projData?.name}</h2>
-                      <p className="text-zinc-400 text-sm font-mono">{projData?.shortDesc}</p>
+                      <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">{projData?.name}</h2>
+                      <p className="text-zinc-400 text-xs md:text-sm font-mono">{projData?.shortDesc}</p>
                     </div>
 
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-2.5">
                       <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">Stack</span>
                       <div className="flex flex-wrap gap-2">
                         {projData?.tech.map((t, i) => (
-                          <span key={i} className="px-2.5 py-1 bg-white/10 border border-white/10 rounded-md text-[11px] font-mono text-zinc-300">
+                          <span key={i} className="px-2.5 py-1 bg-white/10 border border-white/10 rounded-md text-[10px] md:text-[11px] font-mono text-zinc-300">
                             {t}
                           </span>
                         ))}
                       </div>
                     </div>
 
-                    {/* MOVED BUTTONS TO LEFT COLUMN */}
                     <div className="flex flex-col gap-3 mt-auto pt-6">
                       <a 
                         href={projData?.liveUrl} 
                         target="_blank" 
                         rel="noreferrer" 
-                        className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]"
+                        className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-2.5 rounded-xl text-[11px] md:text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]"
                         onClick={(e) => {
                           if (!projData?.liveUrl || projData.liveUrl === "#") {
                             e.preventDefault();
-                            toast.info("Updating soon...");
+                            toast.info("Live URL updating soon...");
                           }
                         }}
                       >
@@ -375,11 +474,11 @@ const MacOSDesktop = () => {
                         href={projData?.githubUrl} 
                         target="_blank" 
                         rel="noreferrer" 
-                        className="w-full flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]"
+                        className="w-full flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-2.5 rounded-xl text-[11px] md:text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]"
                         onClick={(e) => {
                           if (!projData?.githubUrl || projData.githubUrl === "#") {
                             e.preventDefault();
-                            toast.info("Updating soon...");
+                            toast.info("Source repository updating soon...");
                           }
                         }}
                       >
@@ -389,19 +488,19 @@ const MacOSDesktop = () => {
                   </div>
 
                   {/* RIGHT COLUMN: Desc & Key Features */}
-                  <div className="w-full md:w-[65%] p-6 md:p-8 flex flex-col gap-8 bg-[#1c1c1e]/50">
+                  <div className="w-full md:w-[62%] p-6 md:p-8 flex flex-col gap-6 bg-[#1c1c1e]/50 overflow-y-auto no-scrollbar">
 
                     <div>
-                      <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest block mb-3">Overview</span>
-                      <p className="text-sm text-zinc-300 leading-relaxed">{projData?.fullDesc}</p>
+                      <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest block mb-2.5">Overview</span>
+                      <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">{projData?.fullDesc}</p>
                     </div>
 
                     <div>
-                      <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest block mb-4">Key Features</span>
-                      <ul className="flex flex-col gap-3">
+                      <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest block mb-3">Key Features</span>
+                      <ul className="flex flex-col gap-2.5">
                         {projData?.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-start gap-3 text-sm text-zinc-300">
-                            <CheckCircle2 size={16} className="text-[#57a6eb] shrink-0 mt-0.5" />
+                          <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-zinc-300">
+                            <CheckCircle2 size={16} className="text-[#57a6eb] shrink-0 mt-[1px]" />
                             <span className="leading-relaxed">{feature}</span>
                           </li>
                         ))}
@@ -489,8 +588,9 @@ export default function ProjectsPage() {
 
       requestFullScreen();
 
-      for (let i = 1; i <= 5; i++) {
-        await new Promise(res => setTimeout(res, 70));
+      // Dynamically load ALL modules based on project count
+      for (let i = 1; i <= projectsData.length; i++) {
+        await new Promise(res => setTimeout(res, 25)); // Sped up the loop so 11 projects load quickly
         setBootLines(prev => [...prev, { type: "info", text: `Unpacking project_module_0${i}.pkg... OK` }]);
       }
 
@@ -505,7 +605,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <main className="fixed inset-0 z-50 w-full h-dvh bg-[#240707] overflow-hidden cursor-default">
+    <main className="fixed inset-0 z-50 w-full h-dvh bg-[#141414] overflow-hidden cursor-default">
       <AnimatePresence mode="wait">
 
         {phase === "terminal" && (

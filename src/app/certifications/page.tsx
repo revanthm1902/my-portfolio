@@ -6,6 +6,7 @@ import AppFrame from "@/components/AppFrame";
 import Footer from "@/components/Footer";
 import { Award, Globe, X, CalendarDays, Building2, ExternalLink, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 
 type Certificate = {
   id: string;
@@ -290,6 +291,12 @@ export default function CertificationsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-all shadow-lg shadow-red-600/20"
+                      onClick={(e) => {
+                        if (!selectedCert.link || selectedCert.link === "#") {
+                          e.preventDefault();
+                          toast.info("Updating soon...");
+                        }
+                      }}
                     >
                       <ExternalLink className="w-4 h-4" />
                       Verify Certificate

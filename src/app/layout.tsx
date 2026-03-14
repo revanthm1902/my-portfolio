@@ -4,6 +4,7 @@ import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import MusicPlayer from "@/components/MusicPlayer";
 import localFont from 'next/font/local';
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         <CustomCursor />
         {children}
         <MusicPlayer />
+        <Toaster position="top-center" />
       </body>
     </html>
   );

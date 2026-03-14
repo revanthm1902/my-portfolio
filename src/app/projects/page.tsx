@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal, Wifi, BatteryFull, Search, ExternalLink, Github, Maximize2, CheckCircle2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 // --- PROJECT DATA (Now includes Key Features) ---
 const projectsData = [
@@ -356,10 +357,32 @@ const MacOSDesktop = () => {
 
                     {/* MOVED BUTTONS TO LEFT COLUMN */}
                     <div className="flex flex-col gap-3 mt-auto pt-6">
-                      <a href={projData?.liveUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]">
+                      <a 
+                        href={projData?.liveUrl} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]"
+                        onClick={(e) => {
+                          if (!projData?.liveUrl || projData.liveUrl === "#") {
+                            e.preventDefault();
+                            toast.info("Updating soon...");
+                          }
+                        }}
+                      >
                         <ExternalLink size={16} /> VIEW LIVE
                       </a>
-                      <a href={projData?.githubUrl} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]">
+                      <a 
+                        href={projData?.githubUrl} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="w-full flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white hover:bg-zinc-700 px-4 py-3 rounded-xl text-xs font-bold tracking-widest transition-all cursor-pointer hover:scale-[1.02]"
+                        onClick={(e) => {
+                          if (!projData?.githubUrl || projData.githubUrl === "#") {
+                            e.preventDefault();
+                            toast.info("Updating soon...");
+                          }
+                        }}
+                      >
                         <Github size={16} /> SOURCE CODE
                       </a>
                     </div>

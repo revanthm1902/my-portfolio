@@ -5,6 +5,7 @@ import AppFrame from "@/components/AppFrame";
 import Footer from "@/components/Footer";
 import { ExternalLink, X, Linkedin, BookOpen, ImageOff, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 
 const writingsData = [
   {
@@ -14,7 +15,7 @@ const writingsData = [
     summary: 'Our project: 🎯 SafeFit – A Smart Bracelet (Where Fashion Meets Innovation) Your all-in-one companion for Health, Fitness, and Safety.',
     date: '2025-07-04',
     source: 'LinkedIn',
-    image: 'https://media.licdn.com/dms/image/v2/D4E22AQGewU2eoIncBA/feedshare-shrink_2048_1536/B4EZfWDIAyG4As-/0/1751642838069?e=1754524800&v=beta&t=rfjbLfmOQKBL-hYniRVcFhVfDLptOJgmqwg4Jf5remE',
+    image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&q=80',
   },
   {
     id: '2',
@@ -23,7 +24,7 @@ const writingsData = [
     summary: 'First-place team competed under the theme "Search and Rescue"\nThe second-place team worked on the theme "UAV-Assisted Agriculture Monitoring"',
     date: '2025-03-15',
     source: 'LinkedIn',
-    image: 'https://media.licdn.com/dms/image/v2/D5622AQGtlw5ajpwoJQ/feedshare-shrink_2048_1536/B56ZYGSrKHHEAo-/0/1743862282527?e=1754524800&v=beta&t=6mmgm5VknG_qNyDx6Cxf6uqMeVHVDy1Hc9EhkTF4sZE',
+    image: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&q=80',
   },
   {
     id: '3',
@@ -32,7 +33,7 @@ const writingsData = [
     summary: 'wrapped up an incredible two-day journey at the LLM Security Bootcamp (Feb 21-22, 2025) at VIT-AP University! The hands-on training in LLM security, AI, and cybersecurity was truly insightful, covering GenAI, MLOps, LangChain, RAG, and more!',
     date: '2025-02-25',
     source: 'LinkedIn',
-    image: 'https://media.licdn.com/dms/image/v2/D4E22AQEyT7OnPmy8ZQ/feedshare-shrink_1280/B4EZVsrNn7HgAk-/0/1741285026253?e=1754524800&v=beta&t=nPKvPAPs7zBy9EFDo-deTd4yWN3Rdv84QAFclRnrM1k',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80',
   },
   {
     id: '4',
@@ -41,7 +42,7 @@ const writingsData = [
     summary: 'Learning on REST APIs & HTTP Methods, Query & Path Parameters, Authentication & API Keys, Status Codes & Error Handling, Automating Tests in Postman',
     date: '2025-02-15',
     source: 'LinkedIn',
-    image: 'https://cc.sj-cdn.net/instructor/3d8458f2k85sh-postman/courses/1a8b8cdxvqjxq/promo-image.1676069333.png',
+    image: 'https://images.unsplash.com/photo-1623479322729-28b25c16b011?w=800&q=80',
   },
   {
     id: '5',
@@ -50,7 +51,7 @@ const writingsData = [
     summary: 'We showcased our Agri Drone, an innovative solution designed to revolutionize precision farming as part of TechtoGreen’s product portfolio.',
     date: '2025-02-08',
     source: 'LinkedIn',
-    image: 'https://media.licdn.com/dms/image/v2/D4E22AQHYBpE14ieUFA/feedshare-shrink_800/B4EZUsCmy.HUAg-/0/1740200664974?e=1754524800&v=beta&t=ftWq2Gfe2ZSkr-QdhetPF5yiQwYW9Z9tpAVjw3xKQxo',
+    image: 'https://images.unsplash.com/photo-1586771107445-d3af21245842?w=800&q=80',
   },
   {
     id: '6',
@@ -59,7 +60,7 @@ const writingsData = [
     summary: 'Our problem statement focused on Developing a Portable Safety Device (Helmet) for MEWP Operators. Our solution aimed to address the growing safety concerns in industries using Mobile Elevated Work Platforms (MEWPs)',
     date: '2024-09-30',
     source: 'LinkedIn',
-    image: 'https://media.licdn.com/dms/image/v2/D4E22AQF6-gi2DLr1BQ/feedshare-shrink_800/feedshare-shrink_800/0/1727979168192?e=1754524800&v=beta&t=936Q1nDPe46eGrxsrHwSbmFyS-VY7sBBh9cfJYpplOE',
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356fce?w=800&q=80',
   },
   {
     id: '7',
@@ -68,7 +69,7 @@ const writingsData = [
     summary: 'The event brought together participants from over 15 countries, including the USA, UK, Australia, Japan, Canada, New Zealand, and more. We explored innovations in AI, FinTech, AgriTech, and Health Tech, and had insightful conversations',
     date: '2024-09-29',
     source: 'LinkedIn',
-    image: 'https://media.licdn.com/dms/image/v2/D5622AQFEiGo7rALVnw/feedshare-shrink_800/feedshare-shrink_800/0/1727807434094?e=1754524800&v=beta&t=NIKuBy7uDtEp8XldBGTWT6G362dNFuE3zz8yWzT2jto',
+    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32d7?w=800&q=80',
   },
 ];
 
@@ -80,9 +81,15 @@ const PostImage = ({ src, alt, link, source, isModal = false }: { src: string; a
       <a 
         href={link} 
         target="_blank" 
-        rel="noopener noreferrer" 
-        className={`w-full flex flex-col items-center justify-center bg-zinc-50 border border-zinc-100 hover:border-zinc-300 dark:bg-zinc-900/40 dark:border-zinc-800/80 dark:hover:border-zinc-700 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all p-6 text-center group/fallback cursor-pointer ${isModal ? 'min-h-[250px] rounded-xl' : 'h-full rounded-xl absolute inset-0'}`} 
-        onClick={(e) => e.stopPropagation()}
+        rel="noopener noreferrer"
+        className={`w-full flex flex-col items-center justify-center bg-zinc-50 border border-zinc-100 hover:border-zinc-300 dark:bg-zinc-900/40 dark:border-zinc-800/80 dark:hover:border-zinc-700 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all p-6 text-center group/fallback cursor-pointer ${isModal ? 'min-h-[250px] rounded-xl' : 'h-full rounded-xl absolute inset-0'}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!link || link === '#' || link.includes('urn:li:activity:987654321')) {
+            e.preventDefault();
+            toast.info("Updating soon...");
+          }
+        }}
       >
         <div className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 flex items-center justify-center mb-3 shadow-sm group-hover/fallback:scale-110 transition-transform">
           <ImageOff className="w-4 h-4 text-zinc-400" />
@@ -203,6 +210,12 @@ export default function BlogPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm"
+                    onClick={(e) => {
+                      if (!selectedPost.link || selectedPost.link === '#' || selectedPost.link.includes('urn:li:activity:987654321')) {
+                        e.preventDefault();
+                        toast.info("Updating soon...");
+                      }
+                    }}
                   >
                     {getSourceIcon(selectedPost.source)}
                     <span>View on {selectedPost.source}</span>
@@ -254,6 +267,12 @@ export default function BlogPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors group"
+                      onClick={(e) => {
+                        if (!selectedPost.link || selectedPost.link === '#' || selectedPost.link.includes('urn:li:activity:987654321')) {
+                          e.preventDefault();
+                          toast.info("Updating soon...");
+                        }
+                      }}
                     >
                       Read full post on {selectedPost.source}
                       <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />

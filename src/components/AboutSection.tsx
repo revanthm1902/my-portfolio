@@ -16,17 +16,17 @@ import {
 // ──────────────────────────────────
 
 const timeline = [
-  {
+    {
     id: 1,
-    type: "work",
-    date: "Jan 2025 – Apr 2025",
-    title: "Full Stack Intern",
-    org: "Purple Techno Solutions",
-    location: "Remote / Hybrid",
-    icon: Database,
-    desc: "Engineered scalable MERN stack web applications and built Python-based predictive analytics modules (Pandas, Scikit-learn) to generate actionable client insights. Streamlined deployment with AWS CI/CD workflows.",
+    type: "edu",
+    date: "2023 – 2027",
+    title: "B.Tech Computer Science",
+    org: "Vellore Institute of Technology",
+    location: "Andhra Pradesh, India",
+    icon: GraduationCap,
+    desc: "Core focus on Data Structures, Algorithms, Full-Stack Web Development, and AI/ML integrations.",
   },
-  {
+    {
     id: 2,
     type: "work",
     date: "Aug 2024 – Aug 2025",
@@ -38,21 +38,32 @@ const timeline = [
   },
   {
     id: 3,
-    type: "edu",
-    date: "2023 – 2027",
-    title: "B.Tech Computer Science",
-    org: "Vellore Institute of Technology",
-    location: "Andhra Pradesh, India",
-    icon: GraduationCap,
-    desc: "Core focus on Data Structures, Algorithms, Full-Stack Web Development, and AI/ML integrations.",
+    type: "work",
+    date: "Jan 2025 – Apr 2025",
+    title: "Full Stack Intern",
+    org: "Purple Techno Solutions",
+    location: "Remote / Hybrid",
+    icon: Database,
+    desc: "Engineered scalable MERN stack web applications and built Python-based predictive analytics modules (Pandas, Scikit-learn) to generate actionable client insights. Streamlined deployment with AWS CI/CD workflows.",
   },
+    {
+    id: 4,
+    type: "work",
+    date: "Feb 2026 – Present",
+    title: "Product Manager",
+    org: "AryVerse",
+    location: "Remote / Hybrid",
+    icon: Cpu,
+    desc: "Leading product development for AI-powered animation tools, overseeing the entire lifecycle from ideation to deployment. Collaborating with cross-functional teams to design seamless user experiences and robust backend architectures, while integrating machine learning models to enhance product capabilities.",
+  },
+
 ];
 
 const achievements = [
   { icon: Globe, title: "Global Nominee", desc: "NASA Space Apps Challenge 2024 Global Nominee." },
-  { icon: Code, title: "300+ DSA Problems", desc: "Solved across LeetCode, CodeForces, and other platforms." },
+  { icon: Code, title: "Problem Solver", desc: "Solved across LeetCode, CodeForces, and other platforms." },
   { icon: Zap, title: "Hardware Hacker", desc: "Designed custom PCBs (SafeFit wearable) alongside cloud backends." },
-  { icon: Award, title: "Hackathon Winner", desc: "1st place at HackAP 2024 & AppFusion 2024, Runner-Up IEEE Hackasagon." },
+  { icon: Award, title: "Hackathons", desc: "1st place at HackAP 2024 & AppFusion 2024, Runner-Up IEEE Hackasagon." },
 ];
 
 // ──────────────────────────────────
@@ -99,22 +110,25 @@ export default function AboutSection() {
                 development and R&amp;D engineering, I&apos;ve shipped MERN
                 stack applications with predictive analytics at Purple Techno
                 Solutions and built IoT-driven safety systems at TechtoGreen
-                Drone &amp; Robotics that cut incident response latency by 90%.
+                Drone &amp; Robotics that cut incident response latency by 90%
+                . Currently, I&apos;m leading product development at AryVerse,
+                where we create animations and AI-powered tools, focusing on
+                seamless user experiences and robust backend architectures.
               </p>
               <p>
                 I work across the entire stack —{" "}
                 <span className="text-zinc-900 dark:text-zinc-200 font-medium">
                   Java, Python, TypeScript, React, Next.js, Node.js, Django,
-                  AWS, and embedded C++
+                  AWS, MySQL, MongoDB, Docker, and more
                 </span>
                 . Whether it&apos;s deploying serverless functions, designing
                 custom PCBs for health wearables, or fine-tuning ML models, I
                 focus on owning the complete pipeline from idea to production.
               </p>
               <p>
-                Beyond engineering, I&apos;m an active competitive programmer
-                with 300+ problems solved, a NASA Space Apps Challenge global
-                nominee, and a multi-time hackathon winner (HackAP 2024,
+                Beyond engineering, I&apos;m an active competitive programmer,
+                a NASA Space Apps Challenge global nominee,
+                and a multi-time hackathon winner (HackAP 2024,
                 AppFusion 2024, IEEE Hacksagon 2025). I thrive under
                 pressure, believe the best solutions come from understanding
                 problems from{" "}

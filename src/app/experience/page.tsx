@@ -5,6 +5,7 @@ import AppFrame from "@/components/AppFrame";
 import Footer from "@/components/Footer";
 import { Briefcase, Building2, CalendarDays, MapPin, X, ArrowUpRight, FileText, Award } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 
 const experiences = [
   {
@@ -221,17 +222,29 @@ export default function ExperiencePage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-sm font-semibold transition-all group shadow-sm"
+                    onClick={(e) => {
+                      if (!selectedExp.offerLetter || selectedExp.offerLetter === "#") {
+                        e.preventDefault();
+                        toast.info("Updating soon...");
+                      }
+                    }}
                   >
                     <FileText className="w-4 h-4 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
                     View Offer Letter
                     <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
-                  
+
                   <a
                     href={selectedExp.certificate}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-sm font-semibold transition-all group shadow-sm"
+                    onClick={(e) => {
+                      if (!selectedExp.certificate || selectedExp.certificate === "#") {
+                        e.preventDefault();
+                        toast.info("Updating soon...");
+                      }
+                    }}
                   >
                     <Award className="w-4 h-4 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
                     View Certificate

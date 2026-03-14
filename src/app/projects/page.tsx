@@ -306,11 +306,10 @@ const MacOSDesktop = () => {
               exit={{ opacity: 0, scale: 0.95, filter: "blur(5px)" }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               style={{
-                top: `max(5%, ${10 + (index * 2)}%)`,
-                left: `max(2%, ${15 + (index * 3)}%)`,
+                top: `max(6%, ${8 + (index * 1.5)}%)`,
                 zIndex: 100 + index
               }}
-              className={`absolute w-[94vw] md:w-[225rem] ${isTerminal ? 'h-[60vh] md:h-[125rem]' : 'h-[85vh] md:min-h-[137.5rem] max-h-[88vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
+              className={`absolute left-1/2 -translate-x-1/2 w-[94vw] md:w-[88vw] md:max-w-6xl ${isTerminal ? 'h-[60vh] md:h-[72vh]' : 'h-[82vh] md:h-[84vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
             >
               {/* Window Title Bar */} <div className="h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
                 <div className="flex gap-2.5">

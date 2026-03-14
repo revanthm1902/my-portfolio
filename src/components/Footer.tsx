@@ -6,8 +6,11 @@ import { Github, Linkedin, Mail, Heart } from "lucide-react";
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Resume", href: "/resume" },
+  { label: "Skills", href: "/skills" },
+  { label: "Experience", href: "/experience" },
   { label: "Projects", href: "/projects" },
+  { label: "Certifications", href: "/certifications" },
+  { label: "Resume", href: "/resume" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -39,7 +42,7 @@ export default function Footer() {
             <h4 className="font-mono text-[10px] tracking-[0.3em] text-zinc-400 uppercase mb-4">
               Quick Links
             </h4>
-            <ul className="space-y-2">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link

@@ -243,10 +243,10 @@ const MacOSDesktop = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
-      className="absolute inset-0 z-50 flex flex-col overflow-hidden cursor-auto select-none bg-black"
+      className="absolute inset-0 z-50 flex flex-col overflow-hidden cursor-auto select-none bg-[#2a0505]"
     >
       <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/wallpaper.jpg')" }} />
-      <div className="absolute inset-0 z-0 bg-black/20" />
+      <div className="absolute inset-0 z-0 bg-[#5b0b0b]/35" />
 
       {/* TOP MENU BAR */}
       <div className="h-7 w-full bg-black/40 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-3 md:px-4 text-white text-[10px] md:text-[11px] font-medium tracking-wide z-50">
@@ -314,10 +314,10 @@ const MacOSDesktop = () => {
               {/* Window Title Bar */} <div className="h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
                 <div className="flex gap-2.5">
                   <button onClick={(e) => { e.stopPropagation(); closeWindow(win.id); }} className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FF5F56] flex items-center justify-center group cursor-pointer">
-                    <span className="opacity-0 group-hover:opacity-100 text-[#8b1a10] text-[10px] md:text-xs font-bold leading-none mb-[1px] md:mb-[2px]">×</span>
+                    <span className="opacity-0 group-hover:opacity-100 text-[#8b1a10] text-[10px] md:text-xs font-bold leading-none mb-px md:mb-0.5">×</span>
                   </button>
                   <button className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FFBD2E] flex items-center justify-center group cursor-pointer">
-                    <span className="opacity-0 group-hover:opacity-100 text-[#9d7215] text-[10px] md:text-xs font-bold leading-none mb-[1px] md:mb-[2px]">-</span>
+                    <span className="opacity-0 group-hover:opacity-100 text-[#9d7215] text-[10px] md:text-xs font-bold leading-none mb-px md:mb-0.5">-</span>
                   </button>
                   <button className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#27C93F] flex items-center justify-center group cursor-pointer">
                     <Maximize2 size={8} className="opacity-0 group-hover:opacity-100 text-[#115b1a]" />
@@ -399,7 +399,7 @@ const MacOSDesktop = () => {
         >
           <div className="flex items-center text-white font-mono font-bold text-lg">
             <span className="text-zinc-400 group-hover:text-white transition-colors">&lt;</span>
-            <div className="w-0 overflow-hidden group-hover:w-[76px] transition-all duration-300 ease-out flex items-center justify-center">
+            <div className="w-0 overflow-hidden group-hover:w-19 transition-all duration-300 ease-out flex items-center justify-center">
               <span className="text-sm tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap px-2 transition-opacity duration-300 delay-100">
                 EXIT OS
               </span>
@@ -436,9 +436,9 @@ export default function ProjectsPage() {
         res(true);
       }, delay));
 
-      await addLine("info", "[ OK ] Mounting root filesystem /dev/nvme0n1p2...", 600);
-      await addLine("warn", "[WARN] Unrecognized user signature detected.", 500);
-      await addLine("info", "[AUTH] Human verification protocol required.", 400);
+      await addLine("info", "[ OK ] Mounting root filesystem /dev/nvme0n1p2...", 260);
+      await addLine("warn", "[WARN] Unrecognized user signature detected.", 220);
+      await addLine("info", "[AUTH] Human verification protocol required.", 180);
 
       setMathA(Math.floor(Math.random() * 50) + 10);
       setMathB(Math.floor(Math.random() * 50) + 10);
@@ -467,13 +467,13 @@ export default function ProjectsPage() {
       requestFullScreen();
 
       for (let i = 1; i <= 5; i++) {
-        await new Promise(res => setTimeout(res, 150));
+        await new Promise(res => setTimeout(res, 70));
         setBootLines(prev => [...prev, { type: "info", text: `Unpacking project_module_0${i}.pkg... OK` }]);
       }
 
-      await new Promise(res => setTimeout(res, 400));
+      await new Promise(res => setTimeout(res, 150));
       setBootLines(prev => [...prev, { type: "info", text: "Starting GUI Interface..." }]);
-      await new Promise(res => setTimeout(res, 600));
+      await new Promise(res => setTimeout(res, 250));
       setPhase("desktop");
     } else {
       setBootLines(prev => [...prev, { type: "error", text: "Incorrect checksum. Access denied." }]);
@@ -482,7 +482,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <main className="fixed inset-0 z-50 w-full h-dvh bg-[#141414] overflow-hidden cursor-default">
+    <main className="fixed inset-0 z-50 w-full h-dvh bg-[#240707] overflow-hidden cursor-default">
       <AnimatePresence mode="wait">
 
         {phase === "terminal" && (

@@ -28,6 +28,9 @@ const edges = [
   { source: "skills", target: "certifications" },
 ];
 
+const GRAPH_WIDTH = 1000;
+const GRAPH_HEIGHT = 700;
+
 // --- Connects Right Edge to Left Edge ---
 const generateOrthogonalPath = (source: { x: number; y: number }, target: { x: number; y: number }) => {
   const startX = source.x + 20; // 20px offset to start at the edge of the 40px circle
@@ -119,6 +122,26 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
     return () => { if (el) el.removeEventListener("wheel", handleWheel); };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const setFitZoom = () => {
+      const el = containerRef.current;
+      if (!el || window.innerWidth < 768) return;
+
+      const fitScale = Math.min(
+        (el.clientWidth - 48) / GRAPH_WIDTH,
+        (el.clientHeight - 48) / GRAPH_HEIGHT
+      );
+
+      setZoom(Math.min(Math.max(fitScale, 0.4), 1));
+    };
+
+    setFitZoom();
+    window.addEventListener("resize", setFitZoom);
+    return () => window.removeEventListener("resize", setFitZoom);
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const handleNodeClick = (id: string) => {
@@ -138,7 +161,7 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
       initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
       style={{ resize: "both" }}
-      className="fixed top-[10vh] left-[5vw] md:top-[12vh] md:left-[10vw] z-100 w-[90vw] md:w-[80vw] max-w-5xl h-[80vh] md:h-[75vh] max-h-200 min-w-80 min-h-100 bg-[#0a0a0a] border border-zinc-800 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden text-white"
+      className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-100 w-[94vw] md:w-[84vw] max-w-6xl h-[82vh] md:h-[78vh] max-h-225 min-w-[320px] min-h-105 bg-[#0a0a0a] border border-zinc-800 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden text-white"
     >
       <div onPointerDown={(e) => windowDragControls.start(e)} className="flex items-center justify-between px-5 py-3.5 bg-[#121212] border-b border-zinc-800 cursor-grab active:cursor-grabbing shrink-0 z-50">
         <div className="flex items-center gap-4 md:gap-5">
@@ -164,7 +187,8 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
           <button onClick={() => setZoom(z => Math.min(z + 0.2, 2.5))} className="w-7 h-7 flex items-center justify-center text-zinc-500 hover:text-white hover:bg-zinc-800 rounded transition-colors">+</button>
         </div>
 
-        <motion.div drag className="absolute origin-center w-250 h-175 cursor-grab active:cursor-grabbing left-0 top-0" style={{ scale: zoom }}>
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+        <motion.div drag className="relative origin-center w-250 h-175 cursor-grab active:cursor-grabbing" style={{ scale: zoom }}>
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
             {edges.map((edge) => {
               const source = nodes.find((n) => n.id === edge.source);
@@ -206,6 +230,7 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
             );
           })}
         </motion.div>
+        </div>
       </div>
 
       <div className="flex md:hidden flex-1 flex-col p-6 overflow-y-auto bg-[#0a0a0a]">

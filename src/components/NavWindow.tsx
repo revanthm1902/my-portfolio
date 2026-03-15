@@ -221,7 +221,7 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden cursor-move">
-          <motion.div drag dragConstraints={containerRef} className="relative origin-center w-300 h-200 flex-shrink-0 cursor-grab active:cursor-grabbing" style={{ scale: zoom }}>
+          <motion.div drag dragConstraints={containerRef} className="relative origin-center w-300 h-200 shrink-0 cursor-grab active:cursor-grabbing" style={{ scale: zoom }}>
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
               <line x1="350" y1="40" x2="350" y2="760" className="stroke-zinc-800/70 stroke-[1px]" strokeDasharray="2 6" />
               <line x1="650" y1="40" x2="650" y2="760" className="stroke-zinc-800/60 stroke-[1px]" strokeDasharray="2 6" />

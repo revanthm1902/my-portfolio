@@ -82,7 +82,7 @@ const PostImage = ({ src, alt, link, source, isModal = false }: { src: string; a
         href={link} 
         target="_blank" 
         rel="noopener noreferrer"
-        className={`w-full flex flex-col items-center justify-center bg-zinc-50 border border-zinc-100 hover:border-zinc-300 dark:bg-zinc-900/40 dark:border-zinc-800/80 dark:hover:border-zinc-700 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all p-6 text-center group/fallback cursor-pointer ${isModal ? 'min-h-[250px] rounded-xl' : 'h-full rounded-xl absolute inset-0'}`}
+        className={`w-full flex flex-col items-center justify-center bg-zinc-50 border border-zinc-100 hover:border-zinc-300 dark:bg-zinc-900/40 dark:border-zinc-800/80 dark:hover:border-zinc-700 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all p-6 text-center group/fallback cursor-pointer ${isModal ? 'min-h-62.5 rounded-xl' : 'h-full rounded-xl absolute inset-0'}`}
         onClick={(e) => {
           e.stopPropagation();
           if (!link || link === '#' || link.includes('urn:li:activity:987654321')) {
@@ -103,6 +103,7 @@ const PostImage = ({ src, alt, link, source, isModal = false }: { src: string; a
   }
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img 
       src={src} 
       alt={alt} 
@@ -168,7 +169,7 @@ export default function BlogPage() {
                   {post.title}
                 </h3>
                 
-                <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base mb-6 line-clamp-3 flex-grow leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base mb-6 line-clamp-3 grow leading-relaxed">
                   {post.summary}
                 </p>
                 
@@ -193,16 +194,16 @@ export default function BlogPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedPost(null)}
-              className="fixed inset-0 z-[99999] flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
+              className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
             >
               <motion.div
                 initial={{ scale: 0.95, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white dark:bg-zinc-900 sm:border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-2xl h-[100dvh] sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
+                className="bg-white dark:bg-zinc-900 sm:border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-2xl h-dvh sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
               >
-                <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white via-white dark:from-zinc-900 dark:via-zinc-900 to-transparent z-10 pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-b from-white via-white dark:from-zinc-900 dark:via-zinc-900 to-transparent z-10 pointer-events-none" />
                 
                 <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
                   <a
@@ -226,7 +227,7 @@ export default function BlogPage() {
                       e.stopPropagation();
                       setSelectedPost(null);
                     }}
-                    className="p-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-full transition-colors flex-shrink-0 cursor-pointer pointer-events-auto"
+                    className="p-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-full transition-colors shrink-0 cursor-pointer pointer-events-auto"
                   >
                     <X className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
                   </button>
@@ -234,7 +235,7 @@ export default function BlogPage() {
                 
                 <div className="overflow-y-auto no-scrollbar p-5 sm:p-10 pt-24 sm:pt-20 h-full font-sans">
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center shrink-0">
                       {getSourceIcon(selectedPost.source)}
                     </div>
                     <div>

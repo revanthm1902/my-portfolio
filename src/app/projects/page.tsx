@@ -405,7 +405,8 @@ const MacOSDesktop = () => {
               exit={{ opacity: 0, scale: 0.95, filter: "blur(5px)" }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               style={{
-                top: `max(6%, ${8 + (index * 1.5)}%)`,
+                top: `max(6%, ${8 + (index * 3)}%)`,
+                marginLeft: `${index * 24}px`,
                 zIndex: 100 + index
               }}
               // DECREASED WINDOW SIZE (md:w-[820px] and md:h-[500px])

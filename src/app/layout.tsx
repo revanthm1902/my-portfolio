@@ -25,6 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.className} ${ndotFont.variable}`}>
+      <head>
+        <link rel="preload" as="image" href="/wallpaper.jpg" />
+      </head>
       <body className="antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
         <CustomCursor />
         {children}

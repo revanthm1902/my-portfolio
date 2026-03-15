@@ -50,10 +50,10 @@ const projectsData = [
       "Strict Role-Based Access Control (RBAC) architecture",
       "Digitized and encrypted records for 1,000+ students & staff",
       "Automated attendance logging and fee tracking modules",
-      "Dynamic report card generation and analytics dashboard"
+      "Dynamic report and analytics dashboard"
     ],
     tech: ["React.js", "Node.js", "Express", "MongoDB"],
-    liveUrl: "#",
+    liveUrl: "https://stgdconventschool.com/",
     githubUrl: "https://github.com/revanthm1902/StgdSchool",
   },
   {

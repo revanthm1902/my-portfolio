@@ -61,9 +61,9 @@ const timeline = [
 
 const achievements = [
   { icon: Globe, title: "Global Nominee", desc: "NASA Space Apps Challenge 2024 Global Nominee." },
-  { icon: Code, title: "Problem Solver", desc: "Solved across LeetCode, CodeForces, and other platforms." },
-  { icon: Zap, title: "Hardware Hacker", desc: "Designed custom PCBs (SafeFit wearable) alongside cloud backends." },
+    { icon: Zap, title: "Hardware Hacker", desc: "Designed custom PCBs (SafeFit wearable) alongside cloud backends." },
   { icon: Award, title: "Hackathons", desc: "1st place at HackAP 2024 & AppFusion 2024, Runner-Up IEEE Hackasagon." },
+  { icon: Code, title: "Problem Solver", desc: "Solved across LeetCode, CodeForces, and other platforms." },
 ];
 
 // ──────────────────────────────────

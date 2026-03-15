@@ -23,54 +23,104 @@ const certificatesData: Record<"global" | "general", Certificate[]> = {
   global: [
     {
       id: "global-1",
-      title: "Global Nominee - NASA Space Apps Challenge",
-      issuer: "NASA",
-      date: "2024",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop", // placeholder
-      description: "Selected as a Global Nominee in the prestigious NASA Space Apps Challenge, recognized for building an innovative tech solution addressing complex space and earth challenges.",
-      skills: ["SpaceTech", "Innovation", "Problem Solving", "Collaboration"],
-      link: "#"
-    },
-    {
-      id: "global-2",
       title: "OCI Generative AI Professional",
       issuer: "Oracle",
       date: "2025",
-      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop", // placeholder
+      image: "/certificates/OCI_AI.jpg",
       description: "Earned the Oracle Cloud Infrastructure Generative AI Professional certification, demonstrating deep understanding of foundational and advanced GenAI models within OCI.",
       skills: ["Generative AI", "Cloud Infrastructure", "LLMs", "Oracle Cloud"],
+      link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=72674E2FF8ED27F7B5228B9D24C8F84A9978E3D24496BE990733E523BE1B4C45"
+    },
+    {
+      id: "global-2",
+      title: "OCI Foundations Associate",
+      issuer: "Oracle",
+      date: "2025",
+      image: "/certificates/OCI_FA.jpg",
+      description: "Certified in Oracle Cloud Infrastructure core concepts, including cloud architecture, computing, storage, networking, and identity management.",
+      skills: ["Cloud Computing", "OCI Concepts", "Architecture Design"],
+      link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=E0EBE9E66EF3522343C267D9DC298C20E8C09A2519C946E4893F70880BFC4EA1"
+    },
+    {
+      id: "global-3",
+      title: "McKinsey Forward Program",
+      issuer: "McKinsey",
+      date: "2024",
+      image: "/certificates/McKinsey_ForwardProgram.png",
+      description: "Completed the McKinsey Forward Program, gaining skills in practical problem solving, leadership, effective communication, and adaptability.",
+      skills: ["Problem Solving", "Leadership", "Communication", "Management"],
+      link: "https://www.credly.com/badges/7efca65a-3cfc-4a58-a827-63ef667e1219/linked_in_profile"
+    },
+    {
+      id: "global-4",
+      title: "Digital Skills: User Experience",
+      issuer: "Accenture",
+      date: "2024",
+      image: "/certificates/Accenture_UI_UX.jpg",
+      description: "Completed an extensive program focusing on the fundamental principles of User Experience (UX), interface design, and user-centric problem-solving.",
+      skills: ["UI/UX Design", "User Research", "Prototyping"],
+      link: "#"
+    },
+    {
+      id: "global-5",
+      title: "Certified Essentials Automation Professional",
+      issuer: "Automation Anywhere",
+      date: "2026",
+      image: "/certificates/Automation_anywhere.jpg",
+      description: "Acquired the Essentials Automation Professional certification, establishing foundational knowledge in building, understanding, and implementing Robotic Process Automation solutions.",
+      skills: ["RPA", "Automation Anywhere", "Process Automation"],
+      link: "https://certificates.automationanywhere.com/eb5b2933-cf30-4650-a058-ea4cce212c51#acc.9fm2cxy3"
+    },
+    {
+      id: "global-6",
+      title: "Global Nominee - NASA Space Apps Challenge",
+      issuer: "NASA",
+      date: "2024",
+      image: "/certificates/NASA Space Apps Challenge.jpg",
+      description: "Selected as a Global Nominee in the prestigious NASA Space Apps Challenge, recognized for building an innovative tech solution addressing complex space and earth challenges.",
+      skills: ["SpaceTech", "Innovation", "Problem Solving", "Collaboration"],
       link: "#"
     }
   ],
   general: [
     {
       id: "general-1",
-      title: "OCI Foundations Associate",
-      issuer: "Oracle",
-      date: "2025",
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop", // placeholder
-      description: "Certified in Oracle Cloud Infrastructure core concepts, including cloud architecture, computing, storage, networking, and identity management.",
-      skills: ["Cloud Computing", "OCI Concepts", "Architecture Design"],
-      link: "#"
+      title: "Postman API Student Expert",
+      issuer: "Postman",
+      date: "2024",
+      image: "/certificates/PostmanAPI.png",
+      description: "Recognized as an API Student Expert, proficient in creating, testing, and managing APIs using Postman.",
+      skills: ["API Development", "API Testing", "Postman", "REST APIs"],
+      link: "https://badges.parchment.com/public/assertions/WtC556s-Q9yikRy-fTGTzw"
     },
     {
       id: "general-2",
-      title: "Industry Ready Certification",
-      issuer: "McKinsey Forward Program",
-      date: "2024",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop", // placeholder
-      description: "Completed the McKinsey Forward Program, gaining skills in practical problem solving, leadership, effective communication, and adaptability.",
-      skills: ["Problem Solving", "Leadership", "Communication", "Management"],
-      link: "#"
+      title: "Pep Sales Star",
+      issuer: "PepsiCo India",
+      date: "2025",
+      image: "/certificates/Pep Sales Star Workshop.png",
+      description: "Actively participated in the Pep Sales Star Workshop hosted by PepsiCo India, gaining practical insights into the FMCG industry and sales operations.",
+      skills: ["Sales", "FMCG Industry", "Operations"],
+      link: "https://www.verix.io/credential/7c301240-28a7-43a4-beb7-b37187ecef7d"
     },
     {
       id: "general-3",
-      title: "Algorithms & Data Structures",
-      issuer: "Skill Platforms",
-      date: "2023 - Present",
-      image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=800&auto=format&fit=crop", // placeholder
-      description: "Completed comprehensive problem-solving tracks, finishing over 300+ DSA problems across multiple competitive programming platforms.",
-      skills: ["Data Structures", "Algorithms", "Logic", "C++/Python"],
+      title: "Hacksagon Finalist",
+      issuer: "ABV-IIITM Gwalior & IEEE",
+      date: "2025",
+      image: "/certificates/Hacksagon.jpg",
+      description: "Emerged as a Finalist among 600+ registered teams at HACKSAGON 2025, a National Level Software & Hardware Hackathon.",
+      skills: ["Hackathon", "Software Engineering", "Hardware", "Prototyping"],
+      link: "#"
+    },
+    {
+      id: "general-4",
+      title: "Nestle Certificate",
+      issuer: "Nestle",
+      date: "2024",
+      image: "/certificates/Nestle.jpg",
+      description: "Successfully completed program/training under Nestle.",
+      skills: ["FMCG", "Business Operations", "Management"],
       link: "#"
     }
   ]
@@ -160,7 +210,7 @@ export default function CertificationsPage() {
                         alt={cert.title} 
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
                       <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/40 backdrop-blur-md text-white border border-white/10 text-xs font-mono">
                           <CalendarDays className="w-3.5 h-3.5" />
@@ -169,7 +219,7 @@ export default function CertificationsPage() {
                       </div>
                     </div>
 
-                    <div className="p-6 flex flex-col flex-grow">
+                    <div className="p-6 flex flex-col grow">
                       <div className="flex items-center gap-2 mb-3 text-red-600 dark:text-red-500 text-sm font-semibold">
                         <Building2 className="w-4 h-4" />
                         {cert.issuer}
@@ -201,14 +251,14 @@ export default function CertificationsPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedCert(null)}
-            className="fixed inset-0 z-[99999] flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
+            className="fixed inset-0 z-99999 flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-4xl h-[100dvh] sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
+              className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-4xl h-dvh sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
             >
               <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
                 <button 
@@ -217,7 +267,7 @@ export default function CertificationsPage() {
                     e.stopPropagation();
                     setSelectedCert(null);
                   }}
-                  className="p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md dark:bg-zinc-800 dark:hover:bg-zinc-700 text-white rounded-full transition-colors flex-shrink-0 cursor-pointer shadow-sm"
+                  className="p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md dark:bg-zinc-800 dark:hover:bg-zinc-700 text-white rounded-full transition-colors shrink-0 cursor-pointer shadow-sm"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -225,14 +275,14 @@ export default function CertificationsPage() {
 
               <div className="overflow-y-auto w-full h-full flex flex-col sm:flex-row">
                 {/* Image Section (Left on desktop, Top on mobile) */}
-                <div className="w-full sm:w-2/5 h-64 sm:h-full relative bg-zinc-100 dark:bg-zinc-950 flex-shrink-0">
+                <div className="w-full sm:w-2/5 h-64 sm:h-full relative bg-zinc-100 dark:bg-zinc-950 shrink-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={selectedCert.image} 
                     alt={selectedCert.title} 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent sm:hidden" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent sm:hidden" />
                 </div>
 
                 {/* Content Section (Right on desktop, Bottom on mobile) */}
@@ -285,23 +335,19 @@ export default function CertificationsPage() {
                     </div>
                   </div>
 
-                  <div className="mt-8 pt-8 border-t border-zinc-100 dark:border-zinc-800">
-                    <a
-                      href={selectedCert.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-all shadow-lg shadow-red-600/20"
-                      onClick={(e) => {
-                        if (!selectedCert.link || selectedCert.link === "#") {
-                          e.preventDefault();
-                          toast.info("Updating soon...");
-                        }
-                      }}
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Verify Certificate
-                    </a>
-                  </div>
+                  {selectedCert.link && selectedCert.link !== "#" && (
+                    <div className="mt-8 pt-8 border-t border-zinc-100 dark:border-zinc-800">
+                      <a
+                        href={selectedCert.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-all shadow-lg shadow-red-600/20"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        Verify Certificate
+                      </a>
+                    </div>
+                  )}
 
                 </div>
               </div>

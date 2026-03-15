@@ -247,10 +247,27 @@ const OSTerminal = ({ onFocus, openProject }: { onFocus: () => void, openProject
       newHistory.push({ type: "text", text: "Available commands:" });
       newHistory.push({ type: "text", text: "  ls         - List all available projects" });
       newHistory.push({ type: "text", text: "  open <id>  - Open a project (e.g., 'open 1')" });
+      newHistory.push({ type: "text", text: "  whoami     - Display user information" });
+      newHistory.push({ type: "text", text: "  skills     - Display technical skills" });
+      newHistory.push({ type: "text", text: "  resume     - Get link to resume" });
+      newHistory.push({ type: "text", text: "  github     - Get GitHub profile link" });
       newHistory.push({ type: "text", text: "  clear      - Clear terminal output" });
       newHistory.push({ type: "text", text: "  date       - Show current system date" });
     } else if (cmd === "ls") {
       projectsData.forEach(p => newHistory.push({ type: "text", text: `  [${p.id.toString().padStart(2, '0')}] ${p.name}` }));
+    } else if (cmd === "whoami") {
+      newHistory.push({ type: "text", text: "Revanth Modalavalasa" });
+      newHistory.push({ type: "text", text: "Full-Stack Developer // Product Designer" });
+      newHistory.push({ type: "text", text: "Passionate about AI, full-stack, & IoT." });
+    } else if (cmd === "skills") {
+      newHistory.push({ type: "text", text: "Languages: TypeScript, JavaScript, Python, C++, Java" });
+      newHistory.push({ type: "text", text: "Frontend: React, Next.js, Tailwind CSS, Framer Motion" });
+      newHistory.push({ type: "text", text: "Backend: Node.js, Express, MongoDB, PostgreSQL, Supabase" });
+      newHistory.push({ type: "text", text: "Tools/Other: Git, Docker, Vercel, IoT/Arduino" });
+    } else if (cmd === "resume") {
+      newHistory.push({ type: "text", text: "You can view my resume here: /resume" });
+    } else if (cmd === "github") {
+      newHistory.push({ type: "text", text: "https://github.com/revanthm1902" });
     } else if (cmd === "clear") {
       setHistory([]);
       setInput("");

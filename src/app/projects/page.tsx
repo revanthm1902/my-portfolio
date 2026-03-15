@@ -208,17 +208,19 @@ const AppIcon = ({ proj, onClick }: { proj: ProjectType, onClick: () => void }) 
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
-      className="flex flex-col items-center justify-start w-20 md:w-24 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-colors group shrink-0"
+      className="flex flex-col items-center justify-start w-24 h-28 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-all duration-300 group shrink-0"
     >
-      <div className="relative w-16 h-12 md:w-20 md:h-14 items-end justify-center drop-shadow-xl mb-2 flex mx-auto">
+      <div className="relative w-16 h-12 md:w-20 md:h-14 items-end justify-center drop-shadow-xl mb-2 flex mx-auto transition-all duration-300">
         <div className="absolute top-0 left-0 w-1/3 h-3 md:h-4 bg-[#7abcf5] rounded-t-md" />
         <div className="absolute bottom-0 w-full h-10 md:h-12 bg-[#57a6eb] rounded-b-md rounded-tr-md" />
         <div className="absolute bottom-2 left-[10%] w-[80%] h-8 md:h-10 bg-white/90 rounded-sm" />
-        <div className="absolute bottom-0 w-full h-9 md:h-11 bg-[#479ee8]/90 backdrop-blur-md rounded-md border-t border-white/30 shadow-inner" />
+        <div className="absolute bottom-0 w-full h-9 md:h-11 bg-[#479ee8]/90 backdrop-blur-md rounded-md border-t border-white/30 shadow-inner group-hover:brightness-110 transition-all duration-300" />
       </div>
-      <span className="text-white text-[10px] md:text-[11px] font-medium text-center shadow-black drop-shadow-md bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded leading-tight line-clamp-2 w-full">
-        {proj.iconName}
-      </span>
+      <div className="h-8 flex items-start justify-center w-full mt-1">
+        <span className="text-white text-[10px] md:text-[11px] font-medium text-center shadow-black drop-shadow-md bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded leading-tight line-clamp-2 w-full transition-colors duration-300">
+          {proj.iconName}
+        </span>
+      </div>
     </motion.div>
   );
 };
@@ -369,7 +371,7 @@ const MacOSDesktop = () => {
       <div className="flex-1 p-4 md:p-6 relative w-full h-full z-10 overflow-hidden">
 
         {/* RESPONSIVE ICON GRID */}
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:flex md:flex-col md:flex-wrap gap-2 md:gap-6 items-start content-start h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden md:overflow-hidden md:overflow-x-auto no-scrollbar w-full pb-20">
+        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-[repeat(auto-fill,minmax(96px,1fr))] md:grid-rows-[repeat(auto-fill,minmax(112px,1fr))] md:grid-flow-col gap-2 md:gap-4 items-start justify-start content-start h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden md:overflow-hidden md:overflow-x-auto no-scrollbar w-full pb-20">
 
           {projectsData.map((proj) => (
             <AppIcon key={proj.id} proj={proj} onClick={() => openWindow(proj.id, "project")} />
@@ -379,14 +381,16 @@ const MacOSDesktop = () => {
           <motion.div
             whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             onClick={() => openWindow("terminal", "terminal")}
-            className="flex flex-col items-center justify-start w-20 md:w-24 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-colors group"
+            className="flex flex-col items-center justify-start w-24 h-28 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-all duration-300 group shrink-0"
           >
-            <div className="flex items-center justify-center w-14 h-12 md:w-16 md:h-14 rounded-xl bg-[#141414] border border-zinc-700 shadow-xl mb-2 mx-auto">
-              <Terminal size={24} className="text-[#e67e5a]" />
+            <div className="flex items-center justify-center w-14 h-12 md:w-16 md:h-14 rounded-xl bg-[#141414] border border-zinc-700 shadow-xl mb-2 mx-auto transition-all duration-300 group-hover:border-zinc-500">
+              <Terminal size={24} className="text-[#e67e5a] transition-all duration-300" />
             </div>
-            <span className="text-white text-[10px] md:text-[11px] font-medium text-center shadow-black drop-shadow-md bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded w-full">
-              Terminal
-            </span>
+            <div className="h-8 flex items-start justify-center w-full mt-1">
+              <span className="text-white text-[10px] md:text-[11px] font-medium text-center shadow-black drop-shadow-md bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded w-full transition-colors duration-300">
+                Terminal
+              </span>
+            </div>
           </motion.div>
         </div>
 

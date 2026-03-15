@@ -410,7 +410,7 @@ const MacOSDesktop = () => {
                 zIndex: 100 + index
               }}
               // DECREASED WINDOW SIZE (md:w-[820px] and md:h-[500px])
-              className={`absolute left-1/2 -translate-x-1/2 w-[94vw] md:w-[820px] ${isTerminal ? 'h-[60vh] md:h-[450px]' : 'h-[82vh] md:h-[520px] max-h-[85vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
+              className={`absolute left-1/2 -translate-x-1/2 w-[94vw] md:w-205 ${isTerminal ? 'h-[60vh] md:h-112.5' : 'h-[82vh] md:h-130 max-h-[85vh]'} flex flex-col bg-[#1c1c1e]/90 backdrop-blur-3xl rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 overflow-hidden`}
             >
               {/* Window Title Bar */} 
               <div className="h-10 md:h-12 w-full bg-[#2d2d30] border-b border-black/40 flex items-center justify-between px-4 cursor-grab active:cursor-grabbing shrink-0">
@@ -501,7 +501,7 @@ const MacOSDesktop = () => {
                       <ul className="flex flex-col gap-2.5">
                         {projData?.features.map((feature, idx) => (
                           <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-zinc-300">
-                            <CheckCircle2 size={16} className="text-[#57a6eb] shrink-0 mt-[1px]" />
+                            <CheckCircle2 size={16} className="text-[#57a6eb] shrink-0 mt-1px" />
                             <span className="leading-relaxed">{feature}</span>
                           </li>
                         ))}

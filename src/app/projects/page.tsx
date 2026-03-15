@@ -227,7 +227,7 @@ const AppIcon = ({ proj, onClick }: { proj: ProjectType, onClick: () => void }) 
 
 // --- IN-OS TERMINAL COMPONENT ---
 const OSTerminal = ({ onFocus, openProject }: { onFocus: () => void, openProject: (id: number) => void }) => {
-  const [history, setHistory] = useState<{ type: string, text: string }[]>([
+  const [history, setHistory] = useState<{ type: string, text: string, url?: string }[]>([
     { type: "info", text: "Portfolio OS v1.0.0 (Revanth Modalavalasa)" },
     { type: "info", text: "Type 'help' to see available commands." }
   ]);
@@ -265,9 +265,9 @@ const OSTerminal = ({ onFocus, openProject }: { onFocus: () => void, openProject
       newHistory.push({ type: "text", text: "Backend: Node.js, Express, MongoDB, PostgreSQL, Supabase" });
       newHistory.push({ type: "text", text: "Tools/Other: Git, Docker, Vercel, IoT/Arduino" });
     } else if (cmd === "resume") {
-      newHistory.push({ type: "text", text: "You can view my resume here: /resume" });
+      newHistory.push({ type: "link", text: "View Resume →", url: "https://revanthm.vercel.app/resume" });
     } else if (cmd === "github") {
-      newHistory.push({ type: "text", text: "https://github.com/revanthm1902" });
+      newHistory.push({ type: "link", text: "Follow on GitHub →", url: "https://github.com/revanthm1902" });
     } else if (cmd === "clear") {
       setHistory([]);
       setInput("");
@@ -301,7 +301,13 @@ const OSTerminal = ({ onFocus, openProject }: { onFocus: () => void, openProject
               line.type === "success" ? "text-[#e67e5a]" :
                 line.type === "cmd" ? "text-white font-bold" : "text-zinc-400"
           }>
-            {line.text}
+            {line.type === "link" && line.url ? (
+              <a href={line.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors">
+                {line.text} {line.url}
+              </a>
+            ) : (
+              line.text
+            )}
           </div>
         ))}
         <div ref={endRef} />

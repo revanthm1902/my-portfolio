@@ -48,12 +48,12 @@ const generateOrthogonalPath = (
   source: { x: number; y: number },
   target: { x: number; y: number }
 ) => {
-  const startX = source.x + 24; // 24px offset to start at the edge of the 48px circle
+  const startX = source.x + 32; // 32px offset to start at the edge of the 64px circle
   const startY = source.y;
-  const endX = target.x - 24;   // 24px offset to end at the edge of the target circle
+  const endX = target.x - 32;   // 32px offset to end at the edge of the target circle
   const endY = target.y;
   const laneX = getLaneX(sourceId, targetId, startX, endX);
-  const midX = Math.max(startX + 48, Math.min(laneX, endX - 48));
+  const midX = Math.max(startX + 64, Math.min(laneX, endX - 64));
   
   return `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`;
 };
@@ -261,12 +261,12 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
             return (
               <div key={node.id} style={{ left: node.x, top: node.y }} className="absolute -translate-x-1/2 -translate-y-1/2 z-10 flex items-center group cursor-pointer" onPointerDown={(e) => e.stopPropagation()} onClick={() => handleNodeClick(node.id)}>
                 <div className="relative flex items-center justify-center">
-                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className={`w-12 h-12 rounded-full border-[1.5px] flex items-center justify-center transition-all duration-300 relative z-10 bg-[#0a0a0a] ${isActive ? "border-white text-white shadow-[0_0_15px_rgba(255,255,255,0.4)]" : isVisited ? "border-zinc-400 text-zinc-300" : "border-zinc-700 text-zinc-500 border-dashed"}`}>
-                    <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className={`w-16 h-16 rounded-full border-[1.5px] flex items-center justify-center transition-all duration-300 relative z-10 bg-[#0a0a0a] ${isActive ? "border-white text-white shadow-[0_0_15px_rgba(255,255,255,0.4)]" : isVisited ? "border-zinc-400 text-zinc-300" : "border-zinc-700 text-zinc-500 border-dashed"}`}>
+                    <Icon size={28} strokeWidth={isActive ? 2.5 : 2} />
                   </motion.div>
                 </div>
-                <div className="absolute left-14 bg-[#0a0a0a] px-2 py-0.5 rounded border border-[#0a0a0a]">
-                  <span className={`text-base font-medium tracking-wide transition-colors duration-300 ${isActive ? "text-white" : isVisited ? "text-zinc-300" : "text-zinc-500"}`}>
+                <div className="absolute left-20 bg-[#0a0a0a] px-3 py-1 rounded-md border border-[#0a0a0a]">
+                  <span className={`text-lg font-medium tracking-wide transition-colors duration-300 ${isActive ? "text-white" : isVisited ? "text-zinc-300" : "text-zinc-500"}`}>
                     {node.label}
                   </span>
                 </div>

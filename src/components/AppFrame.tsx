@@ -116,7 +116,7 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
 
           {/* 3. The Nav Window */}
           <AnimatePresence>
-            {isNavOpen && <NavWindow isOpen={isNavOpen} onClose={() => setIsNavOpen(false)} />}
+            {isNavOpen && <NavWindow key="nav-window" isOpen={isNavOpen} onClose={() => setIsNavOpen(false)} />}
           </AnimatePresence>
 
           {/* 4. THE ACTUAL PAGE CONTENT — clipped inside frame */}

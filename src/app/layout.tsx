@@ -28,7 +28,7 @@ export default function RootLayout({
       <head>
         <link rel="preload" as="image" href="/wallpaper.jpg" />
       </head>
-      <body className="antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+      <body className="antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 overflow-x-hidden">
         <CustomCursor />
         {children}
         <MusicPlayer />

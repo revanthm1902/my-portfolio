@@ -93,18 +93,7 @@ interface NavWindowProps {
 
 export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
   const [zoom, setZoom] = useState(1);
-  const [visitedNodes, setVisitedNodes] = useState<string[]>(() => {
-    if (typeof window === "undefined") return ["home"];
-    const currentPage =
-      window.location.pathname === "/" ? "home" : window.location.pathname.replace(/^\//, "");
-    try {
-      const stored = sessionStorage.getItem("portfolio-visited-nodes");
-      const storedNodes: string[] = stored ? JSON.parse(stored) : ["home"];
-      return Array.from(new Set([...storedNodes, currentPage]));
-    } catch {
-      return Array.from(new Set(["home", currentPage]));
-    }
-  });
+  const [visitedNodes, setVisitedNodes] = useState<string[]>(["home"]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const windowDragControls = useDragControls();
@@ -114,8 +103,32 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
 
   const activeNode = pathname === "/" ? "home" : pathname.replace(/^\//, "");
 
+  // Hydrate visitedNodes safely on the client
   useEffect(() => {
-    sessionStorage.setItem("portfolio-visited-nodes", JSON.stringify(visitedNodes));
+    // Next.js recommended way to defer state update to avoid synchronous cascading renders during hydration
+    const timer = setTimeout(() => {
+      const currentPage = window.location.pathname === "/" ? "home" : window.location.pathname.replace(/^\//, "");
+      try {
+        const stored = sessionStorage.getItem("portfolio-visited-nodes");
+        if (stored) {
+          const storedNodes: string[] = JSON.parse(stored);
+          setVisitedNodes(Array.from(new Set([...storedNodes, currentPage])));
+        } else {
+          setVisitedNodes(Array.from(new Set(["home", currentPage])));
+        }
+      } catch {
+        setVisitedNodes(Array.from(new Set(["home", currentPage])));
+      }
+    }, 0);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Update session storage when visitedNodes change
+  useEffect(() => {
+    if (visitedNodes.length > 1 || (visitedNodes.length === 1 && visitedNodes[0] !== "home")) {
+      sessionStorage.setItem("portfolio-visited-nodes", JSON.stringify(visitedNodes));
+    }
   }, [visitedNodes]);
 
   useEffect(() => {
@@ -173,7 +186,11 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
 
   return (
     <motion.div
-      drag dragControls={windowDragControls} dragListener={false} dragMomentum={false}
+      drag 
+      dragControls={windowDragControls} 
+      dragListener={false} 
+      dragMomentum={false}
+      dragConstraints={{ top: -200, bottom: 200, left: -400, right: 400 }}
       initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
       style={{ resize: "both" }}

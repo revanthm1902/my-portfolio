@@ -404,7 +404,7 @@ const MacOSDesktop = () => {
           <motion.div
             whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             onClick={() => openWindow("terminal", "terminal")}
-            className="flex flex-col items-center justify-start w-24 h-28 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-all duration-300 group shrink-0"
+            className="hidden md:flex flex-col items-center justify-start w-24 h-28 p-2 rounded-xl cursor-pointer hover:bg-white/10 transition-all duration-300 group shrink-0"
           >
             <div className="flex items-center justify-center w-14 h-12 md:w-16 md:h-14 rounded-xl bg-[#141414] border border-zinc-700 shadow-xl mb-2 mx-auto transition-all duration-300 group-hover:border-zinc-500">
               <Terminal size={24} className="text-[#e67e5a] transition-all duration-300" />

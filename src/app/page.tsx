@@ -55,7 +55,7 @@ export default function Home() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className={`${displayFont.className} text-[clamp(3.5rem,10vh,5.5rem)] sm:text-[clamp(4.5rem,12vh,6.5rem)] md:text-[clamp(5rem,14vh,7.5rem)] font-bold leading-[0.85] tracking-tight text-zinc-900 dark:text-zinc-50 flex flex-col items-center`}
+              className={`${displayFont.className} text-[clamp(2.2rem,11vw,4.5rem)] sm:text-[clamp(4.5rem,12vh,6.5rem)] md:text-[clamp(5rem,14vh,7.5rem)] font-bold leading-[0.85] tracking-tight text-zinc-900 dark:text-zinc-50 flex flex-col items-center`}
               style={{ perspective: "1000px" }}
             >
               <span className="flex">

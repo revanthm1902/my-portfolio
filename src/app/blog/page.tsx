@@ -143,7 +143,7 @@ export default function BlogPage() {
             <BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-500" /> Writings // Updates // Thoughts
           </div>
           <h1 className="font-(family-name:--font-ndot) text-5xl md:text-7xl lg:text-8xl text-zinc-900 dark:text-zinc-50 tracking-tight uppercase mb-12">
-            WRITINGS
+            BLOG
           </h1>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 w-full">

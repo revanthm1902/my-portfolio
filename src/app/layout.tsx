@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const ndotFont = localFont({
-  src: '../../public/fonts/NDot-55.ttf',
+  src: '../../public/fonts/Ndot-55.ttf',
   variable: '--font-ndot',
 });
 

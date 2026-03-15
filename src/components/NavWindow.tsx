@@ -30,8 +30,8 @@ const edges = [
   { source: "experience", target: "contact", depth: 2 },
 ];
 
-const GRAPH_WIDTH = 1000;
-const GRAPH_HEIGHT = 700;
+const GRAPH_WIDTH = 1100;
+const GRAPH_HEIGHT = 800;
 
 // --- Structured branch lanes for cleaner hierarchy ---
 const getLaneX = (sourceId: string, targetId: string, startX: number, endX: number) => {
@@ -220,12 +220,12 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
           <button onClick={() => setZoom(z => Math.min(z + 0.2, 2.5))} className="w-7 h-7 flex items-center justify-center text-zinc-500 hover:text-white hover:bg-zinc-800 rounded transition-colors">+</button>
         </div>
 
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-        <motion.div drag className="relative origin-center w-250 h-175 cursor-grab active:cursor-grabbing" style={{ scale: zoom }}>
-          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-            <line x1="350" y1="40" x2="350" y2="660" className="stroke-zinc-800/70 stroke-[1px]" strokeDasharray="2 6" />
-            <line x1="650" y1="40" x2="650" y2="660" className="stroke-zinc-800/60 stroke-[1px]" strokeDasharray="2 6" />
-            <line x1="800" y1="40" x2="800" y2="660" className="stroke-zinc-800/50 stroke-[1px]" strokeDasharray="2 6" />
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden cursor-move">
+          <motion.div drag dragConstraints={containerRef} className="relative origin-center w-300 h-200 flex-shrink-0 cursor-grab active:cursor-grabbing" style={{ scale: zoom }}>
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+              <line x1="350" y1="40" x2="350" y2="760" className="stroke-zinc-800/70 stroke-[1px]" strokeDasharray="2 6" />
+              <line x1="650" y1="40" x2="650" y2="760" className="stroke-zinc-800/60 stroke-[1px]" strokeDasharray="2 6" />
+              <line x1="800" y1="40" x2="800" y2="760" className="stroke-zinc-800/50 stroke-[1px]" strokeDasharray="2 6" />
             {edges.map((edge) => {
               const source = nodes.find((n) => n.id === edge.source);
               const target = nodes.find((n) => n.id === edge.target);

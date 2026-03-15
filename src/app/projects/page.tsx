@@ -200,7 +200,9 @@ const exitFullScreen = () => {
 };
 
 // --- APP ICON COMPONENT ---
-const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
+type ProjectType = typeof projectsData[0];
+
+const AppIcon = ({ proj, onClick }: { proj: ProjectType, onClick: () => void }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -222,7 +224,7 @@ const AppIcon = ({ proj, onClick }: { proj: any, onClick: () => void }) => {
 };
 
 // --- IN-OS TERMINAL COMPONENT ---
-const OSTerminal = ({ onClose, onFocus, openProject }: { onClose: () => void, onFocus: () => void, openProject: (id: number) => void }) => {
+const OSTerminal = ({ onFocus, openProject }: { onFocus: () => void, openProject: (id: number) => void }) => {
   const [history, setHistory] = useState<{ type: string, text: string }[]>([
     { type: "info", text: "Portfolio OS v1.0.0 (Revanth Modalavalasa)" },
     { type: "info", text: "Type 'help' to see available commands." }
@@ -350,7 +352,7 @@ const MacOSDesktop = () => {
       {/* TOP MENU BAR */}
       <div className="h-7 w-full bg-black/40 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-3 md:px-4 text-white text-[10px] md:text-[11px] font-medium tracking-wide z-50">
         <div className="flex items-center gap-2 md:gap-4">
-          <span className="font-bold cursor-pointer hover:opacity-80"> Revanth's OS </span>
+          <span className="font-bold cursor-pointer hover:opacity-80"> Revanth&apos;s OS </span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">File</span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">Edit</span>
           <span className="hidden md:inline hover:bg-white/20 px-2 py-0.5 rounded cursor-pointer">View</span>
@@ -434,7 +436,7 @@ const MacOSDesktop = () => {
 
               {/* Window Content */}
               {isTerminal ? (
-                <OSTerminal onClose={() => closeWindow("terminal")} onFocus={() => bringToFront("terminal")} openProject={(id) => openWindow(id, "project")} />
+                <OSTerminal onFocus={() => bringToFront("terminal")} openProject={(id) => openWindow(id, "project")} />
               ) : (
                 <div className="flex-1 flex flex-col md:flex-row cursor-auto overflow-y-auto no-scrollbar">
 

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import { Award, Globe, X, CalendarDays, Building2, ExternalLink, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { toast } from "sonner";
 
 type Certificate = {
@@ -128,6 +129,11 @@ const certificatesData: Record<"global" | "general", Certificate[]> = {
 export default function CertificationsPage() {
   const [activeTab, setActiveTab] = useState<"global" | "general">("global");
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -241,117 +247,120 @@ export default function CertificationsPage() {
       </div>
 
       {/* Full Modal Popup for Certificate */}
-      <AnimatePresence>
-        {selectedCert && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedCert(null)}
-            className="fixed inset-0 z-99999 flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
-          >
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedCert && (
             <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-4xl h-dvh sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedCert(null)}
+              className="fixed inset-0 z-[99999] flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
             >
-              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
-                <button 
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedCert(null);
-                  }}
-                  className="p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md dark:bg-zinc-800 dark:hover:bg-zinc-700 text-white rounded-full transition-colors shrink-0 cursor-pointer shadow-sm"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              <div className="overflow-y-auto w-full h-full flex flex-col sm:flex-row">
-                {/* Image Section (Left on desktop, Top on mobile) */}
-                <div className="w-full sm:w-2/5 h-64 sm:h-full relative bg-zinc-100 dark:bg-zinc-950 shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img 
-                    src={selectedCert.image} 
-                    alt={selectedCert.title} 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent sm:hidden" />
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-4xl h-dvh sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
+              >
+                <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
+                  <button 
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedCert(null);
+                    }}
+                    className="p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md dark:bg-zinc-800 dark:hover:bg-zinc-700 text-white rounded-full transition-colors shrink-0 cursor-pointer shadow-sm"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
                 </div>
 
-                {/* Content Section (Right on desktop, Bottom on mobile) */}
-                <div className="p-6 sm:p-10 flex flex-col justify-center w-full sm:w-3/5 font-sans relative z-10 -mt-6 sm:mt-0 bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-none">
-                  
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-semibold mb-6 w-fit">
-                    <Award className="w-4 h-4" />
-                    {activeTab === "global" ? "Global Recognition" : "Certification"}
+                <div className="overflow-y-auto w-full h-full flex flex-col sm:flex-row">
+                  {/* Image Section (Left on desktop, Top on mobile) */}
+                  <div className="w-full sm:w-2/5 h-64 sm:h-full relative bg-zinc-100 dark:bg-zinc-950 shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                      src={selectedCert.image} 
+                      alt={selectedCert.title} 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent sm:hidden" />
                   </div>
 
-                  <h2 className="text-zinc-900 dark:text-zinc-100 text-3xl sm:text-4xl font-bold leading-tight mb-4">
-                    {selectedCert.title}
-                  </h2>
-                  
-                  <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8 text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                    <span className="flex items-center gap-2">
-                       <Building2 className="w-4 h-4 text-zinc-400" />
-                       {selectedCert.issuer}
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <CalendarDays className="w-4 h-4 text-zinc-400" />
-                      {selectedCert.date}
-                    </span>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-2">
-                        Overview
-                      </h3>
-                      <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                        {selectedCert.description}
-                      </p>
+                  {/* Content Section (Right on desktop, Bottom on mobile) */}
+                  <div className="p-6 sm:p-10 flex flex-col justify-center w-full sm:w-3/5 font-sans relative z-10 -mt-6 sm:mt-0 bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-none">
+                    
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-semibold mb-6 w-fit">
+                      <Award className="w-4 h-4" />
+                      {activeTab === "global" ? "Global Recognition" : "Certification"}
                     </div>
 
-                    <div>
-                      <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-3">
-                        Skills & Competencies
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedCert.skills.map((skill, i) => (
-                          <span 
-                            key={i} 
-                            className="px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg border border-zinc-200 dark:border-zinc-700"
-                          >
-                            {skill}
-                          </span>
-                        ))}
+                    <h2 className="text-zinc-900 dark:text-zinc-100 text-3xl sm:text-4xl font-bold leading-tight mb-4">
+                      {selectedCert.title}
+                    </h2>
+                    
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8 text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                      <span className="flex items-center gap-2">
+                         <Building2 className="w-4 h-4 text-zinc-400" />
+                         {selectedCert.issuer}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <CalendarDays className="w-4 h-4 text-zinc-400" />
+                        {selectedCert.date}
+                      </span>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+                          Overview
+                        </h3>
+                        <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                          {selectedCert.description}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-3">
+                          Skills & Competencies
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedCert.skills.map((skill, i) => (
+                            <span 
+                              key={i} 
+                              className="px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg border border-zinc-200 dark:border-zinc-700"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
+
+                    {selectedCert.link && selectedCert.link !== "#" && (
+                      <div className="mt-8 pt-8 border-t border-zinc-100 dark:border-zinc-800">
+                        <a
+                          href={selectedCert.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-all shadow-lg shadow-red-600/20"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Verify Certificate
+                        </a>
+                      </div>
+                    )}
+
                   </div>
-
-                  {selectedCert.link && selectedCert.link !== "#" && (
-                    <div className="mt-8 pt-8 border-t border-zinc-100 dark:border-zinc-800">
-                      <a
-                        href={selectedCert.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-all shadow-lg shadow-red-600/20"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Verify Certificate
-                      </a>
-                    </div>
-                  )}
-
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import { Briefcase, Building2, CalendarDays, MapPin, X, ArrowUpRight, FileText, Award } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { toast } from "sonner";
 
 const experiences = [
@@ -60,6 +61,11 @@ const experiences = [
 
 export default function ExperiencePage() {
   const [selectedExp, setSelectedExp] = useState<typeof experiences[0] | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -136,116 +142,119 @@ export default function ExperiencePage() {
           <Footer />
         </div>
 
-      {/* Full Experience Modal Popup */}
-      <AnimatePresence>
-        {selectedExp && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedExp(null)}
-            className="fixed inset-0 z-99999 flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
-          >
+      {/* Full Experience Modal Popup - Rendered via Portal to break out of AppFrame */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedExp && (
             <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-3xl h-dvh sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedExp(null)}
+              className="fixed inset-0 z-[99999] flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
             >
-              <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-b from-white via-white dark:from-zinc-900 dark:via-zinc-900 to-transparent z-10 pointer-events-none" />
-              
-              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
-                <button 
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedExp(null);
-                  }}
-                  className="p-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-full transition-colors shrink-0 cursor-pointer pointer-events-auto shadow-sm"
-                >
-                  <X className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
-                </button>
-              </div>
-              
-              <div className="overflow-y-auto no-scrollbar p-6 sm:p-10 pt-24 sm:pt-20 h-full font-sans">
-                <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-8">
-                  <div className="w-14 h-14 rounded-2xl bg-red-600/10 border border-red-600/20 flex items-center justify-center shrink-0">
-                    <Briefcase className="w-7 h-7 text-red-600" />
-                  </div>
-                  <div>
-                    <h2 className="text-zinc-900 dark:text-zinc-100 text-3xl font-bold leading-tight">
-                      {selectedExp.role}
-                    </h2>
-                    <div className="text-base font-medium text-zinc-600 dark:text-zinc-400 mt-2 flex items-center gap-2">
-                       <Building2 className="w-4 h-4 text-zinc-500" />
-                       {selectedExp.organization}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-10 text-sm font-mono text-zinc-500 dark:text-zinc-500 border-b border-zinc-100 dark:border-zinc-800 pb-6">
-                  <span className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    {selectedExp.location}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <CalendarDays className="w-4 h-4" />
-                    {selectedExp.duration}
-                  </span>
-                </div>
-
-                {/* Project Details Section */}
-                <div className="mb-10">
-                  <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-5 flex items-center gap-2">
-                    <Award className="w-5 h-5 text-red-500" /> Key Responsibilities & Projects
-                  </h3>
-                  <ul className="space-y-4">
-                    {selectedExp.details.map((detail, index) => (
-                      <li key={index} className="flex items-start gap-4">
-                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-red-500 shrink-0 shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
-                        <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed">
-                          {detail}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-3xl h-dvh sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
+              >
+                <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-b from-white via-white dark:from-zinc-900 dark:via-zinc-900 to-transparent z-10 pointer-events-none" />
+                
+                <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
+                  <button 
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedExp(null);
+                    }}
+                    className="p-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-full transition-colors shrink-0 cursor-pointer pointer-events-auto shadow-sm"
+                  >
+                    <X className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
+                  </button>
                 </div>
                 
-                {/* Links Section */}
-                <div className="mt-10 pt-8 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center gap-4">
-                  {selectedExp.offerLetter && selectedExp.offerLetter !== "#" && (
-                    <a
-                      href={selectedExp.offerLetter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-sm font-semibold transition-all group shadow-sm"
-                    >
-                      <FileText className="w-4 h-4 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
-                      View Offer Letter
-                      <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </a>
-                  )}
+                <div className="overflow-y-auto no-scrollbar p-6 sm:p-10 pt-24 sm:pt-20 h-full font-sans">
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-8">
+                    <div className="w-14 h-14 rounded-2xl bg-red-600/10 border border-red-600/20 flex items-center justify-center shrink-0">
+                      <Briefcase className="w-7 h-7 text-red-600" />
+                    </div>
+                    <div>
+                      <h2 className="text-zinc-900 dark:text-zinc-100 text-3xl font-bold leading-tight">
+                        {selectedExp.role}
+                      </h2>
+                      <div className="text-base font-medium text-zinc-600 dark:text-zinc-400 mt-2 flex items-center gap-2">
+                         <Building2 className="w-4 h-4 text-zinc-500" />
+                         {selectedExp.organization}
+                      </div>
+                    </div>
+                  </div>
 
-                  {selectedExp.certificate && selectedExp.certificate !== "#" && (
-                    <a
-                      href={selectedExp.certificate}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-sm font-semibold transition-all group shadow-sm"
-                    >
-                      <Award className="w-4 h-4 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
-                      View Certificate
-                      <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </a>
-                  )}
+                  <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-10 text-sm font-mono text-zinc-500 dark:text-zinc-500 border-b border-zinc-100 dark:border-zinc-800 pb-6">
+                    <span className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4" />
+                      {selectedExp.location}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <CalendarDays className="w-4 h-4" />
+                      {selectedExp.duration}
+                    </span>
+                  </div>
+
+                  {/* Project Details Section */}
+                  <div className="mb-10">
+                    <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-5 flex items-center gap-2">
+                      <Award className="w-5 h-5 text-red-500" /> Key Responsibilities & Projects
+                    </h3>
+                    <ul className="space-y-4">
+                      {selectedExp.details.map((detail, index) => (
+                        <li key={index} className="flex items-start gap-4">
+                          <div className="mt-2 w-1.5 h-1.5 rounded-full bg-red-500 shrink-0 shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
+                          <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed">
+                            {detail}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Links Section */}
+                  <div className="mt-10 pt-8 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center gap-4">
+                    {selectedExp.offerLetter && selectedExp.offerLetter !== "#" && (
+                      <a
+                        href={selectedExp.offerLetter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-sm font-semibold transition-all group shadow-sm"
+                      >
+                        <FileText className="w-4 h-4 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
+                        View Offer Letter
+                        <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </a>
+                    )}
+
+                    {selectedExp.certificate && selectedExp.certificate !== "#" && (
+                      <a
+                        href={selectedExp.certificate}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/80 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-sm font-semibold transition-all group shadow-sm"
+                      >
+                        <Award className="w-4 h-4 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" />
+                        View Certificate
+                        <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </a>
+                    )}
+                  </div>
+
                 </div>
-
-              </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 }

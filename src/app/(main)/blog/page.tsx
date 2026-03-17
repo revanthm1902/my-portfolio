@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import { ExternalLink, X, Linkedin, BookOpen, ImageOff, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { toast } from "sonner";
 
 const writingsData = [
@@ -114,6 +115,11 @@ const PostImage = ({ src, alt, link, source, isModal = false }: { src: string; a
 
 export default function BlogPage() {
   const [selectedPost, setSelectedPost] = useState<typeof writingsData[0] | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -184,87 +190,31 @@ export default function BlogPage() {
       </div>
         
         {/* Full Post Modal Popup */}
-        <AnimatePresence>
-          {selectedPost && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedPost(null)}
-              className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
-            >
+        {mounted && createPortal(
+          <AnimatePresence>
+            {selectedPost && (
               <motion.div
-                initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                onClick={(e) => e.stopPropagation()}
-                className="bg-white dark:bg-zinc-900 sm:border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-2xl h-dvh sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedPost(null)}
+                className="fixed inset-0 z-[99999] flex items-center justify-center p-0 sm:p-6 backdrop-blur-3xl bg-zinc-50/90 dark:bg-zinc-950/90"
               >
-                <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-b from-white via-white dark:from-zinc-900 dark:via-zinc-900 to-transparent z-10 pointer-events-none" />
-                
-                <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
-                  <a
-                    href={selectedPost.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm"
-                    onClick={(e) => {
-                      if (!selectedPost.link || selectedPost.link === '#' || selectedPost.link.includes('urn:li:activity:987654321')) {
-                        e.preventDefault();
-                        toast.info("Updating soon...");
-                      }
-                    }}
-                  >
-                    {getSourceIcon(selectedPost.source)}
-                    <span>View on {selectedPost.source}</span>
-                  </a>
-                  <button 
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedPost(null);
-                    }}
-                    className="p-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-full transition-colors shrink-0 cursor-pointer pointer-events-auto"
-                  >
-                    <X className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
-                  </button>
-                </div>
-                
-                <div className="overflow-y-auto no-scrollbar p-5 sm:p-10 pt-24 sm:pt-20 h-full font-sans">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center shrink-0">
-                      {getSourceIcon(selectedPost.source)}
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wide">
-                        {selectedPost.source} Post
-                      </div>
-                      <div className="text-xs text-zinc-500 dark:text-zinc-400 font-mono mt-0.5">
-                        {selectedPost.date}
-                      </div>
-                    </div>
-                  </div>
-
-                  <h2 className="text-zinc-900 dark:text-zinc-100 text-2xl sm:text-3xl font-bold mb-6 leading-tight">
-                    {selectedPost.title}
-                  </h2>
-
-                  <p className="text-zinc-700 dark:text-zinc-300 text-base sm:text-lg mb-10 whitespace-pre-wrap leading-relaxed">
-                    {selectedPost.summary}
-                  </p>
+                <motion.div
+                  initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="bg-white dark:bg-zinc-900 sm:border border-zinc-200 dark:border-zinc-800 rounded-none sm:rounded-3xl w-full max-w-2xl h-dvh sm:h-auto sm:max-h-[90vh] overflow-hidden sm:shadow-2xl flex flex-col relative"
+                >
+                  <div className="absolute top-0 inset-x-0 h-24 bg-linear-to-b from-white via-white dark:from-zinc-900 dark:via-zinc-900 to-transparent z-10 pointer-events-none" />
                   
-                  {selectedPost.image && (
-                    <div className="w-full rounded-2xl overflow-hidden bg-zinc-50 dark:bg-zinc-950/50 shadow-inner flex justify-center border border-zinc-100 dark:border-zinc-800">
-                      <PostImage src={selectedPost.image} alt="Full post visual" link={selectedPost.link} source={selectedPost.source} isModal />
-                    </div>
-                  )}
-                  
-                  <div className="mt-10 pt-6 border-t border-zinc-100 dark:border-zinc-800 flex justify-center">
+                  <div className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex items-center gap-2">
                     <a
                       href={selectedPost.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors group"
+                      className="flex items-center gap-2 bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm"
                       onClick={(e) => {
                         if (!selectedPost.link || selectedPost.link === '#' || selectedPost.link.includes('urn:li:activity:987654321')) {
                           e.preventDefault();
@@ -272,15 +222,74 @@ export default function BlogPage() {
                         }
                       }}
                     >
-                      Read full post on {selectedPost.source}
-                      <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                      {getSourceIcon(selectedPost.source)}
+                      <span>View on {selectedPost.source}</span>
                     </a>
+                    <button 
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedPost(null);
+                      }}
+                      className="p-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-full transition-colors shrink-0 cursor-pointer pointer-events-auto"
+                    >
+                      <X className="w-5 h-5 text-zinc-600 dark:text-zinc-300" />
+                    </button>
                   </div>
-                </div>
+                  
+                  <div className="overflow-y-auto no-scrollbar p-5 sm:p-10 pt-24 sm:pt-20 h-full font-sans">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center shrink-0">
+                        {getSourceIcon(selectedPost.source)}
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wide">
+                          {selectedPost.source} Post
+                        </div>
+                        <div className="text-xs text-zinc-500 dark:text-zinc-400 font-mono mt-0.5">
+                          {selectedPost.date}
+                        </div>
+                      </div>
+                    </div>
+
+                    <h2 className="text-zinc-900 dark:text-zinc-100 text-2xl sm:text-3xl font-bold mb-6 leading-tight">
+                      {selectedPost.title}
+                    </h2>
+
+                    <p className="text-zinc-700 dark:text-zinc-300 text-base sm:text-lg mb-10 whitespace-pre-wrap leading-relaxed">
+                      {selectedPost.summary}
+                    </p>
+                    
+                    {selectedPost.image && (
+                      <div className="w-full rounded-2xl overflow-hidden bg-zinc-50 dark:bg-zinc-950/50 shadow-inner flex justify-center border border-zinc-100 dark:border-zinc-800">
+                        <PostImage src={selectedPost.image} alt="Full post visual" link={selectedPost.link} source={selectedPost.source} isModal />
+                      </div>
+                    )}
+                    
+                    <div className="mt-10 pt-6 border-t border-zinc-100 dark:border-zinc-800 flex justify-center">
+                      <a
+                        href={selectedPost.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors group"
+                        onClick={(e) => {
+                          if (!selectedPost.link || selectedPost.link === '#' || selectedPost.link.includes('urn:li:activity:987654321')) {
+                            e.preventDefault();
+                            toast.info("Updating soon...");
+                          }
+                        }}
+                      >
+                        Read full post on {selectedPost.source}
+                        <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </>
   );
 }

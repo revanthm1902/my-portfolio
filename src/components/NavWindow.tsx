@@ -8,15 +8,15 @@ import React from "react";
 
 // --- EXACT BRACKET COORDINATES ---
 const nodes = [
-  { id: "home", label: "Portfolio", icon: Home, x: 200, y: 350 },
-  { id: "about", label: "About", icon: User, x: 500, y: 180 },
-  { id: "contact", label: "Contact", icon: MessageCircle, x: 800, y: 350 },
-  { id: "skills", label: "Skills", icon: Wrench, x: 500, y: 520 },
-  { id: "blog", label: "Blog", icon: PenTool, x: 800, y: 100 },
-  { id: "resume", label: "Resume", icon: FileText, x: 800, y: 280 },
-  { id: "experience", label: "Experience", icon: Briefcase, x: 500, y: 350 },
-  { id: "projects", label: "Projects", icon: FolderGit2, x: 800, y: 460 },
-  { id: "certifications", label: "Certifications", icon: Award, x: 800, y: 600 },
+  { id: "home", label: "Portfolio", icon: Home, x: 150, y: 400 },
+  { id: "about", label: "About", icon: User, x: 550, y: 200 },
+  { id: "experience", label: "Experience", icon: Briefcase, x: 550, y: 400 },
+  { id: "skills", label: "Skills", icon: Wrench, x: 550, y: 600 },
+  { id: "blog", label: "Blog", icon: PenTool, x: 950, y: 100 },
+  { id: "resume", label: "Resume", icon: FileText, x: 950, y: 250 },
+  { id: "contact", label: "Contact", icon: MessageCircle, x: 950, y: 400 },
+  { id: "projects", label: "Projects", icon: FolderGit2, x: 950, y: 550 },
+  { id: "certifications", label: "Certifications", icon: Award, x: 950, y: 700 },
 ];
 
 const edges = [
@@ -30,13 +30,13 @@ const edges = [
   { source: "experience", target: "contact", depth: 2 },
 ];
 
-const GRAPH_WIDTH = 1100;
+const GRAPH_WIDTH = 1250;
 const GRAPH_HEIGHT = 800;
 
 // --- Structured branch lanes for cleaner hierarchy ---
 const getLaneX = (sourceId: string, targetId: string, startX: number, endX: number) => {
-  if (sourceId === "home") return 350;
-  if (sourceId === "about" || sourceId === "skills" || sourceId === "experience") return 650;
+  if (sourceId === "home") return ((150 + 32) + (550 - 32)) / 2; // Midpoint 350
+  if (sourceId === "about" || sourceId === "skills" || sourceId === "experience") return ((550 + 32) + (950 - 32)) / 2; // Midpoint 750
 
   const targetOffset = targetId === "contact" ? 20 : 0;
   return ((startX + endX) / 2) + targetOffset;
@@ -223,9 +223,9 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden cursor-move">
           <motion.div drag dragConstraints={containerRef} className="relative origin-center w-300 h-200 shrink-0 cursor-grab active:cursor-grabbing" style={{ scale: zoom }}>
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-              <line x1="350" y1="40" x2="350" y2="760" className="stroke-zinc-800/70 stroke-[1px]" strokeDasharray="2 6" />
-              <line x1="650" y1="40" x2="650" y2="760" className="stroke-zinc-800/60 stroke-[1px]" strokeDasharray="2 6" />
-              <line x1="800" y1="40" x2="800" y2="760" className="stroke-zinc-800/50 stroke-[1px]" strokeDasharray="2 6" />
+              <line x1="150" y1="40" x2="150" y2="760" className="stroke-zinc-800/70 stroke-[1px]" strokeDasharray="2 6" />
+              <line x1="550" y1="40" x2="550" y2="760" className="stroke-zinc-800/60 stroke-[1px]" strokeDasharray="2 6" />
+              <line x1="950" y1="40" x2="950" y2="760" className="stroke-zinc-800/50 stroke-[1px]" strokeDasharray="2 6" />
             {edges.map((edge) => {
               const source = nodes.find((n) => n.id === edge.source);
               const target = nodes.find((n) => n.id === edge.target);
@@ -265,7 +265,7 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
                     <Icon size={28} strokeWidth={isActive ? 2.5 : 2} />
                   </motion.div>
                 </div>
-                <div className="absolute left-20 bg-[#0a0a0a] px-3 py-1 rounded-md border border-[#0a0a0a]">
+                <div className="absolute left-[88px] bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-2 rounded-lg border border-zinc-800/50 shadow-md">
                   <span className={`text-lg font-medium tracking-wide transition-colors duration-300 ${isActive ? "text-white" : isVisited ? "text-zinc-300" : "text-zinc-500"}`}>
                     {node.label}
                   </span>
@@ -278,22 +278,22 @@ export default function NavWindow({ isOpen, onClose }: NavWindowProps) {
       </div>
 
       <div className="flex md:hidden flex-1 flex-col p-6 overflow-y-auto bg-[#0a0a0a]">
-        <div className="flex flex-col gap-6 w-full max-w-sm mx-auto mt-4">
+        <div className="flex flex-col gap-8 w-full max-w-sm mx-auto mt-4 pb-12">
           <MobileNode id="home" label="Portfolio" icon={Home} isVisited={visitedNodes.includes("home")} isActive={activeNode === "home"} onNodeClick={handleNodeClick} />
-          <div className="flex flex-col gap-6 pl-6 ml-5 border-l-[1.5px] border-zinc-700/80 border-dashed">
+          <div className="flex flex-col gap-8 pl-6 ml-5 border-l-[1.5px] border-zinc-700/80 border-dashed">
             <MobileNode id="about" label="About" icon={User} isVisited={visitedNodes.includes("about")} isActive={activeNode === "about"} onNodeClick={handleNodeClick} />
-            <div className="flex flex-col gap-6 pl-6 ml-5 border-l-[1.5px] border-zinc-600/80 border-dashed">
+            <div className="flex flex-col gap-8 pl-6 ml-5 border-l-[1.5px] border-zinc-600/80 border-dashed">
                <MobileNode id="blog" label="Blog" icon={PenTool} isVisited={visitedNodes.includes("blog")} isActive={activeNode === "blog"} onNodeClick={handleNodeClick} />
                <MobileNode id="resume" label="Resume" icon={FileText} isVisited={visitedNodes.includes("resume")} isActive={activeNode === "resume"} onNodeClick={handleNodeClick} />
             </div>
+            <MobileNode id="experience" label="Experience" icon={Briefcase} isVisited={visitedNodes.includes("experience")} isActive={activeNode === "experience"} onNodeClick={handleNodeClick} />
+            <div className="flex flex-col gap-8 pl-6 ml-5 border-l-[1.5px] border-zinc-600/80 border-dashed">
+              <MobileNode id="contact" label="Contact" icon={MessageCircle} isVisited={visitedNodes.includes("contact")} isActive={activeNode === "contact"} onNodeClick={handleNodeClick} />
+            </div>
             <MobileNode id="skills" label="Skills" icon={Wrench} isVisited={visitedNodes.includes("skills")} isActive={activeNode === "skills"} onNodeClick={handleNodeClick} />
-            <div className="flex flex-col gap-6 pl-6 ml-5 border-l-[1.5px] border-zinc-600/80 border-dashed">
+            <div className="flex flex-col gap-8 pl-6 ml-5 border-l-[1.5px] border-zinc-600/80 border-dashed">
                <MobileNode id="projects" label="Projects" icon={FolderGit2} isVisited={visitedNodes.includes("projects")} isActive={activeNode === "projects"} onNodeClick={handleNodeClick} />
                <MobileNode id="certifications" label="Certifications" icon={Award} isVisited={visitedNodes.includes("certifications")} isActive={activeNode === "certifications"} onNodeClick={handleNodeClick} />
-            </div>
-            <MobileNode id="experience" label="Experience" icon={Briefcase} isVisited={visitedNodes.includes("experience")} isActive={activeNode === "experience"} onNodeClick={handleNodeClick} />
-            <div className="flex flex-col gap-6 pl-6 ml-5 border-l-[1.5px] border-zinc-600/80 border-dashed">
-              <MobileNode id="contact" label="Contact" icon={MessageCircle} isVisited={visitedNodes.includes("contact")} isActive={activeNode === "contact"} onNodeClick={handleNodeClick} />
             </div>
           </div>
         </div>

@@ -108,7 +108,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1.3 }}
-              className="mt-[3vh] md:mt-[4vh] flex items-center justify-center pb-[2vh]"
+              className="mt-[3vh] md:mt-[4vh] flex flex-wrap gap-4 items-center justify-center pb-[2vh]"
             >
               <Link
                 href="/resume"
@@ -116,6 +116,13 @@ export default function Home() {
               >
                 <span className="absolute inset-0 bg-linear-to-r from-red-600 to-red-500 translate-x-0 md:-translate-x-full group-hover:translate-x-0 transition-transform duration-600 ease-out" />
                 <span className="relative z-10 md:group-hover:text-white transition-colors duration-300">Resume</span>
+              </Link>
+              <Link
+                href="/projects"
+                className="group relative inline-flex justify-center items-center px-8 py-3.5 md:px-12 md:py-4.5 overflow-hidden rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-2xl border border-red-500/50 md:border-white/25 dark:md:border-zinc-700/40 text-zinc-900 dark:text-white font-semibold text-xs md:text-sm tracking-wide shadow-[0_8px_40px_rgba(220,38,38,0.15)] md:shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:md:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-500 hover:border-red-500/50 hover:shadow-[0_8px_40px_rgba(220,38,38,0.15)]"
+              >
+                <span className="absolute inset-0 bg-linear-to-r from-red-600 to-red-500 translate-x-0 md:-translate-x-full group-hover:translate-x-0 transition-transform duration-600 ease-out" />
+                <span className="relative z-10 md:group-hover:text-white transition-colors duration-300">Projects</span>
               </Link>
             </motion.div>
           </motion.div>

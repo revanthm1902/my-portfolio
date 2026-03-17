@@ -5,6 +5,7 @@ import localFont from 'next/font/local';
 import { Toaster } from "sonner";
 import CustomCursor from "@/components/CustomCursor";
 import MusicPlayer from "@/components/MusicPlayer";
+import RouteTransition from "@/components/RouteTransition";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.className} ${ndotFont.variable}`}>
       <body className="antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 overflow-x-hidden">
         <CustomCursor />
-        {children}
+        <RouteTransition>
+          {children}
+        </RouteTransition>
         <MusicPlayer />
         <Toaster position="top-center" />
       </body>

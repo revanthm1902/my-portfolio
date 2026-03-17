@@ -44,7 +44,7 @@ export default function Preloader({ onComplete, isSecondary = false }: { onCompl
 
   return (
     <motion.div
-      className="fixed inset-0 z-999 flex items-center justify-center bg-black text-white"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black text-white"
       initial={{ y: 0 }}
       exit={{ y: "-100vh", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
     >
@@ -56,13 +56,13 @@ export default function Preloader({ onComplete, isSecondary = false }: { onCompl
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="text-4xl md:text-6xl lg:text-7xl font-mono tracking-wide"
+            className="font-mono text-2xl md:text-3xl text-white tracking-wide flex items-center"
           >
             {typedText}
             <motion.span
-              animate={{ opacity: [0, 1, 0] }}
+              animate={{ opacity: [1, 0, 1] }}
               transition={{ repeat: Infinity, duration: 0.8 }}
-              className="inline-block w-4 h-8 md:w-6 md:h-12 bg-white ml-2 align-middle"
+              className="w-3 h-7 md:h-8 bg-white ml-2 block"
             />
           </motion.h1>
         ) : (

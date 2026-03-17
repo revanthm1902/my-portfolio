@@ -243,7 +243,7 @@ const OSTerminal = ({ onFocus, openProject }: { onFocus: () => void, openProject
     if (!input.trim()) return;
 
     const cmd = input.trim().toLowerCase();
-    const newHistory = [...history, { type: "cmd", text: `revanth@mac ~$ ${input}` }];
+    const newHistory = [...history, { type: "cmd", text: `revanth@os:~$ ${input}` }];
 
     if (cmd === "help") {
       newHistory.push({ type: "text", text: "Available commands:" });
@@ -315,7 +315,7 @@ const OSTerminal = ({ onFocus, openProject }: { onFocus: () => void, openProject
         <div ref={endRef} />
       </div>
       <form onSubmit={handleCommand} className="flex items-center gap-2 mt-2 shrink-0">
-        <span className="text-[#e67e5a] font-bold hidden xs:inline">revanth@mac ~$</span>
+        <span className="text-[#e67e5a] font-bold hidden xs:inline">revanth@os:~$</span>
         <span className="text-[#e67e5a] font-bold xs:hidden">~$</span>
         <input
           autoFocus

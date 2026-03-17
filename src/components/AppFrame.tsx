@@ -5,7 +5,6 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate }
 import { Github, Linkedin, Mail, Network } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Preloader from "@/components/Preloader";
-import RouteTransition from "@/components/RouteTransition";
 import dynamic from "next/dynamic";
 
 // Dynamic import: NavWindow is a 16KB component only needed when the user opens the nav
@@ -134,9 +133,7 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="absolute inset-4 md:inset-8 z-10 overflow-hidden"
           >
-            <RouteTransition>
-              {children}
-            </RouteTransition>
+            {children}
           </motion.div>
         </>
       )}

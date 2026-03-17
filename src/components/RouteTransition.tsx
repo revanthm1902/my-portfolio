@@ -9,6 +9,8 @@ export default function RouteTransition({ children }: { children: React.ReactNod
   const prevPathname = useRef(pathname);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const isFirstRender = useRef(true);
+  const [displayText, setDisplayText] = useState("");
+  const fullText = "<rev.dev/>";
 
   useEffect(() => {
     // Skip the very first render (initial page load — Preloader handles that)
@@ -22,10 +24,20 @@ export default function RouteTransition({ children }: { children: React.ReactNod
     if (pathname !== prevPathname.current) {
       prevPathname.current = pathname;
       setIsTransitioning(true);
+      setDisplayText("");
 
-      // Auto-dismiss — content is already loaded since Next.js prefetches
-      const timer = setTimeout(() => setIsTransitioning(false), 400);
-      return () => clearTimeout(timer);
+      let i = 0;
+      const interval = setInterval(() => {
+        setDisplayText(fullText.slice(0, i + 1));
+        i++;
+        if (i === fullText.length) {
+          clearInterval(interval);
+          // Wait a bit after typing is done before dismissing
+          setTimeout(() => setIsTransitioning(false), 200);
+        }
+      }, 35); // Fast typing (~350ms total)
+
+      return () => clearInterval(interval);
     }
   }, [pathname]);
 
@@ -36,38 +48,20 @@ export default function RouteTransition({ children }: { children: React.ReactNod
         {isTransitioning && (
           <motion.div
             key="route-transition"
-            initial={{ opacity: 1, y: 0 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[998] flex items-center justify-center bg-black"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="flex flex-col items-center gap-3"
-            >
-              <span className="font-mono text-2xl md:text-3xl text-white tracking-wide">
-                {"<rev.dev/>"}
-              </span>
-              <div className="flex gap-1">
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="w-1.5 h-1.5 rounded-full bg-red-600"
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{
-                      duration: 0.6,
-                      repeat: Infinity,
-                      delay: i * 0.15,
-                      ease: "easeInOut",
-                    }}
-                  />
-                ))}
-              </div>
-            </motion.div>
+            <span className="font-mono text-2xl md:text-3xl text-white tracking-wide flex items-center">
+              {displayText}
+              <motion.span 
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ repeat: Infinity, duration: 0.8 }}
+                className="w-3 h-7 md:h-8 bg-white ml-2"
+              />
+            </span>
           </motion.div>
         )}
       </AnimatePresence>

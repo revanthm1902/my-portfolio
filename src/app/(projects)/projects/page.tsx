@@ -373,7 +373,7 @@ const MacOSDesktop = () => {
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
       className="absolute inset-0 z-50 flex flex-col overflow-hidden cursor-auto select-none bg-[#2a0505]"
     >
-      <Image src="/wallpaper.jpg" alt="Desktop wallpaper" fill className="object-cover z-0" quality={75} priority sizes="100vw" />
+      <Image src="/wallpaper.jpg" alt="Desktop wallpaper" fill className="object-cover z-0" quality={75} priority sizes="100vw" placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsKCwsLDA4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBU=/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wgARCAAKABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAQH/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/2gAMAwEAAhADEAAAAdoqUf/EABcQAAMBAAAAAAAAAAAAAAAAAAABEQL/2gAIAQEAAQUCaRf/xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAYEAACAwAAAAAAAAAAAAAAAAAAARIgIf/aAAgBAQAGPwLGcf/EABgQAAMBAQAAAAAAAAAAAAAAAAABESEx/9oACAEBAAE/IaSKaPnD/9oADAMBAAIAAwAAABCz3//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8QP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8QP//EABoQAQADAQEBAAAAAAAAAAAAAAEAETFBUXH/2gAIAQEAAT8QBltqzk6hU8jP/9k=" />
       <div className="absolute inset-0 z-0 bg-[#5b0b0b]/35" />
 
       {/* TOP MENU BAR */}

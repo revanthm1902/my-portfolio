@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from 'next/font/local';
 import { Toaster } from "sonner";
-import AppFrame from "@/components/AppFrame";
 import CustomCursor from "@/components/CustomCursor";
 import MusicPlayer from "@/components/MusicPlayer";
 
@@ -28,9 +27,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.className} ${ndotFont.variable}`}>
       <body className="antialiased bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 overflow-x-hidden">
         <CustomCursor />
-        <AppFrame>
-          {children}
-        </AppFrame>
+        {children}
         <MusicPlayer />
         <Toaster position="top-center" />
       </body>

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import AppFrame from "@/components/AppFrame";
 import Footer from "@/components/Footer";
 import { Award, Globe, X, CalendarDays, Building2, ExternalLink, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -144,9 +143,8 @@ export default function CertificationsPage() {
 
   return (
     <>
-      <AppFrame>
-        <div className="absolute inset-0 overflow-y-auto no-scrollbar pb-4 pt-24 md:pt-32">
-          <div className="max-w-6xl mx-auto px-4 sm:px-8 md:px-12">
+      <div className="absolute inset-0 overflow-y-auto no-scrollbar pb-4 pt-24 md:pt-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 md:px-12">
             <div className="mb-12">
               <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-red-600 uppercase mb-4">
                 {"// sys.Trophies & Credentials"}
@@ -238,10 +236,9 @@ export default function CertificationsPage() {
                 ))}
               </AnimatePresence>
             </motion.div>
-          </div>
-          <Footer />
         </div>
-      </AppFrame>
+        <Footer />
+      </div>
 
       {/* Full Modal Popup for Certificate */}
       <AnimatePresence>

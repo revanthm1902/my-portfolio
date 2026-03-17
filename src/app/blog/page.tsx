@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import AppFrame from "@/components/AppFrame";
 import Footer from "@/components/Footer";
 import { ExternalLink, X, Linkedin, BookOpen, ImageOff, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -137,8 +136,7 @@ export default function BlogPage() {
 
   return (
     <>
-      <AppFrame>
-        <div className="absolute inset-0 overflow-y-auto no-scrollbar pb-4">
+      <div className="absolute inset-0 overflow-y-auto no-scrollbar pb-4">
         <div className="min-h-dvh flex flex-col items-start justify-start max-w-5xl mx-auto px-4 sm:px-8 md:px-12 pt-24 md:pt-32 pb-24">
           <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-zinc-500 uppercase mb-4 flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-500" /> Writings // Updates // Thoughts
@@ -184,7 +182,6 @@ export default function BlogPage() {
         </div>
         <Footer />
       </div>
-    </AppFrame>
         
         {/* Full Post Modal Popup */}
         <AnimatePresence>

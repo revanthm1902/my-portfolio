@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal, Wifi, BatteryFull, Search, ExternalLink, Github, Maximize2, CheckCircle2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Image from "next/image";
 
 // --- EXPANDED PROJECT DATA ---
 const projectsData = [
@@ -202,7 +203,7 @@ const exitFullScreen = () => {
 // --- APP ICON COMPONENT ---
 type ProjectType = typeof projectsData[0];
 
-const AppIcon = ({ proj, onClick }: { proj: ProjectType, onClick: () => void }) => {
+const AppIcon = React.memo(({ proj, onClick }: { proj: ProjectType, onClick: () => void }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -223,7 +224,8 @@ const AppIcon = ({ proj, onClick }: { proj: ProjectType, onClick: () => void }) 
       </div>
     </motion.div>
   );
-};
+});
+AppIcon.displayName = "AppIcon";
 
 // --- IN-OS TERMINAL COMPONENT ---
 const OSTerminal = ({ onFocus, openProject }: { onFocus: () => void, openProject: (id: number) => void }) => {
@@ -371,7 +373,7 @@ const MacOSDesktop = () => {
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
       className="absolute inset-0 z-50 flex flex-col overflow-hidden cursor-auto select-none bg-[#2a0505]"
     >
-      <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/wallpaper.jpg')" }} />
+      <Image src="/wallpaper.jpg" alt="Desktop wallpaper" fill className="object-cover z-0" quality={75} priority sizes="100vw" />
       <div className="absolute inset-0 z-0 bg-[#5b0b0b]/35" />
 
       {/* TOP MENU BAR */}

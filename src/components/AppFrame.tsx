@@ -1,11 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { Github, Linkedin, Mail, Network } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Preloader from "@/components/Preloader";
-import NavWindow from "@/components/NavWindow";
+import dynamic from "next/dynamic";
+
+// Dynamic import: NavWindow is a 16KB component only needed when the user opens the nav
+const NavWindow = dynamic(() => import("@/components/NavWindow"), { ssr: false });
 
 export default function AppFrame({ children }: { children: React.ReactNode }) {
   const [loaderState, setLoaderState] = useState<{ isLoading: boolean; type: "initial" | "secondary" | "checking" }>({
@@ -22,6 +25,9 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
     }
   }, []);
   const router = useRouter();
+
+  // Stabilized callback for NavWindow onClose
+  const handleNavClose = useCallback(() => setIsNavOpen(false), []);
 
   // Mouse tracking for background dot eraser
   const cursorX = useMotionValue(-1000);
@@ -80,7 +86,7 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
           <div className="absolute bottom-4 md:bottom-8 left-8 md:left-16 z-30 pointer-events-none -translate-y-1/2">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md border border-white/30 dark:border-zinc-700/50 rounded-md shadow-lg">
               <span className="font-mono text-[8px] md:text-[10px] text-zinc-700 dark:text-zinc-400 tracking-[0.3em] uppercase">
-                {"> "} Hyderabad, India
+                {"> "} Hyderabad, India
               </span>
             </div>
           </div>
@@ -116,7 +122,7 @@ export default function AppFrame({ children }: { children: React.ReactNode }) {
 
           {/* 3. The Nav Window */}
           <AnimatePresence>
-            {isNavOpen && <NavWindow key="nav-window" isOpen={isNavOpen} onClose={() => setIsNavOpen(false)} />}
+            {isNavOpen && <NavWindow key="nav-window" isOpen={isNavOpen} onClose={handleNavClose} />}
           </AnimatePresence>
 
           {/* 4. THE ACTUAL PAGE CONTENT — clipped inside frame */}

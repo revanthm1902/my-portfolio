@@ -51,8 +51,7 @@ export default function MusicPlayer() {
       {/* Notice the `loop` attribute added here */}
       <audio ref={audioRef} src={track.src} preload="auto" autoPlay loop />
 
-      <motion.div
-        layout
+      <div
         onMouseEnter={() => setIsExpanded(true)}
         onMouseLeave={() => setIsExpanded(false)}
         onClick={toggleMute} // Entire pill is clickable for better UX
@@ -60,8 +59,7 @@ export default function MusicPlayer() {
         style={{ padding: "6px" }}
       >
         {/* The Icon Container */}
-        <motion.div
-          layout
+        <div
           className="relative flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-zinc-100 dark:bg-black/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
         >
           {isMuted ? (
@@ -79,7 +77,7 @@ export default function MusicPlayer() {
           {!isMuted && !isExpanded && (
             <span className="absolute inset-0 rounded-full border border-zinc-400/30 animate-ping duration-1000" />
           )}
-        </motion.div>
+        </div>
 
         {/* The Expanding Song Details */}
         <AnimatePresence>
@@ -108,7 +106,7 @@ export default function MusicPlayer() {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </>
   );
 }

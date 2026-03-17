@@ -67,7 +67,7 @@ interface MobileNodeProps {
   onNodeClick: (id: string) => void;
 }
 
-function MobileNode({ id, label, icon: Icon, isVisited, isActive, onNodeClick }: MobileNodeProps) {
+const MobileNode = React.memo(function MobileNode({ id, label, icon: Icon, isVisited, isActive, onNodeClick }: MobileNodeProps) {
   return (
     <div onClick={() => onNodeClick(id)} className="relative flex items-center gap-4 cursor-pointer group">
       {id !== "home" && (
@@ -84,7 +84,7 @@ function MobileNode({ id, label, icon: Icon, isVisited, isActive, onNodeClick }:
       </span>
     </div>
   );
-}
+});
 
 interface NavWindowProps {
   isOpen: boolean;

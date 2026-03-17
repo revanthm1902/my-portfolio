@@ -1,20 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue } from "framer-motion";
 
 export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const isHoveringRef = useRef(false);
 
   // Motion values for X and Y coordinates
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
-
-  // Spring physics for smooth trailing effect
-  const springConfig = { damping: 20, stiffness: 700, mass: 0.1 };
-  // const cursorX = useSpring(mouseX, springConfig);
-  // const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
     // Only show custom cursor on non-touch devices
@@ -24,20 +20,41 @@ export default function CustomCursor() {
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
+    };
 
-      // Check if the mouse is hovering over a clickable element
-      const target = e.target as HTMLElement;
-      const isClickable = target.closest(
-        'a, button, [role="button"], input, select, textarea'
-      );
-      
-      setIsHovering(!!isClickable);
+    // Optimized hover detection: use mouseover/mouseout delegation instead of
+    // checking e.target.closest() on every single mousemove (~60 calls/sec).
+    // This fires only when hover state actually changes.
+    const checkClickable = (target: HTMLElement | null): boolean => {
+      if (!target) return false;
+      return !!target.closest('a, button, [role="button"], input, select, textarea');
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const hovering = checkClickable(e.target as HTMLElement);
+      if (hovering !== isHoveringRef.current) {
+        isHoveringRef.current = hovering;
+        setIsHovering(hovering);
+      }
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const relatedTarget = e.relatedTarget as HTMLElement | null;
+      const stillHovering = checkClickable(relatedTarget);
+      if (stillHovering !== isHoveringRef.current) {
+        isHoveringRef.current = stillHovering;
+        setIsHovering(stillHovering);
+      }
     };
 
     window.addEventListener("mousemove", moveCursor);
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
     };
   }, [mouseX, mouseY]);
 
@@ -46,14 +63,12 @@ export default function CustomCursor() {
   return (
     <motion.div
       className="fixed top-0 left-0 pointer-events-none z-999999 rounded-full mix-blend-difference"
-        // 1. Remove the useSpring imports and variables.
-        // 2. Change your style prop in the motion.div to use the raw motion values directly:
-        style={{
-        x: mouseX, // Using raw mouseX instead of cursorX
-        y: mouseY, // Using raw mouseY instead of cursorY
+      style={{
+        x: mouseX,
+        y: mouseY,
         translateX: "-50%",
         translateY: "-50%",
-        }}
+      }}
       animate={{
         // Morphing animation logic
         width: isHovering ? 40 : 12,

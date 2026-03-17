@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import AppFrame from "@/components/AppFrame";
 import Footer from "@/components/Footer";
 import { Briefcase, Building2, CalendarDays, MapPin, X, ArrowUpRight, FileText, Award } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -74,8 +73,7 @@ export default function ExperiencePage() {
 
   return (
     <>
-      <AppFrame>
-        <div className="absolute inset-0 overflow-y-auto no-scrollbar pb-4 pt-24 md:pt-32">
+      <div className="absolute inset-0 overflow-y-auto no-scrollbar pb-4 pt-24 md:pt-32">
           <div className="max-w-6xl mx-auto px-4 sm:px-8 md:px-12">
             <div className="mb-16">
               <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-red-600 uppercase mb-4">
@@ -137,7 +135,6 @@ export default function ExperiencePage() {
           </div>
           <Footer />
         </div>
-      </AppFrame>
 
       {/* Full Experience Modal Popup */}
       <AnimatePresence>
